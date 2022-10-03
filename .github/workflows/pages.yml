@@ -36,6 +36,6 @@ jobs:
       - run: npm config set legacy-peer-deps true
       - run: npm install
       - run: npm run build --prod
-      
+          CI:""
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
