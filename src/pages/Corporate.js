@@ -24,7 +24,6 @@ const Corporate = () => {
             <main className="page-wrapper">
                 
                 <div className="header-transparent-with-topbar">
-                    <HeaderTopBar />
                     <HeaderOne btnStyle="btn-small btn-icon" HeaderSTyle="header-not-transparent" />
                 </div>
 

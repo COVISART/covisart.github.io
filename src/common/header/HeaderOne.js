@@ -2,6 +2,7 @@ import {useState, useRef} from "react";
 import { FiMenu } from "react-icons/fi";
 import Logo from "../../elements/logo/Logo";
 import Nav from './Nav';
+import Menu from './Menu';
 import MobileMenu from './MobileMenu';
 import Darkmode from "./Darkmode";
 import useStickyHeader from "./useStickyHeader";
@@ -35,10 +36,10 @@ const HeaderOne = ({btnStyle, HeaderSTyle}) => {
                         <div className="col-lg-9 col-md-6 col-8 position-static">
                             <div className="header-right">
                                 <nav className="mainmenu-nav d-none d-lg-block">
-                                    <Nav />
+                                    <Menu />
                                 </nav>
                                 <div className="header-btn">
-                                    <a className={`btn-default ${btnStyle}`} target="_blank" href="https://themeforest.net/checkout/from_item/33571911?license=regular">BUY NOW</a>
+                                    <a className={`btn-default ${btnStyle}`} target="_blank" href="http://store.covisart.com.tr/">BUY NOW</a>
                                 </div>
                                 <div className="mobile-menu-bar ml--5 d-block d-lg-none">
                                     <div className="hamberger">

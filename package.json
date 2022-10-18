@@ -2,7 +2,7 @@
   "name": "doob",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://doob.rainbowit.net/",
+  "homepage": "https://ngs.covisart.com/",
   "dependencies": {
     "@testing-library/jest-dom": "^5.12.0",
     "@testing-library/react": "^11.2.7",

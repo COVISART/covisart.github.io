@@ -5,8 +5,8 @@ import Logo from "../logo/Logo";
 
 const callToActionData = {
     title: "Ready to start creating a standard website?",
-    subtitle: "If you want to create a corporate template you can purshace now our doob template.",
-    btnText: "Purchase Doob",
+    subtitle: "If you want to improve skills, purchase New Generation Simulator NGS-360-3.",
+    btnText: "Purchase NGS-360-3",
 }
 
 const CalltoActionSeven = () => {
@@ -18,8 +18,8 @@ const CalltoActionSeven = () => {
                         <div className="inner">
                             <div className="content text-start">
                                 <Logo 
-                                    image={`${process.env.PUBLIC_URL}/images/logo/logo.png`}
-                                    image2={`${process.env.PUBLIC_URL}/images/logo/logo-dark.png`}
+                                    image={`${process.env.PUBLIC_URL}/images/logo/logo_cv.png`}
+                                    image2={`${process.env.PUBLIC_URL}/images/logo/logo_cv.png`}
                                 />
                                 <ScrollAnimation 
                                 animateIn="fadeInUp"
@@ -36,7 +36,7 @@ const CalltoActionSeven = () => {
                         animateOut="fadeInOut"
                         animateOnce={true}>
                             <div className="call-to-btn text-start mt_sm--20 text-md-end">
-                                <a className="btn-default btn-icon" target="_blank" href="https://themeforest.net/checkout/from_item/33571911?license=regular">{callToActionData.btnText} <i className="icon"><FiArrowRight /></i></a>
+                                <a className="btn-default btn-icon" target="_blank" href="https://store.covisart.com.tr/">{callToActionData.btnText} <i className="icon"><FiArrowRight /></i></a>
                             </div>
                         </ScrollAnimation>
                     </div>

@@ -6,18 +6,18 @@ import ScrollAnimation from "react-animate-on-scroll";
 const ServiceList = [
     {
         icon: <FiActivity />,
-        title: 'Awarded Design',
-        description: 'There are many variations variations  of passages of Lorem Ipsum available, but the majority have suffered.'
+        title: 'Awarded Invention',
+        description: 'Covisart NGS-360-3 was awarded with IFIA Best National Invention Medal by International Federation of Inventors Associations.'
     },
     {
         icon: <FiCast />,
-        title: 'Design & Creative',
-        description: 'Passages there are many variations variations  of of Lorem Ipsum available, but the majority have suffered.'
+        title: 'Design & Service',
+        description: 'Full moduler design. NGS uses commons parts on many compartments. It provides short production time and increase quality of service support'
     },
     {
         icon: <FiMap />,
-        title: 'App Development',
-        description: 'Variations There are many variations  of passages of Lorem Ipsum available, but the majority have suffered.'
+        title: 'Easy Integration',
+        description: 'With advanced software and CosimSDK, integrated with more than 10 simulation softwares and CosimSDK support many populer programming language.'
     },
 ]
 
