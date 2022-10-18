@@ -16,8 +16,7 @@ import PortfolioOne from "../elements/portfolio/PortfolioOne";
 import TeamFour from "../elements/team/TeamFour";
 import BrandTwo from "../elements/brand/BrandTwo";
 
-
-
+//frame-image
 const Company = () => {
     return (
         <>
@@ -44,7 +43,7 @@ const Company = () => {
                                 </div>
                             </div>
                             <div className="col-lg-5 col-xl-6 order-1 order-lg-2">
-                                <div className="frame-image">
+                                <div className="">
                                     <img src="./images/about/NGS-360-3.png" alt="Banner Images" />
                                 </div>
                             </div>
