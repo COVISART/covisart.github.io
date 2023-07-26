@@ -22,7 +22,8 @@ const Company = () => {
         <>
             <SEO title="Homepage" />
             <main className="page-wrapper">
-                <HeaderOne btnStyle="btn-small round btn-icon" HeaderSTyle="header-transparent" />
+                {/* <HeaderOne btnStyle="btn-small round btn-icon" HeaderSTyle="header-transparent" />  */}
+                
                 {/* Start Slider Area  */}
                 <div className="slider-area slider-style-1 bg-transparent height-750">
                     <div className="container">
