@@ -101,62 +101,6 @@ const Company = () => {
 
                 <SlpitOne />
 
-                <div className="rwt-portfolio-area rn-section-gap">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <SectionTitle
-                                    textAlign="text-center"
-                                    radiusRounded=""
-                                    subtitle="Our Project"
-                                    title="Why People Choose Us!"
-                                    description=""
-                                />
-                            </div>
-                        </div>
-                        <PortfolioOne Column="col-lg-6 col-md-6 col-sm-12 col-12 mt--50 portfolio" />
-                    </div>
-                </div>
-
-                <Separator />
-
-                {/* Start Elements Area  */}
-                <div className="rwt-team-area rn-section-gap">
-                    <div className="wrapper plr--65">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <SectionTitle
-                                    textAlign="text-center"
-                                    radiusRounded=""
-                                    subtitle="Our Experts."
-                                    title="Companies Team"
-                                    description="There are many variations of passages of Lorem Ipsum available, <br /> but the majority have suffered alteration."
-                                />
-                            </div>
-                        </div>
-                        <TeamFour column="col-lg-6 col-xl-3 col-md-6 col-12 mt--30" teamStyle="team-style-three" />
-                    </div>
-                </div>
-                {/* End Elements Area  */}
-
-                {/* Start Brand Area  */}
-                <div className="rwt-brand-area pb--80">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <div className="section-title text-center">
-                                    <h3 className="title">Our Awesome Customer Relation Build a <br /> Long Term Relationship.</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <BrandTwo brandStyle="brand-style-2" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {/* End Brand Area  */}
                 <FooterTwo />
                 <Copyright />
             </main>
