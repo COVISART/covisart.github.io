@@ -22,7 +22,7 @@ const FooterTwo = () => {
         <>
             <footer className="rn-footer footer-style-default variation-two">
                 <CalltoActionSeven />
-                <div className="footer-top">
+                {/*<div className="footer-top">
                     <div className="container">
                         <div className="row">
                             {/* Start Single Widget 
@@ -102,10 +102,10 @@ const FooterTwo = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* End Single Widget  */}
+                            {/* End Single Widget 
                         </div>
                     </div>
-                </div>
+                </div>*/}
             </footer>
             <ScrollTop />
         </>
