@@ -25,7 +25,7 @@ const FooterTwo = () => {
                 <div className="footer-top">
                     <div className="container">
                         <div className="row">
-                            {/* Start Single Widget  */}
+                            {/* Start Single Widget 
                             <div className="col-lg-2 col-md-6 col-sm-6 col-12">
                                 <div className="rn-footer-widget">
                                     <h4 className="title">{footerIntemOne.title}</h4>
@@ -38,9 +38,9 @@ const FooterTwo = () => {
                                     </div>
                                 </div>
                             </div>
-                            {/* End Single Widget  */}
+                             End Single Widget  */}
 
-                            {/* Start Single Widget  */}
+                            {/* Start Single Widget  
                             <div className="col-lg-2 col-md-6 col-sm-6 col-12">
                                 <div className="rn-footer-widget">
                                     <div className="widget-menu-top">
@@ -57,7 +57,7 @@ const FooterTwo = () => {
                             </div>
                             {/* End Single Widget  */}
 
-                            {/* Start Single Widget  */}
+                            {/* Start Single Widget  
                             <div className="col-lg-2 col-md-6 col-sm-6 col-12">
                                 <div className="rn-footer-widget">
                                     <h4 className="title">{footerIntemThree.title}</h4>
@@ -72,7 +72,7 @@ const FooterTwo = () => {
                             </div>
                             {/* End Single Widget  */}
 
-                            {/* Start Single Widget  */}
+                            {/* Start Single Widget  
                             <div className="col-lg-2 col-md-6 col-sm-6 col-12">
                                 <div className="rn-footer-widget">
                                     <h4 className="title">{footerIntemFour.title}</h4>
@@ -87,7 +87,7 @@ const FooterTwo = () => {
                             </div>
                             {/* End Single Widget  */}
 
-                            {/* Start Single Widget  */}
+                            {/* Start Single Widget  
                             <div className="col-lg-4 col-md-6 col-sm-6 col-12">
                                 <div className="rn-footer-widget">
                                     <h4 className="title">{footerIntemFive.title}</h4>
