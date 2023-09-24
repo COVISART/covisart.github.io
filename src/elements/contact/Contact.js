@@ -10,12 +10,6 @@ const Contact = () => {
         <>
             <SEO title="Contact || Covisart R&D Company" />
             <Layout>
-                <BreadcrumbOne 
-                    title="The Easiest Way To Create Website <br /> Quick Copy & Make site."
-                    rootUrl="/"
-                    parentUrl="Home"
-                    currentUrl="Contact"
-                />
                 <div className="main-content">
                     {/* Start Contact Area  */}
                     <div className="rwt-contact-area rn-section-gap">
