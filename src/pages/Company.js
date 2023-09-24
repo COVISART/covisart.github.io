@@ -12,6 +12,7 @@ import ServiceOne from '../elements/service/ServiceOne';
 import Separator from "../elements/separator/Separator";
 import SectionTitle from "../elements/sectionTitle/SectionTitle";
 import SlpitOne from "../elements/split/SlpitOne";
+import SlipThree from "../elements/split/SlipThree";
 import PortfolioOne from "../elements/portfolio/PortfolioOne";
 import TeamFour from "../elements/team/TeamFour";
 import BrandTwo from "../elements/brand/BrandTwo";
@@ -99,11 +100,29 @@ const Company = () => {
                     </div>
                 </div>
                 {/* End Service Area  */}
-
-                <SlpitOne />
-
-                <FooterTwo />
-                <Copyright />
+                <div className="slider-area slider-style-1 bg-transparent height-750">
+                    <div className="container">
+                        <div className="row align-items-center">
+                            <div className="col-lg-7 col-xl-6 order-2 order-lg-1 mt_md--40 mt_sm--40">
+                                <div className="inner text-start">
+                                    <h1 className="title theme-gradient display-one">Powered with AI</h1>
+                                    <ul className="list-icon">
+                                        <li><span className="icon"><FiCheck /></span> AI model controls servo motor that was equipped with absolute encoder.</li>
+                                        <li><span className="icon"><FiCheck /></span> AI predicts next direction of movement.</li>
+                                        <li><span className="icon"><FiCheck /></span> Has 30% advantage over classic motion control algorithms.</li>
+                                        <li><span className="icon"><FiCheck /></span> Can be retrain over time with new dataset using Transfer learning techniques.</li>
+                                    </ul>
+                                    
+                                </div>
+                            </div>
+                            <div className="col-lg-5 col-xl-6 order-1 order-lg-2">
+                                <div className="">
+                                    <img src="./images/about/NGS-360.png" alt="NGS-360" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </main>
         </>
     )
