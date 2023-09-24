@@ -123,6 +123,8 @@ const Company = () => {
                         </div>
                     </div>
                 </div>
+                <FooterTwo />
+                <Copyright />
             </main>
         </>
     )
