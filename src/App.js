@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import PageScrollTop from './components/pageToTop/PageScrollTop'
 
 // Pages import Here 
@@ -29,6 +29,7 @@ import TagList from "./pages/TagList";
 import Author from "./pages/Author";
 import AboutUs from "./pages/AboutUs";
 
+import NGS from "./pages/NGS";
 // Elements import Here 
 
 import Elements from "./elements/elements/Elements";
@@ -76,70 +77,71 @@ const App = () => {
     return (
         <Router>
             <PageScrollTop>
-                <Switch>
-                    <Route path={`${process.env.PUBLIC_URL + "/"}`} exact component={Company}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/business-consulting"}`} exact component={HomeDefault}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/business-consulting-2"}`} exact component={BusinessConsulting2}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/corporate"}`} exact component={Corporate}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/business"}`} exact component={Business}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/digital-agency"}`} exact component={DigitalAgency}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/finance"}`} exact component={Finance}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/company"}`} exact component={Company}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/marketing"}`} exact component={Marketing}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/travel-agency"}`} exact component={TravelAgency}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/consulting"}`} exact component={Consulting}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/seo-agency"}`} exact component={SeoAgency}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/personal-portfolio"}`} exact component={PersonalPortfolio}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/event-conference"}`} exact component={EventConference}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/creative-portfolio"}`} exact component={CreativePortfolio}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/freelancer"}`} exact component={Freelancer}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/international-consulting"}`} exact component={InternationalConsulting}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/startup"}`} exact component={Startup}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/web-agency"}`} exact component={WebAgency}/>
+                <Routes>
+                    <Route path={`${process.env.PUBLIC_URL + "/ngs"}`} element={<NGS/>} />
+                    <Route path={`${process.env.PUBLIC_URL + "/"}`} element={<Company/>} />
+                    <Route path={`${process.env.PUBLIC_URL + "/business-consulting"}`} element={HomeDefault} />
+                    <Route path={`${process.env.PUBLIC_URL + "/business-consulting-2"}`} element={BusinessConsulting2} />
+                    <Route path={`${process.env.PUBLIC_URL + "/corporate"}`} element={Corporate} />
+                    <Route path={`${process.env.PUBLIC_URL + "/business"}`} element={Business} />
+                    <Route path={`${process.env.PUBLIC_URL + "/digital-agency"}`} element={DigitalAgency} />
+                    <Route path={`${process.env.PUBLIC_URL + "/finance"}`} element={Finance} />
+                    <Route path={`${process.env.PUBLIC_URL + "/company"}`} element={Company} />
+                    <Route path={`${process.env.PUBLIC_URL + "/marketing"}`} element={Marketing} />
+                    <Route path={`${process.env.PUBLIC_URL + "/travel-agency"}`} element={TravelAgency} />
+                    <Route path={`${process.env.PUBLIC_URL + "/consulting"}`} element={Consulting} />
+                    <Route path={`${process.env.PUBLIC_URL + "/seo-agency"}`} element={SeoAgency} />
+                    <Route path={`${process.env.PUBLIC_URL + "/personal-portfolio"}`} element={PersonalPortfolio} />
+                    <Route path={`${process.env.PUBLIC_URL + "/event-conference"}`} element={EventConference} />
+                    <Route path={`${process.env.PUBLIC_URL + "/creative-portfolio"}`} element={CreativePortfolio} />
+                    <Route path={`${process.env.PUBLIC_URL + "/freelancer"}`} element={Freelancer} />
+                    <Route path={`${process.env.PUBLIC_URL + "/international-consulting"}`} element={InternationalConsulting} />
+                    <Route path={`${process.env.PUBLIC_URL + "/startup"}`} element={Startup} />
+                    <Route path={`${process.env.PUBLIC_URL + "/web-agency"}`} element={WebAgency} />
 
                     {/* Blog Part  */}
-                    <Route path={`${process.env.PUBLIC_URL + "/blog-grid"}`} exact component={BlogGridView}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/blog-list-view"}`} exact component={BlogListView}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/blog-grid-sidebar"}`} exact component={BlogGridSidebar}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/blog-list-sidebar"}`} exact component={BlogListSidebar}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/blog-details/:id"}`} exact component={BlogDetails}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/category/:slug"}`} exact component={CategoryList}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/archive/:slug"}`} exact component={Author}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/tag/:slug"}`} exact component={TagList}/>
+                    <Route path={`${process.env.PUBLIC_URL + "/blog-grid"}`} element={BlogGridView} />
+                    <Route path={`${process.env.PUBLIC_URL + "/blog-list-view"}`} element={BlogListView} />
+                    <Route path={`${process.env.PUBLIC_URL + "/blog-grid-sidebar"}`} element={BlogGridSidebar} />
+                    <Route path={`${process.env.PUBLIC_URL + "/blog-list-sidebar"}`} element={BlogListSidebar} />
+                    <Route path={`${process.env.PUBLIC_URL + "/blog-details/:id"}`} element={BlogDetails} />
+                    <Route path={`${process.env.PUBLIC_URL + "/category/:slug"}`} element={CategoryList} />
+                    <Route path={`${process.env.PUBLIC_URL + "/archive/:slug"}`} element={Author} />
+                    <Route path={`${process.env.PUBLIC_URL + "/tag/:slug"}`} element={TagList} />
 
-                    <Route path={`${process.env.PUBLIC_URL + "/elements"}`} exact component={Elements}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/button"}`} exact component={Button}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/service"}`} exact component={Service}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/counter"}`} exact component={CounterUp}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/progressbar"}`} exact component={Progressbar}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/social-share"}`} exact component={Social}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/team"}`} exact component={Team}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/testimonial"}`} exact component={Testimonial}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/timeline"}`} exact component={Timeline}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/accordion"}`} exact component={RnAccordion}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/tab"}`} exact component={Tab}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/pricing"}`} exact component={Pricing}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/split"}`} exact component={Split}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/call-to-action"}`} exact component={CalltoAction}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/video-popup"}`} exact component={Video}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/gallery"}`} exact component={Gallery}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/contact"}`} exact component={Contact}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/brand"}`} exact component={Brand}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/advance-tab"}`} exact component={AdvanceTab}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/advance-pricing"}`} exact component={AdvancePricing}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/about-us"}`} exact component={AboutUs}/>
+                    <Route path={`${process.env.PUBLIC_URL + "/elements"}`} element={Elements} />
+                    <Route path={`${process.env.PUBLIC_URL + "/button"}`} element={Button} />
+                    <Route path={`${process.env.PUBLIC_URL + "/service"}`} element={Service} />
+                    <Route path={`${process.env.PUBLIC_URL + "/counter"}`} element={CounterUp} />
+                    <Route path={`${process.env.PUBLIC_URL + "/progressbar"}`} element={Progressbar} />
+                    <Route path={`${process.env.PUBLIC_URL + "/social-share"}`} element={Social} />
+                    <Route path={`${process.env.PUBLIC_URL + "/team"}`} element={Team} />
+                    <Route path={`${process.env.PUBLIC_URL + "/testimonial"}`} element={Testimonial} />
+                    <Route path={`${process.env.PUBLIC_URL + "/timeline"}`} element={Timeline} />
+                    <Route path={`${process.env.PUBLIC_URL + "/accordion"}`} element={RnAccordion} />
+                    <Route path={`${process.env.PUBLIC_URL + "/tab"}`} element={Tab} />
+                    <Route path={`${process.env.PUBLIC_URL + "/pricing"}`} element={Pricing} />
+                    <Route path={`${process.env.PUBLIC_URL + "/split"}`} element={Split} />
+                    <Route path={`${process.env.PUBLIC_URL + "/call-to-action"}`} element={CalltoAction} />
+                    <Route path={`${process.env.PUBLIC_URL + "/video-popup"}`} element={Video} />
+                    <Route path={`${process.env.PUBLIC_URL + "/gallery"}`} element={Gallery} />
+                    <Route path={`${process.env.PUBLIC_URL + "/contact"}`} element={Contact} />
+                    <Route path={`${process.env.PUBLIC_URL + "/brand"}`} element={Brand} />
+                    <Route path={`${process.env.PUBLIC_URL + "/advance-tab"}`} element={AdvanceTab} />
+                    <Route path={`${process.env.PUBLIC_URL + "/advance-pricing"}`} element={AdvancePricing} />
+                    <Route path={`${process.env.PUBLIC_URL + "/about-us"}`} element={AboutUs} />
 
-                    <Route path={`${process.env.PUBLIC_URL + "/error"}`} exact component={Error}/>
-                    
-                    <Route path={`${process.env.PUBLIC_URL + "/portfolio"}`} exact component={Portfolio}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/portfolio-three-column"}`} exact component={portfolioThreeColumn}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/portfolio-full-width"}`} exact component={PortfolioFullWidth}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/portfolio-grid-layout"}`} exact component={PortfolioGrid}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/portfolio-box-layout"}`} exact component={PortfolioBoxLayout}/>
-                    <Route path={`${process.env.PUBLIC_URL + "/portfolio-details/:id"}`} exact component={PortfolioDetails}/>
+                    <Route path={`${process.env.PUBLIC_URL + "/error"}`} element={Error} />
+
+                    <Route path={`${process.env.PUBLIC_URL + "/portfolio"}`} element={Portfolio} />
+                    <Route path={`${process.env.PUBLIC_URL + "/portfolio-three-column"}`} element={portfolioThreeColumn} />
+                    <Route path={`${process.env.PUBLIC_URL + "/portfolio-full-width"}`} element={PortfolioFullWidth} />
+                    <Route path={`${process.env.PUBLIC_URL + "/portfolio-grid-layout"}`} element={PortfolioGrid} />
+                    <Route path={`${process.env.PUBLIC_URL + "/portfolio-box-layout"}`} element={PortfolioBoxLayout} />
+                    <Route path={`${process.env.PUBLIC_URL + "/portfolio-details/:id"}`} element={PortfolioDetails} />
 
 
-                </Switch>
+                </Routes>
             </PageScrollTop>
         </Router>
     )

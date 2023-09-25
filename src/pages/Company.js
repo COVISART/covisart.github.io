@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import SEO from "../common/SEO";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
@@ -18,13 +18,12 @@ import TeamFour from "../elements/team/TeamFour";
 import BrandTwo from "../elements/brand/BrandTwo";
 
 //frame-image
-const Company = () => {
-    return (
-        <>
-            <SEO title="Homepage" />
+class Company extends Component {
+    render() {
+        return (
             <main className="page-wrapper">
                 {/* <HeaderOne btnStyle="btn-small round btn-icon" HeaderSTyle="header-transparent" />  */}
-                
+
                 {/* Start Slider Area  */}
                 <div className="slider-area slider-style-1 bg-transparent height-750">
                     <div className="container">
@@ -39,7 +38,7 @@ const Company = () => {
                                         <li><span className="icon"><FiCheck /></span> Motion Ride for entertainment applications.</li>
                                     </ul>
                                     <div className="button-group mt--40">
-                                        <a className="btn-default btn-medium round btn-icon" target="_blank" href="http://store.covisart.com.tr/">Purchase Now <i className="icon"><FiArrowRight /></i></a>
+                                        <a className="btn-default btn-medium round btn-icon" href="/ngs">Purchase Now <i className="icon"><FiArrowRight /></i></a>
                                         <Link className="btn-default btn-medium btn-border round btn-icon" to="/contact">Contact Us <i className="icon"><FiArrowRight /></i></Link>
                                     </div>
                                 </div>
@@ -112,7 +111,7 @@ const Company = () => {
                                         <li><span className="icon"><FiCheck /></span> Has 30% advantage over classic motion control algorithms.</li>
                                         <li><span className="icon"><FiCheck /></span> Can be retrain over time with new dataset using Transfer learning techniques.</li>
                                     </ul>
-                                    
+
                                 </div>
                             </div>
                             <div className="col-lg-5 col-xl-6 order-1 order-lg-2">
@@ -126,7 +125,7 @@ const Company = () => {
                 <FooterTwo />
                 <Copyright />
             </main>
-        </>
-    )
+        )
+    }
 }
 export default Company;
