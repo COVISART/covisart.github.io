@@ -29,7 +29,7 @@ import TagList from "./pages/TagList";
 import Author from "./pages/Author";
 import AboutUs from "./pages/AboutUs";
 
-import NGS from "./pages/NGS";
+import NGS from "./covisart/NGS";
 // Elements import Here 
 
 import Elements from "./elements/elements/Elements";
