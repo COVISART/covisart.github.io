@@ -1,4 +1,4 @@
-import React,{ Component } from 'react';
+import React, { Component } from 'react';
 import SEO from "../common/SEO";
 import Layout from "../common/Layout";
 import BreadcrumbOne from "../elements/breadcrumb/BreadcrumbOne";
@@ -17,8 +17,8 @@ import Product from "./Product"
 
 class NGS extends Component {
     render() {
-    return (
-        <main className="page-wrapper">
+        return (
+            <main className="page-wrapper">
                 <div className="main-content">
                     {/* Start Elements Area  */}
                     <div className="rwt-tab-area rn-section-gap">
@@ -28,7 +28,10 @@ class NGS extends Component {
                     </div>
                     {/* End Elements Area  */}
                     {/* Start Elements Area  */}
-                    <div className="rwt-pricing-area rn-section-gap">
+
+                    {/**
+                     * 
+                     * <div className="rwt-pricing-area rn-section-gap">
                         <div className="wrapper plr--100 plr_md--15 plr_sm--15">
                             <div className="row mb--40 mb_sm--0">
                                 <div className="col-lg-12">
@@ -44,11 +47,13 @@ class NGS extends Component {
                             <PricingFour />
                         </div>
                     </div>
+                     */}
                     {/* End Elements Area  */}
-                    
+
                 </div>
                 <Copyright />
             </main>
-    )}
+        )
+    }
 }
 export default NGS;
