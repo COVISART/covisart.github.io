@@ -5,40 +5,37 @@ Files: NGS_GLT_V2.glb [113.35MB] > NGS_GLT_V2-transformed.glb [7.84MB] (93%)
 */
 
 import React, { useRef } from 'react'
-import { useGLTF, AccumulativeShadows, RandomizedLight } from '@react-three/drei'
+import { useGLTF, Center, Resize } from '@react-three/drei'
 import { useSnapshot } from 'valtio'
 import { state } from '../store'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { easing, geometry } from 'maath'
 
 export function Model(props) {
   const { nodes, materials } = useGLTF('/covisart/models/NGS_GLT_V2-transformed.glb')
   const snap = useSnapshot(state)
-
   easing.dampC(materials.led.color, snap.led, 0.0, 1)
-
   useFrame((state, delta) => {
     easing.dampC(materials.Paint.color, snap.color, 0.0, delta)
+    const t = (1 + Math.sin(state.clock.elapsedTime * 2)) / 2
   })
   return (
     <group {...props} dispose={null}>
+      {
+        nodes[snap.motor] != null && <mesh castShadow geometry={nodes[snap.motor].geometry} material={nodes[snap.motor].material} />
+      }
+      {
+        Object.values(Object.values(nodes).
+          filter((value) =>
+            value.isMesh &&
+            !snap.motors.some((motor) => motor === value.name))).
+          map((part) => (
+            <mesh castShadow geometry={part.geometry} material={part.material} />
+          ))
+      }
       <group>
-        {
-          nodes[snap.motor] != null && <mesh castShadow geometry={nodes[snap.motor].geometry} material={nodes[snap.motor].material} />
-        }
-        {
-          Object.values(Object.values(nodes).
-            filter((value) =>
-              value.isMesh &&
-              !snap.motors.some((motor) => motor === value.name))).
-            map((part) => (
-              <mesh castShadow geometry={part.geometry} material={part.material} />
-            ))
-        }
-        <group>
-          <mesh castShadow geometry={nodes['RJ45_cover_orange-mesh'].geometry} material={materials.orange} />
-          <mesh castShadow geometry={nodes['RJ45_cover_orange-mesh_1'].geometry} material={materials.connector} />
-        </group>
+        <mesh castShadow geometry={nodes.RJ45_1.geometry} material={materials.orange} />
+        <mesh castShadow geometry={nodes.RJ45_2.geometry} material={materials.connector} />
       </group>
     </group>
   )

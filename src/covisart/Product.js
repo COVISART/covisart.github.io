@@ -2,12 +2,17 @@ import React, { useRef, useState, Suspense } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SectionTitle from "../elements/sectionTitle/SectionTitle";
 import { Canvas, useFrame } from '@react-three/fiber'
-import { Model } from './models/NGS_GLT_V2'
 import { OrbitControls } from '@react-three/drei'
-import { Stage, RandomizedLight, Html, useProgress, Environment, Center } from '@react-three/drei'
+import { Stage, Grid, Html, useProgress, Environment, PresentationControls, Center } from '@react-three/drei'
 import { ColorSelection } from './Selections/ColorSelection'
 import { MotorSelection } from './Selections/MotorSelection'
 import { motion } from 'framer-motion'
+import { EffectComposer, Bloom, DepthOfField } from '@react-three/postprocessing'
+import Robot from './Robot'
+import { Amber } from './models/Amber'
+import { Model } from './models/NGS_GLT_V2'
+import { Female } from './models/Female'
+
 function Loader() {
     const { progress } = useProgress()
     return <Html center>{progress} % loaded</Html>
@@ -15,30 +20,63 @@ function Loader() {
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
     const tabCount = 4;
+
     return (
         <div>
             <div className="row">
                 <div className="col-lg-12">
                     <Tabs selectedIndex={selectedTab} onSelect={(index) => setSelectedTab(index)}>
                         <div className="row row--30 align-items-center">
-                            <div className="col-lg-5">
-                                <motion.div
-                                    key="title"
-                                    initial={{ x: 100, opacity: 0 }}
-                                    animate={{ x: 0, opacity: 1 }}
-                                    transition={{ type: 'spring', damping: 5, stiffness: 40, restDelta: 0.001, duration: 0.3 }}>
-                                    <Canvas style={{ height: "750px" }} gl={{ antialias: true, preserveDrawingBuffer: true }} shadows camera={{ position: [2, 0, -3], fov: 35 }}>
-                                        <Stage adjustCamera intensity={0.5} shadows="contact" environment="city">
-                                            <Suspense fallback={<Loader />}>
-                                                <Center center>
-                                                    <Model/>
-                                                </Center>
-                                            </Suspense>
-                                        </Stage>
-                                        <OrbitControls autoRotate autoRotateSpeed={4} enablePan={false} enableZoom={false} minPolarAngle={Math.PI / 2.1} maxPolarAngle={Math.PI / 2.1} />
-
-                                    </Canvas>
-                                </motion.div>
+                            <div className="col-lg-5" style={{ height: "100%" }}>
+                            <Robot/>
+                                {
+                                    
+                                    /*<motion.div
+                                        key="title"
+                                        initial={{ x: 100, opacity: 0 }}
+                                        animate={{ x: 0, opacity: 1 }}
+                                        style={{ height: "100%" }}
+                                        transition={{ type: 'spring', damping: 5, stiffness: 40, restDelta: 0.001, duration: 0.3 }}>
+                                        <Canvas
+                                            style={{ height: "750px", borderRadius: "5%" }}
+                                            gl={{ antialias: true, logarithmicDepthBuffer: true }}
+                                            shadows
+                                            camera={{ position: [2, 0, -3], fov: 35 }}>
+                                            <fog attach="fog" args={['black', 15, 21.5]} />
+                                            <Stage
+                                                intensity={0.5}
+                                                environment="city"
+                                                shadows={{ type: 'accumulative', bias: -0.001 }}
+                                                adjustCamera>
+                                                <Suspense fallback={<Loader />}>
+                                                    <Center center><Female position={[3, 0, 0]} /> <Model /></Center>
+                                                </Suspense>
+                                            </Stage>
+                                            <Grid
+                                                renderOrder={-1}
+                                                position={[0, 0, 0]}
+                                                infiniteGrid
+                                                cellSize={0.6}
+                                                cellThickness={0.6}
+                                                sectionSize={3.3}
+                                                sectionThickness={1.0}
+                                                sectionColor={[0.5, 0.5, 10]}
+                                                fadeDistance={30}
+                                                fadeStrength={3} />
+                                            <OrbitControls
+                                                autoRotate
+                                                autoRotateSpeed={-1}
+                                                enablePan={false}
+                                                enableZoom={false}
+                                                minPolarAngle={Math.PI / 2.1}
+                                                maxPolarAngle={Math.PI / 2.1} />
+                                            <EffectComposer disableNormalPass multisampling={8}>
+                                                <Bloom luminanceThreshold={1} mipmapBlur />
+                                            </EffectComposer>
+                                            <Environment background preset="city" blur={0.8} />
+                                        </Canvas>
+                                    </motion.div>*/
+                                }
                             </div>
                             <div className="col-lg-7 mt_md--40 mt_sm--40">
                                 <div className="row mb--40">
