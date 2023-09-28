@@ -1,14 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, Suspense } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SectionTitle from "../elements/sectionTitle/SectionTitle";
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Model } from './models/NGS_GLT_V2'
 import { OrbitControls } from '@react-three/drei'
-import { Stage, RandomizedLight } from '@react-three/drei'
+import { Stage, RandomizedLight, Html, useProgress, Environment, Center } from '@react-three/drei'
 import { ColorSelection } from './Selections/ColorSelection'
 import { MotorSelection } from './Selections/MotorSelection'
 import { motion } from 'framer-motion'
-
+function Loader() {
+    const { progress } = useProgress()
+    return <Html center>{progress} % loaded</Html>
+}
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
     const tabCount = 4;
@@ -24,13 +27,16 @@ const Product = () => {
                                     initial={{ x: 100, opacity: 0 }}
                                     animate={{ x: 0, opacity: 1 }}
                                     transition={{ type: 'spring', damping: 5, stiffness: 40, restDelta: 0.001, duration: 0.3 }}>
-                                    <Canvas style={{ height: "750px" }}>
-                                        <ambientLight intensity={0.25} />
-                                        <RandomizedLight castShadow amount={8} frames={100} position={[5, 5, -10]} />
+                                    <Canvas style={{ height: "750px" }} gl={{ antialias: true, preserveDrawingBuffer: true }} shadows camera={{ position: [2, 0, -3], fov: 35 }}>
                                         <Stage adjustCamera intensity={0.5} shadows="contact" environment="city">
-                                            <Model />
+                                            <Suspense fallback={<Loader />}>
+                                                <Center center>
+                                                    <Model/>
+                                                </Center>
+                                            </Suspense>
                                         </Stage>
-                                        <OrbitControls />
+                                        <OrbitControls autoRotate autoRotateSpeed={4} enablePan={false} enableZoom={false} minPolarAngle={Math.PI / 2.1} maxPolarAngle={Math.PI / 2.1} />
+
                                     </Canvas>
                                 </motion.div>
                             </div>
@@ -110,7 +116,7 @@ const Product = () => {
                                                 <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
                                                     <p>Exercitationem Ipsum lorem dolor sit amet consectetur, adipisicing elit. Quibusdam ipsa, deleniti soluta minima minus asperiores doloribus enim vitae obcaecati fuga assumenda laudantium nemo odio provident nulla  tempore corrupti! Nemo.</p>
                                                     <div className="pricing-footer">
-                                                        <a className="btn-default btn-border" onClick={() => {}}>Finish</a>
+                                                        <a className="btn-default btn-border" onClick={() => { }}>Finish</a>
                                                     </div>
                                                 </div>
                                             </div>
