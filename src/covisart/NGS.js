@@ -21,7 +21,7 @@ class NGS extends Component {
             <main className="page-wrapper">
                 <div className="main-content">
                     {/* Start Elements Area  */}
-                    <div className="rwt-tab-area rn-section-gap">
+                    <div className="rwt-tab-area">
                         <div className="wrapper plr--100 plr_md--15 plr_sm--15">
                             <Product />
                         </div>

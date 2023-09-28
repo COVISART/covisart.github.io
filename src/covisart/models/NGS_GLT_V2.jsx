@@ -4,11 +4,11 @@ Command: npx gltfjsx@6.2.13 NGS_GLT_V2.glb --transform --shadows --keepgroups --
 Files: NGS_GLT_V2.glb [113.35MB] > NGS_GLT_V2-transformed.glb [7.84MB] (93%)
 */
 
-import React, { useRef } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import { useGLTF, Center, Resize } from '@react-three/drei'
 import { useSnapshot } from 'valtio'
 import { state } from '../store'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useFrame, useThree, applyProps } from '@react-three/fiber'
 import { easing, geometry } from 'maath'
 
 export function Model(props) {
@@ -19,6 +19,11 @@ export function Model(props) {
     easing.dampC(materials.Paint.color, snap.color, 0.0, delta)
     const t = (1 + Math.sin(state.clock.elapsedTime * 2)) / 2
   })
+  useLayoutEffect(() => {
+    Object.values(nodes).forEach((node) => node.isMesh &&
+      (node.receiveShadow = node.castShadow = true,
+        applyProps(node.material, { roughness: 1.0, roughnessMap: null, normalScale: [4, 4] })))
+  }, [nodes, materials])
   return (
     <group {...props} dispose={null}>
       {

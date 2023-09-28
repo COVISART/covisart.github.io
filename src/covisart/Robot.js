@@ -8,23 +8,27 @@ import { Female } from './models/Female'
 
 export default function Robot() {
   return (
-    <Canvas style={{ height: "750px", borderRadius: "5%" }} gl={{ logarithmicDepthBuffer: true }} shadows camera={{ position: [-15, 0, 10], fov: 25 }}>
+    <Canvas
+      style={{  height:"100vh", borderRadius: "10%" }} 
+      gl={{ logarithmicDepthBuffer: true }} 
+      shadows 
+      camera={{ position: [-15, 0, 10], fov: 25 }}>
       <fog attach="fog" args={['black', 15, 21.5]} />
-      <Stage intensity={0.5} environment="city" shadows={{ type: 'accumulative', bias: -0.001 }} adjustCamera={true}>
+      <Stage intensity={0.5} environment="city" adjustCamera={true}>
         <Kamdo rotation={[0, Math.PI, 0]} />
       </Stage>
-      <Grid 
-      renderOrder={-1} 
-      position={[0, -1.85, 0]} 
-      infiniteGrid 
-      cellSize={0.6} 
-      cellThickness={0.6} 
-      sectionSize={3.3} 
-      sectionThickness={1.5} 
-      sectionColor={[0.5, 0.5, 10]} 
-      fadeDistance={30} 
-      fadeStrength={2}/>
-      <OrbitControls autoRotate autoRotateSpeed={0.5} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
+      <Grid
+        renderOrder={-1}
+        position={[0, -1.75, 0]}
+        infiniteGrid
+        cellSize={0.4}
+        cellThickness={0.6}
+        sectionSize={4}
+        sectionThickness={1.5}
+        sectionColor={[0.5, 0.5, 10]}
+        fadeDistance={30}
+        fadeStrength={2} />
+      <OrbitControls autoRotate autoRotateSpeed={-0.5} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
       <EffectComposer disableNormalPass>
         <Bloom luminanceThreshold={1} mipmapBlur />
       </EffectComposer>
@@ -50,10 +54,10 @@ function Kamdo(props) {
     <group {...props}>
       <group ref={head}>
         <mesh castShadow geometry={nodes.stripe001.geometry}>
-          <MeshDiscardMaterial/>
+          <MeshDiscardMaterial />
         </mesh>
       </group>
-      <Model/>
+      <Model />
       <Female position={[3, 0, 0]}></Female>
     </group>
   )
