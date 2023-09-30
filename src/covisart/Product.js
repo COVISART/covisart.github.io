@@ -4,7 +4,7 @@ import SectionTitle from "../elements/sectionTitle/SectionTitle";
 import { ColorSelection } from './Selections/ColorSelection'
 import { MotorSelection } from './Selections/MotorSelection'
 import { useSnapshot } from 'valtio'
-import Robot from './Robot'
+import Simulator from './Simulator'
 import { state } from './store'
 
 const Product = () => {
@@ -16,7 +16,7 @@ const Product = () => {
                 <Tabs selectedIndex={selectedTab} onSelect={(index) => setSelectedTab(index)}>
                     <div className="row row--30 align-items-center">
                         <div className="col-lg-7" style={{ height: "100vh" }}>
-                            <Robot />
+                            <Simulator />
                         </div>
                         <div className="col-lg-5 mt_md--40 mt_sm--40" >
                             <div className="row mb--40">

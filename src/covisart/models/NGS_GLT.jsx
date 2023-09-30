@@ -4,15 +4,35 @@ Command: npx gltfjsx@6.2.13 NGS_GLT_V2.glb --transform --shadows --keepgroups --
 Files: NGS_GLT_V2.glb [117.38MB] > NGS_GLT_V2-transformed.glb [11.95MB] (90%)
 */
 
-import React, { useRef } from 'react'
+import React, { useRef,useLayoutEffect } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
-
+import { useFrame,applyProps } from '@react-three/fiber'
+import { useSnapshot } from 'valtio'
+import { easing } from 'maath'
+import { state as control } from '../store'
 export function Ngs_GLT({ url, ...props }) {
-  const group = useRef()
+  const axis3 = useRef()
+  const axis2 = useRef()
+  const axis1 = useRef()
+  const snap = useSnapshot(control)
   const { nodes, materials, animations } = useGLTF(url)
-  const { actions } = useAnimations(animations, group)
+  const { actions } = useAnimations(animations, axis3)
+  useFrame((state, delta) => {
+    easing.dampC(materials.Metal.color, snap.color, 0.0, delta)
+  })
+  useFrame((state, delta) => {
+    const t = Math.sin(state.clock.elapsedTime)
+    easing.dampE(axis3.current.rotation, [t, 0, 0], control.speed, delta)
+    easing.dampE(axis2.current.rotation, [0, t, 0], control.speed, delta)
+    easing.dampE(axis1.current.rotation, [t, 0, 0], control.speed, delta)
+  })
+  useLayoutEffect(() => {
+    Object.values(nodes).forEach((node) => node.isMesh &&
+      (node.receiveShadow = node.castShadow = true,
+        applyProps(node.material, { roughness: 1.0, roughnessMap: null, normalScale: [4, 4] })))
+  }, [nodes, materials])
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group  {...props} dispose={null}>
       <group name="Scene">
         <group name="NGS_Platform">
           <mesh name="LP_20" castShadow receiveShadow geometry={nodes.LP_20.geometry} material={materials.connector} />
@@ -26,54 +46,57 @@ export function Ngs_GLT({ url, ...props }) {
           <mesh name="Vidalar_Platform" castShadow receiveShadow geometry={nodes.Vidalar_Platform.geometry} material={materials.Paint} />
         </group>
         <group name="Ruller">
-          <mesh name="Cube" castShadow receiveShadow geometry={nodes.Cube.geometry} material={materials.Line} />
-          <mesh name="Cube001" castShadow receiveShadow geometry={nodes.Cube001.geometry} material={materials.LineBlue} />
-          <mesh name="Cube002" castShadow receiveShadow geometry={nodes.Cube002.geometry} material={materials.Line} />
-          <mesh name="Cube003" castShadow receiveShadow geometry={nodes.Cube003.geometry} material={materials.Line} />
-          <mesh name="Cube004" castShadow receiveShadow geometry={nodes.Cube004.geometry} material={materials.Line} />
-          <mesh name="Cube005" castShadow receiveShadow geometry={nodes.Cube005.geometry} material={materials.LineBlue} />
-          <mesh name="Cube006" castShadow receiveShadow geometry={nodes.Cube006.geometry} material={materials.Line} />
-          <mesh name="Cube007" castShadow receiveShadow geometry={nodes.Cube007.geometry} material={materials.Line} />
-          <mesh name="Cube008" castShadow receiveShadow geometry={nodes.Cube008.geometry} material={materials.LineBlue} />
-          <mesh name="Text" castShadow receiveShadow geometry={nodes.Text.geometry} material={materials.Front_Text} />
+          {
+            snap.ruler &&
+            Object.values(Object.values(nodes).
+              filter((value) =>
+                value.isMesh &&
+                !snap.motors.some((motor) => motor === value.name) &&
+                value.name.includes("Cube") ||
+                value.name.includes("Text"))).
+              map((part) => (
+                <mesh castShadow geometry={part.geometry} material={part.material} />
+              ))
+          }
         </group>
-        <group name="NG_Axis_3">
-          <mesh name="BECKHOFF_AM8552" castShadow receiveShadow geometry={nodes.BECKHOFF_AM8552.geometry} material={materials.Metal} />
-          <mesh name="KOFON_KPL120" castShadow receiveShadow geometry={nodes.KOFON_KPL120.geometry} material={materials.Metal} />
-          <mesh name="NG_A3BP" castShadow receiveShadow geometry={nodes.NG_A3BP.geometry} material={materials.Paint} />
-          <mesh name="NG_A3KM" castShadow receiveShadow geometry={nodes.NG_A3KM.geometry} material={materials.Metal} />
-          <mesh name="NG_A3S2H5" castShadow receiveShadow geometry={nodes.NG_A3S2H5.geometry} material={materials.NGS_Axis_3} />
-          <mesh name="NG_A3S6H2" castShadow receiveShadow geometry={nodes.NG_A3S6H2.geometry} material={materials.NGS_Axis_3_Box} />
-          <mesh name="Vidalar_3" castShadow receiveShadow geometry={nodes.Vidalar_3.geometry} material={materials.Paint} />
+        <group name="NG_Axis_1" ref={axis1} position={[0, 1.39941, 0]}>
+          <mesh name="NG_A1K1009" castShadow receiveShadow geometry={nodes.NG_A1K1009.geometry} material={materials.Metal} position={[0, -1.39941, 0]} />
+          <mesh name="NG_A1P120x120x3_U2220003" castShadow receiveShadow geometry={nodes.NG_A1P120x120x3_U2220003.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+          <mesh name="NG_A1P120x120x3_U2220007" castShadow receiveShadow geometry={nodes.NG_A1P120x120x3_U2220007.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+          <mesh name="NG_A1P120x200x3_U1220001" castShadow receiveShadow geometry={nodes.NG_A1P120x200x3_U1220001.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+          <mesh name="NG_A1P120x200x3_U1220007" castShadow receiveShadow geometry={nodes.NG_A1P120x200x3_U1220007.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+          <mesh name="NG_A1S2H5001" castShadow receiveShadow geometry={nodes.NG_A1S2H5001.geometry} material={materials.NGS_AXIS_1_F} position={[0, -1.39941, 0]} />
+          <mesh name="NG_A1S2H5007" castShadow receiveShadow geometry={nodes.NG_A1S2H5007.geometry} material={materials.NGS_AXIS_1_F} position={[0, -1.39941, 0]} />
+          <mesh name="NG_A1S5H2067" castShadow receiveShadow geometry={nodes.NG_A1S5H2067.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+          <mesh name="NG_S1H3041" castShadow receiveShadow geometry={nodes.NG_S1H3041.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+          <mesh name="Vidalar" castShadow receiveShadow geometry={nodes.Vidalar.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+          <group name="NG_Axis_2" ref={axis2}>
+            <mesh name="NG_A1K1007" castShadow receiveShadow geometry={nodes.NG_A1K1007.geometry} material={materials.Metal} position={[0, -1.39941, 0]} />
+            <mesh name="NG_A1K2003" castShadow receiveShadow geometry={nodes.NG_A1K2003.geometry} material={materials.Metal} position={[0, -1.39941, 0]} />
+            <mesh name="NG_A1S5H2001" castShadow receiveShadow geometry={nodes.NG_A1S5H2001.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+            <mesh name="NG_A2MM001" castShadow receiveShadow geometry={nodes.NG_A2MM001.geometry} material={materials.Metal} position={[0, -1.39941, 0]} />
+            <mesh name="NG_A2MS001" castShadow receiveShadow geometry={nodes.NG_A2MS001.geometry} material={materials.Metal} position={[0, -1.39941, 0]} />
+            <mesh name="NG_A2P120x120x3_U2510" castShadow receiveShadow geometry={nodes.NG_A2P120x120x3_U2510.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+            <mesh name="NG_A2P120x120x3_U2550005" castShadow receiveShadow geometry={nodes.NG_A2P120x120x3_U2550005.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+            <mesh name="NG_A2P120x120x3_U2550_DRIVER001" castShadow receiveShadow geometry={nodes.NG_A2P120x120x3_U2550_DRIVER001.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+            <mesh name="NG_A2S11H2DCR001" castShadow receiveShadow geometry={nodes.NG_A2S11H2DCR001.geometry} material={materials.NGS_Axis_2_Covier} position={[0, -1.39941, 0]} />
+            <mesh name="NG_A2S1H5" castShadow receiveShadow geometry={nodes.NG_A2S1H5.geometry} material={materials.NGS_Axis_2} position={[0, -1.39941, 0]} />
+            <mesh name="NG_A2S1H52" castShadow receiveShadow geometry={nodes.NG_A2S1H52.geometry} material={materials.NGS_Axis_2} position={[0, -1.39941, 0]} />
+            <mesh name="NG_A2S7H2MCO001" castShadow receiveShadow geometry={nodes.NG_A2S7H2MCO001.geometry} material={materials.NGS_Axis_2_Box} position={[0, -1.39941, 0]} />
+            <mesh name="NG_S1H3005" castShadow receiveShadow geometry={nodes.NG_S1H3005.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+            <mesh name="Vidalar003" castShadow receiveShadow geometry={nodes.Vidalar003.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+            <group name="NG_Axis_3" ref={axis3}>
+              <mesh name="BECKHOFF_AM8552" castShadow receiveShadow geometry={nodes.BECKHOFF_AM8552.geometry} material={materials.Metal} position={[0, -1.39941, 0]} />
+              <mesh name="KOFON_KPL120" castShadow receiveShadow geometry={nodes.KOFON_KPL120.geometry} material={materials.Metal} position={[0, -1.39941, 0]} />
+              <mesh name="NG_A3BP" castShadow receiveShadow geometry={nodes.NG_A3BP.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+              <mesh name="NG_A3KM" castShadow receiveShadow geometry={nodes.NG_A3KM.geometry} material={materials.Metal} position={[0, -1.39941, 0]} />
+              <mesh name="NG_A3S2H5" castShadow receiveShadow geometry={nodes.NG_A3S2H5.geometry} material={materials.NGS_Axis_3} position={[0, -1.39941, 0]} />
+              <mesh name="NG_A3S6H2" castShadow receiveShadow geometry={nodes.NG_A3S6H2.geometry} material={materials.NGS_Axis_3_Box} position={[0, -1.39941, 0]} />
+              <mesh name="Vidalar_3" castShadow receiveShadow geometry={nodes.Vidalar_3.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
+            </group>
+          </group>
         </group>
-        <group name="NG_Axis_1">
-          <mesh name="NG_A1K1009" castShadow receiveShadow geometry={nodes.NG_A1K1009.geometry} material={materials.Metal} />
-          <mesh name="NG_A1P120x120x3_U2220003" castShadow receiveShadow geometry={nodes.NG_A1P120x120x3_U2220003.geometry} material={materials.Paint} />
-          <mesh name="NG_A1P120x120x3_U2220007" castShadow receiveShadow geometry={nodes.NG_A1P120x120x3_U2220007.geometry} material={materials.Paint} />
-          <mesh name="NG_A1P120x200x3_U1220001" castShadow receiveShadow geometry={nodes.NG_A1P120x200x3_U1220001.geometry} material={materials.Paint} />
-          <mesh name="NG_A1P120x200x3_U1220007" castShadow receiveShadow geometry={nodes.NG_A1P120x200x3_U1220007.geometry} material={materials.Paint} />
-          <mesh name="NG_A1S2H5001" castShadow receiveShadow geometry={nodes.NG_A1S2H5001.geometry} material={materials.NGS_AXIS_1_F} />
-          <mesh name="NG_A1S2H5007" castShadow receiveShadow geometry={nodes.NG_A1S2H5007.geometry} material={materials.NGS_AXIS_1_F} />
-          <mesh name="NG_A1S5H2067" castShadow receiveShadow geometry={nodes.NG_A1S5H2067.geometry} material={materials.Paint} />
-          <mesh name="NG_S1H3041" castShadow receiveShadow geometry={nodes.NG_S1H3041.geometry} material={materials.Paint} />
-          <mesh name="Vidalar" castShadow receiveShadow geometry={nodes.Vidalar.geometry} material={materials.Paint} />
-        </group>
-        <group name="NG_Axis_2">
-          <mesh name="NG_A1K1007" castShadow receiveShadow geometry={nodes.NG_A1K1007.geometry} material={materials.Metal} />
-          <mesh name="NG_A1K2003" castShadow receiveShadow geometry={nodes.NG_A1K2003.geometry} material={materials.Metal} />
-          <mesh name="NG_A1S5H2001" castShadow receiveShadow geometry={nodes.NG_A1S5H2001.geometry} material={materials.Paint} />
-          <mesh name="NG_A2MM001" castShadow receiveShadow geometry={nodes.NG_A2MM001.geometry} material={materials.Metal} />
-          <mesh name="NG_A2MS001" castShadow receiveShadow geometry={nodes.NG_A2MS001.geometry} material={materials.Metal} />
-          <mesh name="NG_A2P120x120x3_U2510" castShadow receiveShadow geometry={nodes.NG_A2P120x120x3_U2510.geometry} material={materials.Paint} />
-          <mesh name="NG_A2P120x120x3_U2550005" castShadow receiveShadow geometry={nodes.NG_A2P120x120x3_U2550005.geometry} material={materials.Paint} />
-          <mesh name="NG_A2P120x120x3_U2550_DRIVER001" castShadow receiveShadow geometry={nodes.NG_A2P120x120x3_U2550_DRIVER001.geometry} material={materials.Paint} />
-          <mesh name="NG_A2S11H2DCR001" castShadow receiveShadow geometry={nodes.NG_A2S11H2DCR001.geometry} material={materials.NGS_Axis_2_Covier} />
-          <mesh name="NG_A2S1H5" castShadow receiveShadow geometry={nodes.NG_A2S1H5.geometry} material={materials.NGS_Axis_2} />
-          <mesh name="NG_A2S1H52" castShadow receiveShadow geometry={nodes.NG_A2S1H52.geometry} material={materials.NGS_Axis_2} />
-          <mesh name="NG_A2S7H2MCO001" castShadow receiveShadow geometry={nodes.NG_A2S7H2MCO001.geometry} material={materials.NGS_Axis_2_Box} />
-          <mesh name="NG_S1H3005" castShadow receiveShadow geometry={nodes.NG_S1H3005.geometry} material={materials.Paint} />
-          <mesh name="Vidalar003" castShadow receiveShadow geometry={nodes.Vidalar003.geometry} material={materials.Paint} />
-        </group>
+
       </group>
     </group>
   )

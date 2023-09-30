@@ -6,12 +6,12 @@ import { Model } from './models/NGS_GLT_V2'
 import { Ngs_GLT } from './models/NGS_GLT'
 import { useControls } from 'leva'
 import { state } from './store'
-
+import { Effects } from './Effects'
 function Loader() {
   const { progress } = useProgress()
   return <Html center>{progress} % loaded</Html>
 }
-export default function Robot() {
+export default function Simulator() {
   const { ruler } = useControls({ "ruler": false })
   state.ruler = ruler
   return (
@@ -37,13 +37,13 @@ export default function Robot() {
         sectionColor={[1, 1, 1]}
         fadeDistance={30}
         fadeStrength={10} />
-      <OrbitControls autoRotate={false} autoRotateSpeed={-0.2} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
+      <OrbitControls autoRotate={true} autoRotateSpeed={-0.2} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
       <ambientLight position={[0, 2, 5]} />
       <ambientLight position={[-5, 2, 0]} />
       <ambientLight position={[0, 2, -5]} />
       <ambientLight position={[5, 2, 0]} />
       <EffectComposer disableNormalPass>
-        <Bloom luminanceThreshold={1} mipmapBlur />
+      <Bloom luminanceThreshold={0.2} mipmapBlur luminanceSmoothing={0} intensity={1.0} />
       </EffectComposer>
     </Canvas>
   )
@@ -69,7 +69,7 @@ function Kamdo({ url, ...props }) {
           <MeshDiscardMaterial />
         </mesh>
       </group>
-      <Model url={url} position={[0.155, 3, 0]} />
+      <Ngs_GLT url={url} position={[0.155, 3, 0]} />
       {
         //<Female position={[2.5, 0, 0]}/>
       }
