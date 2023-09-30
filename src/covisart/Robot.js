@@ -1,38 +1,50 @@
-import { useRef } from 'react'
+import { useRef, Suspense } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { useGLTF, Stage, Grid, OrbitControls, Environment, MeshDistortMaterial, MeshDiscardMaterial } from '@react-three/drei'
+import { useGLTF, Stage, Grid, OrbitControls, Html, MeshDistortMaterial, MeshDiscardMaterial, useProgress } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import { easing } from 'maath'
 import { Model } from './models/NGS_GLT_V2'
-import { Female } from './models/Female'
+import { Ngs_GLT } from './models/NGS_GLT'
+import { useControls } from 'leva'
+import { state } from './store'
 
+function Loader() {
+  const { progress } = useProgress()
+  return <Html center>{progress} % loaded</Html>
+}
 export default function Robot() {
+  const { ruler } = useControls({ "ruler": false })
+  state.ruler = ruler
   return (
     <Canvas
-      style={{  height:"100vh", borderRadius: "10%" }} 
-      gl={{ logarithmicDepthBuffer: true }} 
-      shadows 
-      camera={{ position: [-15, 0, 10], fov: 25 }}>
+      style={{ height: "100vh" }}
+      gl={{ logarithmicDepthBuffer: true }}
+      shadows>
       <fog attach="fog" args={['black', 15, 21.5]} />
-      <Stage intensity={0.5} environment="city" adjustCamera={true}>
-        <Kamdo rotation={[0, Math.PI, 0]} />
-      </Stage>
+      <Suspense fallback={<Loader />}>
+        <Stage intensity={0.5} environment="city" adjustCamera={true} >
+          <Kamdo url="/covisart/models/NGS_GLT_V2-transformed.glb" />
+        </Stage>
+      </Suspense>
       <Grid
         renderOrder={-1}
-        position={[0, -1.75, 0]}
+        position={[0, -0.95, 0]}
         infiniteGrid
         cellSize={0.4}
         cellThickness={0.6}
+        cellColor={[1, 1, 1]}
         sectionSize={4}
         sectionThickness={1.5}
-        sectionColor={[0.5, 0.5, 10]}
+        sectionColor={[1, 1, 1]}
         fadeDistance={30}
-        fadeStrength={2} />
-      <OrbitControls autoRotate autoRotateSpeed={-0.5} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
+        fadeStrength={10} />
+      <OrbitControls autoRotate={false} autoRotateSpeed={-0.2} enableZoom={false} makeDefault minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} />
+      <ambientLight position={[0, 2, 5]} />
+      <ambientLight position={[-5, 2, 0]} />
+      <ambientLight position={[0, 2, -5]} />
+      <ambientLight position={[5, 2, 0]} />
       <EffectComposer disableNormalPass>
         <Bloom luminanceThreshold={1} mipmapBlur />
       </EffectComposer>
-      <Environment background preset="city" blur={0.8} />
     </Canvas>
   )
 }
@@ -46,7 +58,7 @@ Source: https://sketchfab.com/3d-models/s2wt-kamdo-industrial-divinities-f503b70
 Title: S2WT "Kamdo" (Industrial Divinities)
 */
 
-function Kamdo(props) {
+function Kamdo({ url, ...props }) {
   const head = useRef()
   const { nodes, materials } = useGLTF('/s2wt_kamdo_industrial_divinities-transformed.glb')
 
@@ -57,8 +69,10 @@ function Kamdo(props) {
           <MeshDiscardMaterial />
         </mesh>
       </group>
-      <Model />
-      <Female position={[3, 0, 0]}></Female>
+      <Model url={url} position={[0.155, 3, 0]} />
+      {
+        //<Female position={[2.5, 0, 0]}/>
+      }
     </group>
   )
 }

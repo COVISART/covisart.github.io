@@ -5,19 +5,20 @@ Files: NGS_GLT_V2.glb [113.35MB] > NGS_GLT_V2-transformed.glb [7.84MB] (93%)
 */
 
 import React, { useLayoutEffect, useRef } from 'react'
-import { useGLTF, Center, Resize } from '@react-three/drei'
+import { useGLTF, useAnimations, Resize } from '@react-three/drei'
 import { useSnapshot } from 'valtio'
 import { state } from '../store'
 import { useFrame, useThree, applyProps } from '@react-three/fiber'
 import { easing, geometry } from 'maath'
 
-export function Model(props) {
-  const { nodes, materials } = useGLTF('/covisart/models/NGS_GLT_V2-transformed.glb')
+export function Model({ url, ...props }) {
+  const { nodes, materials, animations } = useGLTF(url)
+
   const snap = useSnapshot(state)
-  easing.dampC(materials.led.color, snap.led, 0.0, 1)
+
+  //easing.dampC(materials.led.color, snap.led, 0.0, 1)
   useFrame((state, delta) => {
-    easing.dampC(materials.Paint.color, snap.color, 0.0, delta)
-    const t = (1 + Math.sin(state.clock.elapsedTime * 2)) / 2
+    easing.dampC(materials.Metal.color, snap.color, 0.0, delta)
   })
   useLayoutEffect(() => {
     Object.values(nodes).forEach((node) => node.isMesh &&
@@ -27,13 +28,29 @@ export function Model(props) {
   return (
     <group {...props} dispose={null}>
       {
-        nodes[snap.motor] != null && <mesh castShadow geometry={nodes[snap.motor].geometry} material={nodes[snap.motor].material} />
+        nodes[snap.motor] != null &&
+        <mesh castShadow geometry={nodes[snap.motor].geometry} material={nodes[snap.motor].material} />
+      }
+      
+      {
+        snap.ruler &&
+        Object.values(Object.values(nodes).
+          filter((value) =>
+            value.isMesh &&
+            !snap.motors.some((motor) => motor === value.name) &&
+            value.name.includes("Cube") || 
+            value.name.includes("Text"))).
+          map((part) => (
+            <mesh castShadow geometry={part.geometry} material={part.material} />
+          ))
       }
       {
         Object.values(Object.values(nodes).
           filter((value) =>
             value.isMesh &&
-            !snap.motors.some((motor) => motor === value.name))).
+            !snap.motors.some((motor) => motor === value.name) &&
+            !value.name.includes("Cube") &&
+            !value.name.includes("Text"))).
           map((part) => (
             <mesh castShadow geometry={part.geometry} material={part.material} />
           ))
@@ -42,7 +59,8 @@ export function Model(props) {
         <mesh castShadow geometry={nodes.RJ45_1.geometry} material={materials.orange} />
         <mesh castShadow geometry={nodes.RJ45_2.geometry} material={materials.connector} />
       </group>
+      
     </group>
+    
   )
 }
-useGLTF.preload('/covisart/models/NGS_GLT_V2-transformed.glb')

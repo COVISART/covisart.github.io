@@ -1,32 +1,21 @@
-import React, { useRef, useState, Suspense } from 'react';
+import React, { useState } from 'react';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SectionTitle from "../elements/sectionTitle/SectionTitle";
-import { Canvas, useFrame } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
-import { Stage, Grid, Html, useProgress, Environment, PresentationControls, Center } from '@react-three/drei'
 import { ColorSelection } from './Selections/ColorSelection'
 import { MotorSelection } from './Selections/MotorSelection'
-import { motion } from 'framer-motion'
-import { EffectComposer, Bloom, DepthOfField } from '@react-three/postprocessing'
+import { useSnapshot } from 'valtio'
 import Robot from './Robot'
-import { Amber } from './models/Amber'
-import { Model } from './models/NGS_GLT_V2'
-import { Female } from './models/Female'
+import { state } from './store'
 
-function Loader() {
-    const { progress } = useProgress()
-    return <Html center>{progress} % loaded</Html>
-}
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
     const tabCount = 4;
-
     return (
         <div className="row">
             <div className="col-lg-12">
                 <Tabs selectedIndex={selectedTab} onSelect={(index) => setSelectedTab(index)}>
                     <div className="row row--30 align-items-center">
-                        <div className="col-lg-7" style={{height:"100vh"}}>
+                        <div className="col-lg-7" style={{ height: "100vh" }}>
                             <Robot />
                         </div>
                         <div className="col-lg-5 mt_md--40 mt_sm--40" >
