@@ -4,9 +4,9 @@ Command: npx gltfjsx@6.2.13 NGS_GLT_V2.glb --transform --shadows --keepgroups --
 Files: NGS_GLT_V2.glb [117.38MB] > NGS_GLT_V2-transformed.glb [11.95MB] (90%)
 */
 
-import React, { useRef,useLayoutEffect } from 'react'
+import React, { useRef, useLayoutEffect } from 'react'
 import { useGLTF, useAnimations } from '@react-three/drei'
-import { useFrame,applyProps } from '@react-three/fiber'
+import { useFrame, applyProps } from '@react-three/fiber'
 import { useSnapshot } from 'valtio'
 import { easing } from 'maath'
 import { state as control } from '../store'
@@ -20,7 +20,7 @@ export function Ngs_GLT({ url, ...props }) {
   useFrame((state, delta) => {
     easing.dampC(materials.Metal.color, snap.color, 0.0, delta)
   })
-  useFrame((state, delta) => {
+  /*useFrame((state, delta) => {
     const t = Math.sin(state.clock.elapsedTime)
     easing.dampE(axis3.current.rotation, [t, 0, 0], control.speed, delta)
     easing.dampE(axis2.current.rotation, [0, t, 0], control.speed, delta)
@@ -30,7 +30,7 @@ export function Ngs_GLT({ url, ...props }) {
     Object.values(nodes).forEach((node) => node.isMesh &&
       (node.receiveShadow = node.castShadow = true,
         applyProps(node.material, { roughness: 1.0, roughnessMap: null, normalScale: [4, 4] })))
-  }, [nodes, materials])
+  }, [nodes, materials])*/
   return (
     <group  {...props} dispose={null}>
       <group name="Scene">
@@ -86,7 +86,10 @@ export function Ngs_GLT({ url, ...props }) {
             <mesh name="NG_S1H3005" castShadow receiveShadow geometry={nodes.NG_S1H3005.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
             <mesh name="Vidalar003" castShadow receiveShadow geometry={nodes.Vidalar003.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
             <group name="NG_Axis_3" ref={axis3}>
-              <mesh name="BECKHOFF_AM8552" castShadow receiveShadow geometry={nodes.BECKHOFF_AM8552.geometry} material={materials.Metal} position={[0, -1.39941, 0]} />
+              {
+                nodes[snap.motor] != null &&
+                <mesh castShadow geometry={nodes[snap.motor].geometry} material={nodes[snap.motor].material} position={[0, -1.39941, 0]}/>
+              }
               <mesh name="KOFON_KPL120" castShadow receiveShadow geometry={nodes.KOFON_KPL120.geometry} material={materials.Metal} position={[0, -1.39941, 0]} />
               <mesh name="NG_A3BP" castShadow receiveShadow geometry={nodes.NG_A3BP.geometry} material={materials.Paint} position={[0, -1.39941, 0]} />
               <mesh name="NG_A3KM" castShadow receiveShadow geometry={nodes.NG_A3KM.geometry} material={materials.Metal} position={[0, -1.39941, 0]} />

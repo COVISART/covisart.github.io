@@ -2,9 +2,12 @@ import { proxy } from 'valtio'
 
 const state = proxy({
   ruler: false,
-  colors: ['#5D676D','#3D3C3E', '#0F244A' ],
+  cockpit: false,
+  raceseat: false,
+  size: ["medium", "large"],
+  colors: ['grey','black', 'green' ],
   decals: ['react', 'three2', 'pmndrs'],
-  color: '#3D3C3E',
+  color: 'grey',
   led: '#FF0000',
   decal: 'three2',
   motors: ['BECKHOFF_AM8552', 'BECKHOFF_AM8052'],

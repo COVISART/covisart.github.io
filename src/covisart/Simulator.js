@@ -18,7 +18,8 @@ export default function Simulator() {
     <Canvas
       style={{ height: "100vh" }}
       gl={{ logarithmicDepthBuffer: true }}
-      shadows>
+      shadows
+      frameloop="demand">
       <fog attach="fog" args={['black', 15, 21.5]} />
       <Suspense fallback={<Loader />}>
         <Stage intensity={0.5} environment="city" adjustCamera={true} >
