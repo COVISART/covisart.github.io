@@ -10,12 +10,9 @@ export default function Configuration() {
             {
                 NGS(snap.color)
                 
-            }{
-                snap.cockpit &&
-                    NGS('cockpit')
-            }{
-                snap.raceseat &&
-                    NGS('RaceSeat')
+            }
+            {
+                snap.accessory !='JustSim' && NGS(snap.accessory)
             }
         </div>
     )

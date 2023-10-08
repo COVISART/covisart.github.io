@@ -88,7 +88,7 @@
   height: 30px;
   border-radius: 10%;
   outline-style: solid;
-  outline-color: green;
+  outline-color: red;
   transition: transform 0.6s cubic-bezier(0.85, 0, 0.15, 1);
 }
 .box:hover {

@@ -2,9 +2,9 @@ import { proxy } from 'valtio'
 
 const state = proxy({
   ruler: false,
-  cockpit: false,
-  raceseat: false,
-  size: ["medium", "large"],
+  sizes: ["450", "850"],
+  size: '450',
+  accessories:['JustSim','RaceSeat', 'cockpit' ],
   colors: ['grey','black', 'green' ],
   decals: ['react', 'three2', 'pmndrs'],
   color: 'grey',
