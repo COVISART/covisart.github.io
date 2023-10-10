@@ -10,14 +10,9 @@ import Simulator from './Simulator'
 import { state } from './store'
 import Configuration from './Configuration'
 import Email from './system/SendMail';
-import { initializeGtag, gtag } from 'gtag-ga';
 import ReactGA from "react-ga4";
-import { initializeApp } from "firebase/app";
-import { getAnalytics, logEvent } from "firebase/analytics";
 import { uploadData } from './system/OrderRequest';
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { Form } from 'react-router-dom';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBRfVZpE4dKAjxq6zB7ja-H8Oo9TWaCiJg",
@@ -191,7 +186,7 @@ const Product = () => {
                                                         <input required type='text' placeholder="Name" onChange={(e) => { state.name = e.currentTarget.value }} />
                                                         <input required type='text' placeholder="Phone" onChange={(e) => { state.phone = e.currentTarget.value }} />
                                                         <input required type='email' placeholder="E-mail" onChange={(e) => { state.email = e.currentTarget.value }} />
-                                                        <input className="btn-default btn-border" type="submit" value="Order"></input >
+                                                        <button className="btn-default btn-border" type="submit" value="Order">Order</button >
                                                     </Space>
                                                 </form>
                                             </div>

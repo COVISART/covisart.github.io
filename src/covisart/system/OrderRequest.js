@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-export const uploadData = async (state) => {
+export const uploadData = (state) => {
     const data = {
         email: state.email,
         name: state.name,
@@ -13,7 +13,7 @@ export const uploadData = async (state) => {
           "string"
         ]
       }
-    await Axios.post("https://ngsmarket.azurewebsites.net/api/Orders/", data,)
+    Axios.post("https://ngsmarket.azurewebsites.net/api/Orders/", data,)
     .then((res) => {
         console.log(res)
     })
