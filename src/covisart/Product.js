@@ -9,10 +9,8 @@ import { useSnapshot } from 'valtio'
 import Simulator from './Simulator'
 import { state } from './store'
 import Configuration from './Configuration'
-import Email from './system/SendMail';
 import ReactGA from "react-ga4";
 import { uploadData } from './system/OrderRequest';
-import 'reactjs-popup/dist/index.css';
 
 const firebaseConfig = {
     apiKey: "AIzaSyBRfVZpE4dKAjxq6zB7ja-H8Oo9TWaCiJg",

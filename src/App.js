@@ -68,9 +68,6 @@ import BlogListSidebar from "./components/blog/BlogListSidebar";
 import BlogDetails from "./pages/BlogDetails";
 import Error from "./pages/Error";
 
-import { initializeGtag, gtag } from 'gtag-ga';
-import ReactGA from "react-ga4";
-
 // Import Css Here 
 import './assets/scss/style.scss';
 
