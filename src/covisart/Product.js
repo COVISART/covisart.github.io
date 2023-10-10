@@ -46,7 +46,7 @@ const Product = () => {
         api.open({
           message: 'We got your order.',
           description:
-            'Dear ' + snap.name + ', we got your order, our sales team will contact with you for further operation. Thanks for your interest our NGS-360 family motion platform.',
+            'Dear ' + state.name + ', we got your order, our sales team will contact with you for further operation. Thanks for your interest our NGS-360 family motion platform.',
           duration: 0,
         });
       };
