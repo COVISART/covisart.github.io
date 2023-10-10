@@ -1,6 +1,9 @@
 import { proxy } from 'valtio'
 
 const state = proxy({
+  name: "",
+  phone:"0",
+  email:"",
   ruler: false,
   sizes: ["450", "850"],
   size: '450',

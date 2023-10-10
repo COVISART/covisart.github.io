@@ -168,3 +168,4 @@ build/*
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode
+public/covisart/images/ngs/NGS.psd

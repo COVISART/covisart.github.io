@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Space, Table, Tag } from 'antd';
+import { Grid, Input, Row, Space, Table, notification  } from 'antd';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SectionTitle from "../elements/sectionTitle/SectionTitle";
 import { ColorSelection } from './Selections/ColorSelection'
@@ -12,12 +12,29 @@ import Configuration from './Configuration'
 import Email from './system/SendMail';
 import { initializeGtag, gtag } from 'gtag-ga';
 import ReactGA from "react-ga4";
+import { initializeApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
+import { uploadData } from './system/OrderRequest';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+import { Form } from 'react-router-dom';
 
+const firebaseConfig = {
+    apiKey: "AIzaSyBRfVZpE4dKAjxq6zB7ja-H8Oo9TWaCiJg",
+    authDomain: "ngs-server.firebaseapp.com",
+    projectId: "ngs-server",
+    storageBucket: "ngs-server.appspot.com",
+    messagingSenderId: "1012345570821",
+    appId: "1:1012345570821:web:58a5bc3258cf43da4fbe6c",
+    measurementId: "G-4ZXME9T8HK"
+};
 
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
+    const [api, contextHolder] = notification.useNotification();
     const tabCount = 5;
     ReactGA.initialize("G-XTQCE7S8BR");
+    ReactGA.send({ hitType: "pageview", page: "/ngs", title: "NGS-360-3 Axis Simulator" });
 
     const snap = useSnapshot(state)
     const columns = [
@@ -32,9 +49,23 @@ const Product = () => {
             key: 'value',
         }
     ];
+    const openNotification = () => {
+        api.open({
+          message: 'We got your order.',
+          description:
+            'Dear ' + snap.name + ', we got your order, our sales team will contact with you for further operation. Thanks for your interest our NGS-360 family motion platform.',
+          duration: 0,
+        });
+      };
+    const handleSubmit = event => {
+        event.preventDefault(); // 👈️ prevent page refresh
 
+        uploadData(snap)
+        openNotification()
+    };
     return (
         <div className="row">
+            {contextHolder}
             <div className="col-lg-12">
                 <Tabs selectedIndex={selectedTab} onSelect={(index) => setSelectedTab(index)}>
                     <div className="row row--30 align-items-center">
@@ -154,20 +185,15 @@ const Product = () => {
                                             } pagination={false} />
 
                                             <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
-                                                <div className="pricing-footer">
-                                                    <a className="btn-default btn-border" onClick={() => {
-                                                        // Send a custom event
-                                                        ReactGA.event({
-                                                            category: "purchase",
-                                                            action: "Purchase",
-                                                            label: "ngs", // optional
-                                                            value: 99, // optional, must be a number
-                                                            nonInteraction: true, // optional, true/false
-                                                            transport: "xhr", // optional, beacon/xhr/image
-                                                        });
-                                                        console.log("clicked")
-                                                    }}>Order</a>
-                                                </div>
+                                                <form style={{ display: 'flex', width: "100%" }}
+                                                    onSubmit={handleSubmit}>
+                                                    <Space direction="vertical" size="middle" style={{ display: 'flex', width: "100%" }}>
+                                                        <input required type='text' placeholder="Name" onChange={(e) => { state.name = e.currentTarget.value }} />
+                                                        <input required type='text' placeholder="Phone" onChange={(e) => { state.phone = e.currentTarget.value }} />
+                                                        <input required type='email' placeholder="E-mail" onChange={(e) => { state.email = e.currentTarget.value }} />
+                                                        <input className="btn-default btn-border" type="submit" value="Order"></input >
+                                                    </Space>
+                                                </form>
                                             </div>
                                         </div>
                                     </TabPanel>
