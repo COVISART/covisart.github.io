@@ -68,17 +68,17 @@ import BlogListSidebar from "./components/blog/BlogListSidebar";
 import BlogDetails from "./pages/BlogDetails";
 import Error from "./pages/Error";
 
-import ReactGA from 'react-ga';
-
+import { initializeGtag, gtag } from 'gtag-ga';
+import ReactGA from "react-ga4";
 
 // Import Css Here 
 import './assets/scss/style.scss';
 
 
 const App = () => {
-    ReactGA.initialize('UA-256923835-1', { debug: true });
-    ReactGA.pageview(`${process.env.PUBLIC_URL + "/ngs"}`);
-    
+
+    //initializeGtag('G-XTQCE7S8BR'); // Your tracking code
+
     return (
         <Router>
             <PageScrollTop>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Space, Table, Tag } from 'antd';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SectionTitle from "../elements/sectionTitle/SectionTitle";
@@ -10,11 +10,15 @@ import Simulator from './Simulator'
 import { state } from './store'
 import Configuration from './Configuration'
 import Email from './system/SendMail';
-import ReactGA from 'react-ga';
+import { initializeGtag, gtag } from 'gtag-ga';
+import ReactGA from "react-ga4";
+
 
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
     const tabCount = 5;
+    ReactGA.initialize("G-XTQCE7S8BR");
+
     const snap = useSnapshot(state)
     const columns = [
         {
@@ -28,6 +32,7 @@ const Product = () => {
             key: 'value',
         }
     ];
+
     return (
         <div className="row">
             <div className="col-lg-12">
@@ -148,20 +153,19 @@ const Product = () => {
                                                 ]
                                             } pagination={false} />
 
-
                                             <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
                                                 <div className="pricing-footer">
                                                     <a className="btn-default btn-border" onClick={() => {
+                                                        // Send a custom event
                                                         ReactGA.event({
-                                                            category: 'Promotion',
-                                                            action: 'Displayed Promotional Widget',
-                                                            label: 'Homepage Thing',
-                                                            nonInteraction: true
+                                                            category: "purchase",
+                                                            action: "Purchase",
+                                                            label: "ngs", // optional
+                                                            value: 99, // optional, must be a number
+                                                            nonInteraction: true, // optional, true/false
+                                                            transport: "xhr", // optional, beacon/xhr/image
                                                         });
-                                                        ReactGA.event({
-                                                            category: 'User',
-                                                            action: 'Created an Account'
-                                                          });
+                                                        console.log("clicked")
                                                     }}>Order</a>
                                                 </div>
                                             </div>
