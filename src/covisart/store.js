@@ -5,6 +5,7 @@ const state = proxy({
   sizes: ["450", "850"],
   size: '450',
   accessories:['JustSim','RaceSeat', 'cockpit' ],
+  accessory:'JustSim',
   colors: ['grey','black', 'green' ],
   decals: ['react', 'three2', 'pmndrs'],
   color: 'grey',

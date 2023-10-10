@@ -9,6 +9,8 @@ import { useSnapshot } from 'valtio'
 import Simulator from './Simulator'
 import { state } from './store'
 import Configuration from './Configuration'
+import Email from './system/SendMail';
+import ReactGA from 'react-ga';
 
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
@@ -25,23 +27,6 @@ const Product = () => {
             dataIndex: 'value',
             key: 'value',
         }
-    ];
-    const data = [
-        {
-            key: '1',
-            name: 'John Brown',
-            value: 32,
-        },
-        {
-            key: '2',
-            name: 'Jim Green',
-            value: 42,
-        },
-        {
-            key: '3',
-            name: 'Joe Black',
-            value: 32,
-        },
     ];
     return (
         <div className="row">
@@ -120,9 +105,9 @@ const Product = () => {
                                     <TabPanel tabid="2">
                                         <div className="rn-tab-content">
                                             <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
-                                                <p>You can only add one accessory on same time, there are <a style={{ color:'red'}}>2</a> accessories available.</p>
+                                                <p>You can only add one accessory on same time, there are <a style={{ color: 'red' }}>2</a> accessories available.</p>
                                                 <div style={{ justifyContent: "space-evenly", alignItems: "center", flexDirection: "row", display: "flex" }}>
-                                                    <AccessorySelection/>
+                                                    <AccessorySelection />
                                                 </div>
 
                                                 <div className="pricing-footer">
@@ -134,7 +119,7 @@ const Product = () => {
                                     <TabPanel tabid="3">
                                         <div className="rn-tab-content">
                                             <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
-                                                <p>Required motors applied with pre configured payload selection. If you want more motor power, please <a style={{ color:'red'}} href='https://covisart.com.tr/contacts/' target='_blank'>contact</a> with us. </p>
+                                                <p>Required motors applied with pre configured payload selection. If you want more motor power, please <a style={{ color: 'red' }} href='https://covisart.com.tr/contacts/' target='_blank'>contact</a> with us. </p>
                                                 <div className="pricing-footer">
                                                     <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Finish</a>
                                                 </div>
@@ -166,7 +151,18 @@ const Product = () => {
 
                                             <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
                                                 <div className="pricing-footer">
-                                                    <a className="btn-default btn-border" onClick={() => { }}>Order</a>
+                                                    <a className="btn-default btn-border" onClick={() => {
+                                                        ReactGA.event({
+                                                            category: 'Promotion',
+                                                            action: 'Displayed Promotional Widget',
+                                                            label: 'Homepage Thing',
+                                                            nonInteraction: true
+                                                        });
+                                                        ReactGA.event({
+                                                            category: 'User',
+                                                            action: 'Created an Account'
+                                                          });
+                                                    }}>Order</a>
                                                 </div>
                                             </div>
                                         </div>

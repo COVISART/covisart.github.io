@@ -68,12 +68,17 @@ import BlogListSidebar from "./components/blog/BlogListSidebar";
 import BlogDetails from "./pages/BlogDetails";
 import Error from "./pages/Error";
 
+import ReactGA from 'react-ga';
+
 
 // Import Css Here 
 import './assets/scss/style.scss';
 
 
 const App = () => {
+    ReactGA.initialize('UA-256923835-1', { debug: true });
+    ReactGA.pageview(`${process.env.PUBLIC_URL + "/ngs"}`);
+    
     return (
         <Router>
             <PageScrollTop>
