@@ -53,7 +53,7 @@ const Product = () => {
     const handleSubmit = event => {
         event.preventDefault(); // 👈️ prevent page refresh
 
-        uploadData(snap)
+        uploadData(state)
         openNotification()
     };
     return (
@@ -181,9 +181,9 @@ const Product = () => {
                                                 <form style={{ display: 'flex', width: "100%" }}
                                                     onSubmit={handleSubmit}>
                                                     <Space direction="vertical" size="middle" style={{ display: 'flex', width: "100%" }}>
-                                                        <input required type='text' placeholder="Name" onChange={(e) => { state.name = e.currentTarget.value }} />
-                                                        <input required type='text' placeholder="Phone" onChange={(e) => { state.phone = e.currentTarget.value }} />
-                                                        <input required type='email' placeholder="E-mail" onChange={(e) => { state.email = e.currentTarget.value }} />
+                                                        <input id="name" required type='text' placeholder="Name" onInput={(e)=>{console.log(e.currentTarget.value)}} onChange={(e) => { state.name = e.currentTarget.value; console.log(e.currentTarget.value) }} />
+                                                        <input id="phone" required type='text' placeholder="Phone" onChange={(e) => { state.phone = e.currentTarget.value }} />
+                                                        <input id="email" required type='email' placeholder="E-mail" onChange={(e) => { state.email = e.currentTarget.value }} />
                                                         <button className="btn-default btn-border" type="submit" value="Order">Order</button >
                                                     </Space>
                                                 </form>
