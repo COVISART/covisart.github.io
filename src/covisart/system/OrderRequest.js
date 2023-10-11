@@ -1,6 +1,6 @@
 import Axios from "axios";
 
-export const uploadData = (state) => {
+export const Order = (state) => {
     const data = {
         email: state.email,
         name: state.name,

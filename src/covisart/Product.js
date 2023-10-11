@@ -11,7 +11,7 @@ import { useSnapshot } from 'valtio'
 import { state } from './store'
 import Configuration from './Configuration'
 import ReactGA from "react-ga4";
-
+import { Order } from './system/OrderRequest';
 
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
@@ -47,7 +47,7 @@ const Product = () => {
     const handleSubmit = event => {
         event.preventDefault(); // 👈️ prevent page refresh
 
-        uploadData(state)
+        Order(state)
         openNotification('bottomRight')
     };
     return (
