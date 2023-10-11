@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,600;1,900&display=swap');
 @import url('https://rsms.me/inter/inter.css');
 
+
 /* CUSTOMIZER */
 .customizer {
   display: flex;
@@ -176,17 +177,28 @@
     line-height: 6rem;
   }
 
-  .color-options {
+  /*.color-options {
     margin-bottom: 20px;
     flex-direction: column;
     position: absolute;
     top: 50%;
     right: 40px;
     transform: translateY(-50%);
-  }
+  }*/
 
   .support--content {
     top: -10%;
     left: 0;
+  }
+  
+}
+@media screen and (max-width: 600px) {
+  .title_message {
+    visibility: hidden;
+    clear: both;
+    float: left;
+    margin: 10px auto 5px 20px;
+    width: 28%;
+    display: none;
   }
 }

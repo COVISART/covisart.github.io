@@ -44,7 +44,7 @@ function Customizer() {
 function Accessory(name, selected) {
     const sizeImage = './covisart/images/ngs/' + name + '_icon.png'
     return (
-        <div key={name} className={selected} style={{ height: "20%", width: "20%", textAlign: "center" }} onClick={() => {name !='cockpit' && (state.accessory = name)}}>
+        <div key={name} className={selected} style={{ height: "20%", width: "20%", textAlign: "center", wordWrap:"break-word" }} onClick={() => {name !='cockpit' && (state.accessory = name)}}>
             {
                 name !='cockpit'
                 ?<img id={name} style={{ borderRadius: "10%" , }} src={sizeImage} alt={name} />

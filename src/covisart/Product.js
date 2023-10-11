@@ -1,26 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { Grid, Input, Row, Space, Table, notification  } from 'antd';
+import React, { useState } from 'react';
+import {  Space, Table, notification } from 'antd';
+import { PhoneOutlined } from '@ant-design/icons';
+
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SectionTitle from "../elements/sectionTitle/SectionTitle";
 import { ColorSelection } from './Selections/ColorSelection'
 import { AccessorySelection } from './Selections/AccessorySelection'
 import { PayloadSelection } from './Selections/PayloadSelection'
 import { useSnapshot } from 'valtio'
-import Simulator from './Simulator'
 import { state } from './store'
 import Configuration from './Configuration'
 import ReactGA from "react-ga4";
-import { uploadData } from './system/OrderRequest';
 
-const firebaseConfig = {
-    apiKey: "AIzaSyBRfVZpE4dKAjxq6zB7ja-H8Oo9TWaCiJg",
-    authDomain: "ngs-server.firebaseapp.com",
-    projectId: "ngs-server",
-    storageBucket: "ngs-server.appspot.com",
-    messagingSenderId: "1012345570821",
-    appId: "1:1012345570821:web:58a5bc3258cf43da4fbe6c",
-    measurementId: "G-4ZXME9T8HK"
-};
 
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
@@ -42,19 +33,22 @@ const Product = () => {
             key: 'value',
         }
     ];
-    const openNotification = () => {
+    const openNotification = (placement) => {
         api.open({
-          message: 'We got your order.',
-          description:
-            'Dear ' + state.name + ', we got your order, our sales team will contact with you for further operation. Thanks for your interest our NGS-360 family motion platform.',
-          duration: 0,
+            message: 'We got your order.',
+            description:
+                'Dear ' + state.name + ', we got your order.  Our sales team will contact with you for further operation. Thanks for your interest our NGS-360 family motion platform.',
+            duration: 0,
+            placement,
+            icon:<PhoneOutlined style={{ color: 'green' }}/>
         });
-      };
+    };
+    
     const handleSubmit = event => {
         event.preventDefault(); // 👈️ prevent page refresh
 
-        uploadData(state)
-        openNotification()
+        //uploadData(state)
+        openNotification('bottomRight')
     };
     return (
         <div className="row">
@@ -62,11 +56,14 @@ const Product = () => {
             <div className="col-lg-12">
                 <Tabs selectedIndex={selectedTab} onSelect={(index) => setSelectedTab(index)}>
                     <div className="row row--30 align-items-center">
-                        <div className="col-lg-7" style={{ height: "100vh" }}>
-                            <Configuration />
+                        <div className="col-lg-6 mt_md--40 mt_sm--40">
+                            <div style={{ position: "relative" }}>
+                                <Configuration />
+                            </div>
+
                         </div>
-                        <div className="col-lg-5 mt_md--40 mt_sm--40" >
-                            <div className="row mb--40">
+                        <div className="col-lg-6 mt_md--40 mt_sm--40" >
+                            <div className="row mb--40 title_message">
                                 <div className="col-lg-12">
                                     <SectionTitle
                                         textAlign="text-center"
@@ -114,6 +111,7 @@ const Product = () => {
                                     <TabPanel tabid="0">
                                         <div className="rn-tab-content">
                                             <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
+                                                <p>NGS-360-3 Motion Platform has <a style={{ color: 'yellow' }}>3</a> different color available. All colors are matte and powder painted</p>
                                                 <ColorSelection />
                                                 <div className="pricing-footer">
                                                     <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Next</a>
@@ -124,6 +122,7 @@ const Product = () => {
                                     <TabPanel tabid="1">
                                         <div className="rn-tab-content">
                                             <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
+                                                <p>Unit of measurement  <a style={{ color: 'red' }}>Kg</a>. It can be changed after later for an extra fee.</p>
                                                 <PayloadSelection />
                                                 <div className="pricing-footer">
                                                     <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Next</a>
@@ -181,7 +180,7 @@ const Product = () => {
                                                 <form style={{ display: 'flex', width: "100%" }}
                                                     onSubmit={handleSubmit}>
                                                     <Space direction="vertical" size="middle" style={{ display: 'flex', width: "100%" }}>
-                                                        <input id="name" required type='text' placeholder="Name" onInput={(e)=>{console.log(e.currentTarget.value)}} onChange={(e) => { state.name = e.currentTarget.value; console.log(e.currentTarget.value) }} />
+                                                        <input id="name" required type='text' placeholder="Name" onInput={(e) => { console.log(e.currentTarget.value) }} onChange={(e) => { state.name = e.currentTarget.value; console.log(e.currentTarget.value) }} />
                                                         <input id="phone" required type='text' placeholder="Phone" onChange={(e) => { state.phone = e.currentTarget.value }} />
                                                         <input id="email" required type='email' placeholder="E-mail" onChange={(e) => { state.email = e.currentTarget.value }} />
                                                         <button className="btn-default btn-border" type="submit" value="Order">Order</button >

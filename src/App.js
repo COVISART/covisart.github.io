@@ -82,6 +82,8 @@ const App = () => {
                 <Routes>
                     <Route path={`${process.env.PUBLIC_URL + "/ngs"}`} element={<NGS/>} />
                     <Route path={`${process.env.PUBLIC_URL + "/"}`} element={<Company/>} />
+                    <Route path={`${process.env.PUBLIC_URL + "/contact"}`} element={<Contact/>} />
+
                     <Route path={`${process.env.PUBLIC_URL + "/business-consulting"}`} element={HomeDefault} />
                     <Route path={`${process.env.PUBLIC_URL + "/business-consulting-2"}`} element={BusinessConsulting2} />
                     <Route path={`${process.env.PUBLIC_URL + "/corporate"}`} element={Corporate} />
@@ -127,7 +129,6 @@ const App = () => {
                     <Route path={`${process.env.PUBLIC_URL + "/call-to-action"}`} element={CalltoAction} />
                     <Route path={`${process.env.PUBLIC_URL + "/video-popup"}`} element={Video} />
                     <Route path={`${process.env.PUBLIC_URL + "/gallery"}`} element={Gallery} />
-                    <Route path={`${process.env.PUBLIC_URL + "/contact"}`} element={Contact} />
                     <Route path={`${process.env.PUBLIC_URL + "/brand"}`} element={Brand} />
                     <Route path={`${process.env.PUBLIC_URL + "/advance-tab"}`} element={AdvanceTab} />
                     <Route path={`${process.env.PUBLIC_URL + "/advance-pricing"}`} element={AdvancePricing} />

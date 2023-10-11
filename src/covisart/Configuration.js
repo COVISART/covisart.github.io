@@ -6,21 +6,26 @@ export default function Configuration() {
     const snap = useSnapshot(state)
 
     return(
-        <div style={{ height: "100vh", justifyContent: "center", alignItems: "center", flexDirection: "column", display: "flex", position:"relative"  }}>
+        <>
             {
                 NGS(snap.color)
-                
             }
             {
-                snap.accessory !='JustSim' && NGS(snap.accessory)
+                snap.accessory !='JustSim' && NGS_A(snap.accessory)
             }
-        </div>
+        </>
     )
 }
 
 function NGS(name) {
     const motorImage = './covisart/images/ngs/' + name + '.png'
     return (
-        <img id={name} style={{ borderRadius: "10%", position:"absolute" }} src={motorImage} alt={name} />
+        <img id={name} style={{ borderRadius: "10%",position: "relative"}} src={motorImage} alt={name} />
+    )
+}
+function NGS_A(name) {
+    const motorImage = './covisart/images/ngs/' + name + '.png'
+    return (
+        <img id={name} style={{ borderRadius: "10%", position: "absolute", top:0, left:0}} src={motorImage} alt={name} />
     )
 }

@@ -18,7 +18,7 @@ import Product from "./Product"
 class NGS extends Component {
     render() {
         return (
-            <main className="page-wrapper">
+            <main className="page-wrapper" >
                 <div className="main-content">
                     {/* Start Elements Area  */}
                     <div className="rwt-tab-area">
