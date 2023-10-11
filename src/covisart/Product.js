@@ -47,7 +47,7 @@ const Product = () => {
     const handleSubmit = event => {
         event.preventDefault(); // 👈️ prevent page refresh
 
-        //uploadData(state)
+        uploadData(state)
         openNotification('bottomRight')
     };
     return (
