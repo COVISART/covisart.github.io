@@ -18,13 +18,13 @@ export default function Configuration() {
 }
 
 function NGS(name) {
-    const motorImage = './covisart/images/ngs/' + name + '.png'
+    const motorImage = './covisart/images/ngs/' + name + '.webp'
     return (
         <img id={name} style={{ borderRadius: "10%",position: "relative"}} src={motorImage} alt={name} />
     )
 }
 function NGS_A(name) {
-    const motorImage = './covisart/images/ngs/' + name + '.png'
+    const motorImage = './covisart/images/ngs/' + name + '.webp'
     return (
         <img id={name} style={{ borderRadius: "10%", position: "absolute", top:0, left:0}} src={motorImage} alt={name} />
     )
