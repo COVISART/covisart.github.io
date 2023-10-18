@@ -18,7 +18,7 @@ export default function Configuration() {
 }
 
 function NGS(name) {
-    const motorImage = './covisart/images/ngs/' + name + '.webp'
+    const motorImage = './covisart/images/ngs/colors/' + name + '.webp'
     return (
         <img id={name} style={{ borderRadius: "10%",position: "relative"}} src={motorImage} alt={name} />
     )

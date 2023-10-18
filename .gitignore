@@ -169,3 +169,5 @@ build/*
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode
 public/covisart/images/ngs/NGS.psd
+
+public/covisart/images/ngs/NGS_v2.psd
