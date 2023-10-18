@@ -16,7 +16,7 @@ const state = proxy({
   decal: 'three2',
   motors: ['BECKHOFF_AM8552', 'BECKHOFF_AM8052'],
   motor: 'BECKHOFF_AM8552',
-  speed: 1
+  speed: 1,
 })
 
 export { state }

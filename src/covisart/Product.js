@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  Space, Table, notification } from 'antd';
+import { Space, Table, notification } from 'antd';
 import { PhoneOutlined } from '@ant-design/icons';
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -11,7 +11,7 @@ import { useSnapshot } from 'valtio'
 import { state } from './store'
 import Configuration from './Configuration'
 import ReactGA from "react-ga4";
-import { Order } from './system/OrderRequest';
+import { Order, PingAPI } from './system/OrderRequest';
 
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
@@ -40,14 +40,14 @@ const Product = () => {
                 'Dear ' + state.name + ', we got your order.  Our sales team will contact with you for further operation. Thanks for your interest our NGS-360 family motion platform.',
             duration: 0,
             placement,
-            icon:<PhoneOutlined style={{ color: 'green' }}/>
+            icon: <PhoneOutlined style={{ color: 'green' }} />
         });
     };
-    
+
     const handleSubmit = event => {
         event.preventDefault(); // 👈️ prevent page refresh
-
-        Order(state)
+        PingAPI();
+        Order(state);
         openNotification('bottomRight')
     };
     return (
