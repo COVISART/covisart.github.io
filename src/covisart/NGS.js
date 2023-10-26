@@ -1,22 +1,44 @@
 import React, { Component } from 'react';
-import SEO from "../common/SEO";
-import Layout from "../common/Layout";
-import BreadcrumbOne from "../elements/breadcrumb/BreadcrumbOne";
-import SectionTitle from "../elements/sectionTitle/SectionTitle";
-import PricingOne from "../elements/pricing/PricingOne";
-import PricingTwo from "../elements/pricing/PricingTwo";
-import PricingThree from "../elements/pricing/PricingThree";
-import PricingFour from "../elements/pricing/PricingFour";
-import PricingFive from "../elements/pricing/PricingFive";
-import Separator from "../elements/separator/Separator";
-import { FiArrowRight, FiCheck } from "react-icons/fi";
-import TabOne from "../elements/tab/TabOne";
-import FooterTwo from '../common/footer/FooterTwo';
 import Copyright from '../common/footer/Copyright';
 import Product from "./Product"
+import ReactGA from "react-ga4";
 class NGS extends Component {
 
     render() {
+
+        ReactGA.initialize("G-XTQCE7S8BR");
+        ReactGA.send({ hitType: "pageview", page: "/products-and-solutions/new-generation-simulator/ngs-360-3/", title: "NGS-360-3 Axis Simulator" });
+        
+        ReactGA.gtag("event", "select_content", {
+            content_type: "product",
+            content_id: "NGS-360-3-v2"
+          });
+
+        ReactGA.gtag("event", "purchase", {
+            transaction_id: "T_12345",
+            value: 75000,
+            tax: 0,
+            shipping: 4200,
+            currency: "USD",
+            coupon: "PreOrder",
+            items: [
+             {
+              item_id: "SKU_2110",
+              item_name: "NGS-360-3 Motion Simulator",
+              affiliation: "Covisart Online Store",
+              coupon: "PreOrder",
+              discount: 1.15,
+              index: 0,
+              item_brand: "COVISART",
+              item_category: "Simulator",
+              item_list_id: "related_products",
+              item_list_name: "Related Products",
+              item_variant: "green",
+              location_id: "ChIJIQBpAG2ahYAR_6128GcTUEo",
+              price: 75000,
+              quantity: 1
+            }]
+        });
         return (
             <main className="page-wrapper" >
                 <div className="main-content">

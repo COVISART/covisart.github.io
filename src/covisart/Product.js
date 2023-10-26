@@ -17,9 +17,6 @@ const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
     const [api, contextHolder] = notification.useNotification();
     const tabCount = 5;
-    ReactGA.initialize("G-XTQCE7S8BR");
-    ReactGA.send({ hitType: "pageview", page: "/products-and-solutions/new-generation-simulator/ngs-360-3/", title: "NGS-360-3 Axis Simulator" });
-
     const snap = useSnapshot(state)
     const columns = [
         {

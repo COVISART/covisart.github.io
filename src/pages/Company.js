@@ -1,23 +1,15 @@
 import React, { Component } from 'react';
-import SEO from "../common/SEO";
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
 
-import HeaderOne from '../common/header/HeaderOne';
-import HeaderTopNews from '../common/header/HeaderTopNews';
 import FooterTwo from '../common/footer/FooterTwo';
 import Copyright from '../common/footer/Copyright';
 
 import ServiceOne from '../elements/service/ServiceOne';
 import Separator from "../elements/separator/Separator";
 import SectionTitle from "../elements/sectionTitle/SectionTitle";
-import SlpitOne from "../elements/split/SlpitOne";
-import SlipThree from "../elements/split/SlipThree";
-import PortfolioOne from "../elements/portfolio/PortfolioOne";
-import TeamFour from "../elements/team/TeamFour";
-import BrandTwo from "../elements/brand/BrandTwo";
 import ReactGA from "react-ga4";
-//frame-image
+
 class Company extends Component {
     render() {
 
@@ -28,6 +20,7 @@ class Company extends Component {
             content_type: "NGS-360-3",
             content_id: "NGS-360-3"
           });
+          
         return (
             <main className="page-wrapper">
                 {/* <HeaderOne btnStyle="btn-small round btn-icon" HeaderSTyle="header-transparent" />  */}
