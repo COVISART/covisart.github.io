@@ -14,8 +14,8 @@ import TabOne from "../elements/tab/TabOne";
 import FooterTwo from '../common/footer/FooterTwo';
 import Copyright from '../common/footer/Copyright';
 import Product from "./Product"
-
 class NGS extends Component {
+
     render() {
         return (
             <main className="page-wrapper" >

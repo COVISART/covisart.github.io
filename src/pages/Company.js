@@ -16,10 +16,18 @@ import SlipThree from "../elements/split/SlipThree";
 import PortfolioOne from "../elements/portfolio/PortfolioOne";
 import TeamFour from "../elements/team/TeamFour";
 import BrandTwo from "../elements/brand/BrandTwo";
-
+import ReactGA from "react-ga4";
 //frame-image
 class Company extends Component {
     render() {
+
+        ReactGA.initialize("G-XTQCE7S8BR");
+        ReactGA.send({ hitType: "pageview", page: "/products-and-solutions/new-generation-simulator/ngs-360-3/", title: "NGS-360-3 Axis Simulator" });
+        
+        ReactGA.gtag("event", "select_content", {
+            content_type: "NGS-360-3",
+            content_id: "NGS-360-3"
+          });
         return (
             <main className="page-wrapper">
                 {/* <HeaderOne btnStyle="btn-small round btn-icon" HeaderSTyle="header-transparent" />  */}
