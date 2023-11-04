@@ -14,7 +14,7 @@ class NGS extends Component {
             content_id: "NGS-360-3-v2"
           });
 
-        ReactGA.gtag("event", "purchase", {
+        /*ReactGA.gtag("event", "purchase", {
             transaction_id: "T_12345",
             value: 75000,
             tax: 0,
@@ -38,7 +38,7 @@ class NGS extends Component {
               price: 75000,
               quantity: 1
             }]
-        });
+        });*/
         return (
             <main className="page-wrapper" >
                 <div className="main-content">

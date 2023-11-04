@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
-
+import HeaderOne from "../common/header/HeaderOne";
 import FooterTwo from '../common/footer/FooterTwo';
 import Copyright from '../common/footer/Copyright';
 
@@ -23,7 +23,7 @@ class Company extends Component {
           
         return (
             <main className="page-wrapper">
-                {/* <HeaderOne btnStyle="btn-small round btn-icon" HeaderSTyle="header-transparent" />  */}
+                {/* <HeaderOne btnStyle="btn-small round btn-icon" HeaderSTyle="header-transparent" /> */}
 
                 {/* Start Slider Area  */}
                 <div className="slider-area slider-style-1 bg-transparent height-750">
@@ -34,9 +34,10 @@ class Company extends Component {
                                     <span className="subtitle"> NEXT GENERATION SIMULATOR</span>
                                     <h1 className="title theme-gradient display-one">NGS-360-3</h1>
                                     <ul className="list-icon">
-                                        <li><span className="icon"><FiCheck /></span> Flight Simulation for jetd and light helicopters .</li>
-                                        <li><span className="icon"><FiCheck /></span> Examining the causes of disorientation.</li>
+                                        <li><span className="icon"><FiCheck /></span> Flight Simulation for jet and light helicopters.</li>
+                                        <li><span className="icon"><FiCheck /></span> Examining the causes of Spatial Disorientation.</li>
                                         <li><span className="icon"><FiCheck /></span> Motion Ride for entertainment applications.</li>
+                                        <li><span className="icon"><FiCheck /></span>Pilot spatial awareness and commercial aviation mishap prevention</li>
                                     </ul>
                                     <div className="button-group mt--40">
                                         <a id="purchase" className="btn-default btn-medium round btn-icon" href="/ngs">Purchase Now <i className="icon"><FiArrowRight /></i></a>
