@@ -6634,6 +6634,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "doob@workspace:."
   dependencies:
+    "@ant-design/icons": ^5.2.6
     "@pmndrs/branding": ^0.0.8
     "@react-three/drei": ^9.84.3
     "@react-three/fiber": ^8.14.3
@@ -6658,6 +6659,7 @@ __metadata:
     react-axios: ^2.0.6
     react-bootstrap: ^2.8.0
     react-circular-progressbar: ^2.0.4
+    react-country-dropdown: ^1.1.0
     react-countup: ^6.4.2
     react-dom: ^18.2.0
     react-ga4: ^2.1.0
@@ -13046,6 +13048,15 @@ __metadata:
   peerDependencies:
     react: ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0
   checksum: ef7c52dc61588233ec7f70b3bae8a2325562e2eff3648e7bc6962162568c36d7e27f165d4639f8bfa18fadb09585577858e35273ce0039ac02e87c9debfd268e
+  languageName: node
+  linkType: hard
+
+"react-country-dropdown@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "react-country-dropdown@npm:1.1.0"
+  peerDependencies:
+    react: ^16.0.0
+  checksum: 6fd0cf121478e9104ba616fb42a7f53fcf8569e2457f0e4a80f9afdd49f537ceac100d881b497e2175b1486fb60da177b715f65d7edb135ce6290153c1f89571
   languageName: node
   linkType: hard
 

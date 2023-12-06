@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://ngs.covisart.com/",
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
     "@pmndrs/branding": "^0.0.8",
     "@react-three/drei": "^9.84.3",
     "@react-three/fiber": "^8.14.3",
@@ -27,6 +28,7 @@
     "react-axios": "^2.0.6",
     "react-bootstrap": "^2.8.0",
     "react-circular-progressbar": "^2.0.4",
+    "react-country-dropdown": "^1.1.0",
     "react-countup": "^6.4.2",
     "react-dom": "^18.2.0",
     "react-ga4": "^2.1.0",
