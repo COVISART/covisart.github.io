@@ -10,6 +10,7 @@ import { PayloadSelection } from './Selections/PayloadSelection'
 import { useSnapshot } from 'valtio'
 import { state } from './store'
 import Configuration from './Configuration'
+import Simulator from './Simulator';
 import { Order, PingAPI, LocalOrder } from './system/OrderRequest';
 import ReactGA from "react-ga4";
 
@@ -86,7 +87,7 @@ const Product = () => {
                     <div className="row row--30 align-items-center">
                         <div className="col-lg-6 mt_md--40 mt_sm--40">
                             <div style={{ position: "relative" }}>
-                                <Configuration />
+                                <Simulator />
                             </div>
                         </div>
                         <div className="col-lg-6 mt_md--40 mt_sm--40" >
@@ -108,11 +109,15 @@ const Product = () => {
                                         <div>
                                             <div className="tab-button-panel">
                                                 <TabList className="tab-button">
-                                                    <Tab tabfor="0">
-                                                        <div className="rn-tab-button">
-                                                            <button>Color</button>
-                                                        </div>
-                                                    </Tab>
+                                                    {
+                                                        /*
+                                                            <Tab tabfor="0">
+                                                                <div className="rn-tab-button">
+                                                                    <button>Color</button>
+                                                                </div>
+                                                            </Tab> 
+                                                        */
+                                                    }
                                                     <Tab tabfor="1">
                                                         <div className="rn-tab-button">
                                                             <button>Payload</button>
@@ -138,17 +143,21 @@ const Product = () => {
                                                 </TabList>
                                             </div>
                                             <div className="tab-content-panel">
-                                                <TabPanel tabid="0">
-                                                    <div className="rn-tab-content">
-                                                        <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
-                                                            <p>NGS-360-3 Motion Platform has <a style={{ color: 'yellow' }}>3</a> different color available. All colors are matte and powder painted</p>
-                                                            <ColorSelection />
-                                                            <div className="pricing-footer">
-                                                                <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Next</a>
+                                                {
+                                                    /*
+                                                    <TabPanel tabid="0">
+                                                        <div className="rn-tab-content">
+                                                            <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
+                                                                <p>NGS-360-3 Motion Platform has <a style={{ color: 'yellow' }}>3</a> different color available. All colors are matte and powder painted</p>
+                                                                <ColorSelection />
+                                                                <div className="pricing-footer">
+                                                                    <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Next</a>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </TabPanel>
+                                                    </TabPanel>
+                                                    */
+                                                }
                                                 <TabPanel tabid="1">
                                                     <div className="rn-tab-content">
                                                         <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
@@ -249,7 +258,7 @@ const Product = () => {
 
                                     )
                                     : (
-                                        <div id="purchesed" style={{justifyContent:'center',  alignItems: "center",flexDirection: "row", display: "flex",}}>
+                                        <div id="purchased" style={{ justifyContent: 'center', alignItems: "center", flexDirection: "row", display: "flex", }}>
                                             <CheckCircleTwoTone twoToneColor="#52c41a" />
                                         </div>
                                     )

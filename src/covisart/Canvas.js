@@ -5,7 +5,7 @@ import { easing } from 'maath'
 import { useSnapshot } from 'valtio'
 import { state } from '../elements/tab/store'
 
-export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
+export default function App ({ position = [0, 0, 2.5], fov = 25 }){
   <Canvas shadows camera={{ position, fov }} gl={{ preserveDrawingBuffer: true }} eventSource={document.getElementById('root')} eventPrefix="client">
     <ambientLight intensity={0.5} />
     <Environment files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/potsdamer_platz_1k.hdr" />
@@ -16,7 +16,7 @@ export const App = ({ position = [0, 0, 2.5], fov = 25 }) => (
       </Center>
     </CameraRig>
   </Canvas>
-)
+}
 
 function Backdrop() {
   const shadows = useRef()

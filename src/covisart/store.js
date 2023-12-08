@@ -13,7 +13,7 @@ const state = proxy({
   accessory:'JustSim',
   colors: ['grey','black', 'blue', 'goldenrod', 'azure', 'lightslategray' ],
   decals: ['react', 'three2', 'pmndrs'],
-  color: 'grey',
+  color: 'black',
   led: '#FF0000',
   decal: 'three2',
   motors: ['BECKHOFF_AM8552', 'BECKHOFF_AM8052'],
