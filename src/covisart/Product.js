@@ -241,10 +241,16 @@ const Product = () => {
                                                                         type='email'
                                                                         placeholder="E-mail"
                                                                         onChange={(e) => { state.email = e.currentTarget.value }} />
+                                                                    <textarea
+                                                                        required
+                                                                        id="message"
+                                                                        type='text'
+                                                                        placeholder="Message"
+                                                                        onChange={(e) => { state.message = e.currentTarget.value }} />
 
                                                                     <Row style={{ justifyContent: "flex-start", alignItems: "center", flexDirection: "row", display: "flex", }}>
                                                                         <div style={{ padding: "3%" }}>Select Country:</div>
-                                                                        <ReactCountryDropdown onSelect={(e) => { state.country = e.name; console.log(state.country); }} countryCode='TR' />
+                                                                        <ReactCountryDropdown onSelect={(e) => { state.country = e.name; }} countryCode='TR' />
                                                                     </Row>
 
                                                                     <button className="btn-default btn-border" type="submit" value="Order">Order</button >
