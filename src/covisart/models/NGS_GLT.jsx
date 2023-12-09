@@ -19,14 +19,16 @@ export function Ngs_GLT({ url, ...props }) {
   easing.dampC(materials.Metal.color, snap.color, 0.0, 0)
 
   useFrame((state, delta) => {
-    const t = Math.sin(state.clock.elapsedTime) //map(Math.sin(state.clock.elapsedTime), -45, 45, -360, 360)
-    easing.dampE(axis3.current.rotation, [t, 0, 0], control.speed, delta/2)
-    easing.dampE(axis2.current.rotation, [0, t, 0], control.speed, delta/2)
-    easing.dampE(axis1.current.rotation, [t, 0, 0], control.speed, delta/2)
+    const t = Math.sin(state.clock.elapsedTime)
+    if(snap.animate){
+      easing.dampE(axis3.current.rotation, [t, 0, 0], snap.speed, delta/2)
+      easing.dampE(axis2.current.rotation, [0, t, 0], snap.speed, delta/2)
+      easing.dampE(axis1.current.rotation, [t, 0, 0], snap.speed, delta/2)
+    }
   })
   useLayoutEffect(() => {
     Object.values(nodes).forEach((node) => node.isMesh &&
-      (node.receiveShadow = node.castShadow = true,
+      (node.receiveShadow = node.castShadow = false,
         applyProps(node.material, { roughness: 1.0, roughnessMap: null, normalScale: [4, 4] })))
   }, [nodes, materials])
   return (

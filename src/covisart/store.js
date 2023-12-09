@@ -5,7 +5,7 @@ const state = proxy({
   phone:"0",
   email:"",
   country:"Turkey",
-  ruler: true,
+  ruler: false,
   ordered: false,
   sizes: ["450", "850"],
   size: '450',
