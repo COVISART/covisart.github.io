@@ -30,8 +30,8 @@ const ContactOne = () => {
                                     </div>
                                     <div className="inner">
                                         <h4 className="title">Our Email Address</h4>
-                                        <p><a href="mailto:info@covisart.com">admin@covisart.com</a></p>
-                                        <p><a href="mailto:contact@covisart.com">contact@covisart.com</a></p>
+                                        <p><a href="mailto:info@covisart.com">info@covisart.com</a></p>
+                                        <p><a href="mailto:contact@covisart.com">support@covisart.com</a></p>
                                     </div>
                                 </div>
                             </div>

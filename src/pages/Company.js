@@ -40,7 +40,7 @@ class Company extends Component {
                                         <li><span className="icon"><FiCheck /></span>Pilot spatial awareness and commercial aviation mishap prevention</li>
                                     </ul>
                                     <div className="button-group mt--40">
-                                        <a id="purchase" className="btn-default btn-medium round btn-icon" href="/ngs">Purchase Now <i className="icon"><FiArrowRight /></i></a>
+                                        <a id="purchase" className="btn-default btn-medium round btn-icon" href="/ngs">Pre-Order <i className="icon"><FiArrowRight /></i></a>
                                         <Link className="btn-default btn-medium btn-border round btn-icon" to="/contact">Contact Us <i className="icon"><FiArrowRight /></i></Link>
                                     </div>
                                 </div>

@@ -4,8 +4,9 @@
   "private": true,
   "homepage": "https://ngs.covisart.com/",
   "dependencies": {
-    "@ant-design/icons": "^5.2.6",
+    "@ant-design/icons": "^5.3.0",
     "@pmndrs/branding": "^0.0.8",
+    "@react-google-maps/api": "^2.19.3",
     "@react-three/drei": "^9.84.3",
     "@react-three/fiber": "^8.14.3",
     "@react-three/postprocessing": "^2.15.1",
