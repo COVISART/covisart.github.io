@@ -19,6 +19,7 @@ const state = proxy({
   motors: ['BECKHOFF_AM8552', 'BECKHOFF_AM8052'],
   motor: 'BECKHOFF_AM8552',
   speed: 1,
+  message: 'no',
 })
 
 export { state }

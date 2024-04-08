@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Grid, Space, Table, notification, Row } from 'antd';
+import { Space, Table, notification, Row } from 'antd';
 import { PhoneOutlined, CheckCircleTwoTone } from '@ant-design/icons';
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -8,7 +8,7 @@ import { AccessorySelection } from './Selections/AccessorySelection'
 import { PayloadSelection } from './Selections/PayloadSelection'
 import { useSnapshot } from 'valtio'
 import { state } from './store'
-import { Order, PingAPI, LocalOrder } from './system/OrderRequest';
+import { Order, PingAPI} from './system/OrderRequest';
 import ReactGA from "react-ga4";
 
 import { ReactCountryDropdown } from 'react-country-dropdown'
@@ -80,7 +80,6 @@ const Product = () => {
         <div className="row">
             {contextHolder}
             <div className="col-lg-12">
-
                 <Tabs selectedIndex={selectedTab} onSelect={(index) => setSelectedTab(index)}>
                     <div className="row row--30 align-items-center">
                         <div className="col-lg-6 mt_md--40 mt_sm--40">
@@ -257,7 +256,7 @@ const Product = () => {
                                                                         <ReactCountryDropdown onSelect={(e) => { state.country = e.name; }} countryCode='TR' />
                                                                     </Row>
 
-                                                                    <button className="btn-default btn-border" type="submit" value="Order">Order</button >
+                                                                    <button className="btn-default btn-border" type="submit" value="Order">Pre-Order</button >
                                                                 </Space>
                                                             </form>
                                                         </div>
@@ -277,8 +276,6 @@ const Product = () => {
                         </div>
                     </div>
                 </Tabs>
-
-
             </div>
         </div>
     )

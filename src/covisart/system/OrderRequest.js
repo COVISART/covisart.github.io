@@ -27,7 +27,7 @@ export const Order = async  (state) => {
         email: state.email,
         name: state.name,
         country: state.country,
-        description: state.country,
+        description: state.message,
         size: state.size,
         phone: state.phone,
         accessory: state.accessory,
