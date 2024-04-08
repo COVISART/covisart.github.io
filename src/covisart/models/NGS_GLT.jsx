@@ -110,4 +110,4 @@ export function map(current, in_min, in_max, out_min, out_max) {
   const mapped= ((current - in_min) * (out_max - out_min)) / (in_max - in_min) + out_min;
   return clamp(mapped, out_min, out_max);
 }
-useGLTF.preload('/covisart/models/NGS_GLT_V2-transformed.glb')
+//useGLTF.preload('/covisart/models/NGS_GLT_V2-transformed.glb')

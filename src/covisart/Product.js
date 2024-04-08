@@ -4,18 +4,16 @@ import { PhoneOutlined, CheckCircleTwoTone } from '@ant-design/icons';
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SectionTitle from "../elements/sectionTitle/SectionTitle";
-import { ColorSelection } from './Selections/ColorSelection'
 import { AccessorySelection } from './Selections/AccessorySelection'
 import { PayloadSelection } from './Selections/PayloadSelection'
 import { useSnapshot } from 'valtio'
 import { state } from './store'
-import Configuration from './Configuration'
-import Simulator from './Simulator';
 import { Order, PingAPI, LocalOrder } from './system/OrderRequest';
 import ReactGA from "react-ga4";
 
 import { ReactCountryDropdown } from 'react-country-dropdown'
 import 'react-country-dropdown/dist/index.css'
+import StaticImageSimulator from './StaticImageSimulator';
 
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
@@ -87,7 +85,7 @@ const Product = () => {
                     <div className="row row--30 align-items-center">
                         <div className="col-lg-6 mt_md--40 mt_sm--40">
                             <div style={{ position: "relative" }}>
-                                <Simulator />
+                                <StaticImageSimulator />
                             </div>
                         </div>
                         <div className="col-lg-6 mt_md--40 mt_sm--40" >
@@ -128,11 +126,13 @@ const Product = () => {
                                                             <button>Accessory</button>
                                                         </div>
                                                     </Tab>
-                                                    <Tab tabfor="3">
+                                                    {
+                                                        /*<Tab tabfor="3">
                                                         <div className="rn-tab-button">
                                                             <button>Motors</button>
                                                         </div>
-                                                    </Tab>
+                                                    </Tab>*/
+                                                    }
                                                     <Tab tabfor="4">
                                                         <div>
                                                             <div className="rn-tab-button">
@@ -172,7 +172,9 @@ const Product = () => {
                                                 <TabPanel tabid="2">
                                                     <div className="rn-tab-content">
                                                         <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
-                                                            <p>You can only add one accessory on same time, there are <a style={{ color: 'red' }}>2</a> accessories available.</p>
+                                                            {
+                                                                //<p>You can only add one accessory on same time, there are <a style={{ color: 'red' }}>2</a> accessories available.</p>
+                                                            }
                                                             <div style={{ justifyContent: "space-evenly", alignItems: "center", flexDirection: "row", display: "flex" }}>
                                                                 <AccessorySelection />
                                                             </div>
@@ -183,16 +185,18 @@ const Product = () => {
                                                         </div>
                                                     </div>
                                                 </TabPanel>
-                                                <TabPanel tabid="3">
-                                                    <div className="rn-tab-content">
-                                                        <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
-                                                            <p>Required motors applied with pre configured payload selection. If you want more motor power, please <a style={{ color: 'red' }} href='https://covisart.com.tr/contacts/' target='_blank'>contact</a> with us. </p>
-                                                            <div className="pricing-footer">
-                                                                <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Finish</a>
+                                                {
+                                                    /*<TabPanel tabid="3">
+                                                        <div className="rn-tab-content">
+                                                            <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
+                                                                <p>Required motors applied with pre configured payload selection. If you want more motor power, please <a style={{ color: 'red' }} href='https://covisart.com.tr/contacts/' target='_blank'>contact</a> with us. </p>
+                                                                <div className="pricing-footer">
+                                                                    <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Finish</a>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </TabPanel>
+                                                    </TabPanel>*/
+                                                }
                                                 <TabPanel tabid="4">
                                                     <div className="rn-tab-content">
                                                         <Table columns={columns} dataSource={

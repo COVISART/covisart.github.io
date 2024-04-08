@@ -1,12 +1,10 @@
-import { useRef, Suspense } from 'react'
-import { Canvas, useThree } from '@react-three/fiber'
-import { useGLTF, Stage, Grid, OrbitControls, Html, ContactShadows, MeshDiscardMaterial, useProgress } from '@react-three/drei'
+import { Suspense } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { Stage, Grid, OrbitControls, Html, useProgress } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import { Model } from './models/NGS_GLT_V2'
 import { Ngs_GLT } from './models/NGS_GLT'
-import { useControls } from 'leva'
 import { state } from './store'
-import { Effects } from './Effects'
+
 function Loader() {
   const { progress } = useProgress()
   return <Html center>{progress} % loaded</Html>
@@ -18,6 +16,8 @@ export default function Simulator() {
 
   return (
     <div>
+      <div style={{backgroundImage: `url(${process.env.PUBLIC_URL}/covisart/ngs/grey.webp)`}}></div>
+
       <Canvas
         style={{ height: "100vh" }}
         frameloop="demand"
@@ -27,7 +27,6 @@ export default function Simulator() {
             <Ngs_GLT url="/covisart/models/NGS_GLT_V2-transformed.glb" />
           </Stage>
         </Suspense>
-
         <Grid
           renderOrder={-1}
           position={[-0.17, -1.32, 0]}
