@@ -7,7 +7,7 @@ import { state } from './store'
 
 function Loader() {
   const { progress } = useProgress()
-  return <Html center>{progress} % loaded</Html>
+  return <Html center>{Math.round(progress)} % loaded</Html>
 }
 export default function Simulator() {
   /*const { ruler, animate } = useControls({ "ruler": false, "animate": false })
@@ -34,10 +34,10 @@ export default function Simulator() {
           cellSize={0.4}
           cellThickness={0.6}
           cellColor={[1, 1, 1]}
-          sectionSize={4}
+          sectionSize={1}
           sectionThickness={1.5}
           sectionColor={[1, 1, 1]}
-          fadeDistance={30}
+          fadeDistance={60}
           fadeStrength={10} />
 
         <OrbitControls
@@ -53,9 +53,6 @@ export default function Simulator() {
         <ambientLight position={[0, 2, -5]} />
         <ambientLight position={[5, 2, 0]} />
 
-        <EffectComposer disableNormalPass>
-          <Bloom luminanceThreshold={0.2} luminanceSmoothing={0} intensity={1.0} />
-        </EffectComposer>
       </Canvas>
       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
         <button
