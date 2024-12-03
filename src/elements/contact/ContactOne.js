@@ -17,8 +17,8 @@ const ContactOne = () => {
                                     </div>
                                     <div className="inner">
                                         <h4 className="title">Contact Phone Number</h4>
-                                        <p><a href="tel:+444 555 666 777">+444 555 666 777</a></p>
-                                        <p><a href="tel:+222 222 222 333">+222 222 222 333</a></p>
+                                        <p><a href="tel:+90 506 107 5590">+90 506 107 5590</a></p>
+                                        <p><a href="tel:+90 505 068 9196">+90 505 068 9196</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -30,8 +30,8 @@ const ContactOne = () => {
                                     </div>
                                     <div className="inner">
                                         <h4 className="title">Our Email Address</h4>
-                                        <p><a href="mailto:admin@gmail.com">admin@gmail.com</a></p>
-                                        <p><a href="mailto:example@gmail.com">example@gmail.com</a></p>
+                                        <p><a href="mailto:info@covisart.com">info@covisart.com</a></p>
+                                        <p><a href="mailto:contact@covisart.com">support@covisart.com</a></p>
                                     </div>
                                 </div>
                             </div>
@@ -43,7 +43,7 @@ const ContactOne = () => {
                                     </div>
                                     <div className="inner">
                                         <h4 className="title">Our Location</h4>
-                                        <p>5678 Bangla Main Road, cities 580 <br /> GBnagla, example 54786</p>
+                                        <p>Turkey. TEKNOPARK ANKARA TECHNOLOGY DEVELOPMENT ZONE, <br /> B BLOK OFIS 32</p>
                                     </div>
                                 </div>
                             </div>

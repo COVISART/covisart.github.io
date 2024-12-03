@@ -40,7 +40,8 @@ const PricingFour = () => {
 
             {/* Start PRicing Table Area  */}
             <div className="col-lg-3 col-md-6 col-12">
-                <div className="rn-pricing style-4 active">
+                {/*<div className="rn-pricing style-4 active"> */}
+                <div className="rn-pricing style-4">
                     <div className="pricing-table-inner">
                         <div className="pricing-header">
                             <h4 className="title">Business</h4>

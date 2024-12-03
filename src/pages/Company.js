@@ -1,28 +1,30 @@
-import React from 'react';
-import SEO from "../common/SEO";
+import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { FiArrowRight, FiCheck } from "react-icons/fi";
-
-import HeaderOne from '../common/header/HeaderOne';
-import HeaderTopNews from '../common/header/HeaderTopNews';
+import HeaderOne from "../common/header/HeaderOne";
 import FooterTwo from '../common/footer/FooterTwo';
 import Copyright from '../common/footer/Copyright';
 
 import ServiceOne from '../elements/service/ServiceOne';
 import Separator from "../elements/separator/Separator";
 import SectionTitle from "../elements/sectionTitle/SectionTitle";
-import SlpitOne from "../elements/split/SlpitOne";
-import PortfolioOne from "../elements/portfolio/PortfolioOne";
-import TeamFour from "../elements/team/TeamFour";
-import BrandTwo from "../elements/brand/BrandTwo";
+import ReactGA from "react-ga4";
 
-//frame-image
-const Company = () => {
-    return (
-        <>
-            <SEO title="Homepage" />
+class Company extends Component {
+    render() {
+
+        ReactGA.initialize("G-XTQCE7S8BR");
+        ReactGA.send({ hitType: "pageview", page: "/products-and-solutions/new-generation-simulator/ngs-360-3/", title: "NGS-360-3 Axis Simulator" });
+        
+        ReactGA.gtag("event", "select_content", {
+            content_type: "NGS-360-3",
+            content_id: "NGS-360-3"
+          });
+          
+        return (
             <main className="page-wrapper">
-                <HeaderOne btnStyle="btn-small round btn-icon" HeaderSTyle="header-transparent" />
+                {/* <HeaderOne btnStyle="btn-small round btn-icon" HeaderSTyle="header-transparent" /> */}
+
                 {/* Start Slider Area  */}
                 <div className="slider-area slider-style-1 bg-transparent height-750">
                     <div className="container">
@@ -32,12 +34,13 @@ const Company = () => {
                                     <span className="subtitle"> NEXT GENERATION SIMULATOR</span>
                                     <h1 className="title theme-gradient display-one">NGS-360-3</h1>
                                     <ul className="list-icon">
-                                        <li><span className="icon"><FiCheck /></span> Flight Simulation for jetd and light helicopters .</li>
-                                        <li><span className="icon"><FiCheck /></span> Examining the causes of disorientation.</li>
+                                        <li><span className="icon"><FiCheck /></span> Flight Simulation for jet and light helicopters.</li>
+                                        <li><span className="icon"><FiCheck /></span> Examining the causes of Spatial Disorientation.</li>
                                         <li><span className="icon"><FiCheck /></span> Motion Ride for entertainment applications.</li>
+                                        <li><span className="icon"><FiCheck /></span>Pilot spatial awareness and commercial aviation mishap prevention</li>
                                     </ul>
                                     <div className="button-group mt--40">
-                                        <a className="btn-default btn-medium round btn-icon" target="_blank" href="http://store.covisart.com.tr/">Purchase Now <i className="icon"><FiArrowRight /></i></a>
+                                        <a id="purchase" className="btn-default btn-medium round btn-icon" href="/ngs">Pre-Order <i className="icon"><FiArrowRight /></i></a>
                                         <Link className="btn-default btn-medium btn-border round btn-icon" to="/contact">Contact Us <i className="icon"><FiArrowRight /></i></Link>
                                     </div>
                                 </div>
@@ -98,69 +101,33 @@ const Company = () => {
                     </div>
                 </div>
                 {/* End Service Area  */}
-
-                <SlpitOne />
-
-                <div className="rwt-portfolio-area rn-section-gap">
+                <div className="slider-area slider-style-1 bg-transparent height-750">
                     <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <SectionTitle
-                                    textAlign="text-center"
-                                    radiusRounded=""
-                                    subtitle="Our Project"
-                                    title="Why People Choose Us!"
-                                    description=""
-                                />
+                        <div className="row align-items-center">
+                            <div className="col-lg-7 col-xl-6 order-2 order-lg-1 mt_md--40 mt_sm--40">
+                                <div className="inner text-start">
+                                    <h1 className="title theme-gradient display-one">Powered with AI</h1>
+                                    <ul className="list-icon">
+                                        <li><span className="icon"><FiCheck /></span> AI model controls servo motor that was equipped with absolute encoder.</li>
+                                        <li><span className="icon"><FiCheck /></span> AI predicts next direction of movement.</li>
+                                        <li><span className="icon"><FiCheck /></span> Has 30% advantage over classic motion control algorithms.</li>
+                                        <li><span className="icon"><FiCheck /></span> Can be retrain over time with new dataset using Transfer learning techniques.</li>
+                                    </ul>
+
+                                </div>
                             </div>
-                        </div>
-                        <PortfolioOne Column="col-lg-6 col-md-6 col-sm-12 col-12 mt--50 portfolio" />
-                    </div>
-                </div>
-
-                <Separator />
-
-                {/* Start Elements Area  */}
-                <div className="rwt-team-area rn-section-gap">
-                    <div className="wrapper plr--65">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <SectionTitle
-                                    textAlign="text-center"
-                                    radiusRounded=""
-                                    subtitle="Our Experts."
-                                    title="Companies Team"
-                                    description="There are many variations of passages of Lorem Ipsum available, <br /> but the majority have suffered alteration."
-                                />
-                            </div>
-                        </div>
-                        <TeamFour column="col-lg-6 col-xl-3 col-md-6 col-12 mt--30" teamStyle="team-style-three" />
-                    </div>
-                </div>
-                {/* End Elements Area  */}
-
-                {/* Start Brand Area  */}
-                <div className="rwt-brand-area pb--80">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <div className="section-title text-center">
-                                    <h3 className="title">Our Awesome Customer Relation Build a <br /> Long Term Relationship.</h3>
+                            <div className="col-lg-5 col-xl-6 order-1 order-lg-2">
+                                <div className="">
+                                    <img src="./images/about/NGS-360.png" alt="NGS-360" />
                                 </div>
                             </div>
                         </div>
-                        <div className="row">
-                            <div className="col-lg-12">
-                                <BrandTwo brandStyle="brand-style-2" />
-                            </div>
-                        </div>
                     </div>
                 </div>
-                {/* End Brand Area  */}
                 <FooterTwo />
                 <Copyright />
             </main>
-        </>
-    )
+        )
+    }
 }
 export default Company;

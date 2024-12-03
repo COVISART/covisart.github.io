@@ -36,7 +36,7 @@ const CalltoActionSeven = () => {
                         animateOut="fadeInOut"
                         animateOnce={true}>
                             <div className="call-to-btn text-start mt_sm--20 text-md-end">
-                                <a className="btn-default btn-icon" target="_blank" href="https://store.covisart.com.tr/">{callToActionData.btnText} <i className="icon"><FiArrowRight /></i></a>
+                                <a className="btn-default btn-icon" href="/ngs">{callToActionData.btnText} <i className="icon"><FiArrowRight /></i></a>
                             </div>
                         </ScrollAnimation>
                     </div>
