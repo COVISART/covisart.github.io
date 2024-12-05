@@ -1,11 +1,9 @@
 import React from 'react';
 import ContactForm from "./ContactForm";
-import GoogleMapStyle from "./GoogleMapStyle";
 import ReactGoogleMap from "./ReactGoogleMap";
 import { FiHeadphones , FiMail , FiMapPin } from "react-icons/fi";
-import { Map, Marker} from "@vis.gl/react-google-maps";
 import { APIProvider } from "@vis.gl/react-google-maps";
-
+import CompanyLocation from "../../covisart/map/map"
 const ContactOne = () => {
     return (
         <>
@@ -56,14 +54,13 @@ const ContactOne = () => {
 
             <div className="row mt--40 row--15">
                 <div className="col-lg-7">
-                    <ContactForm formStyle="contact-form-1" />
+                    <CompanyLocation />  
                 </div>
                 <div className="col-lg-5 mt_md--30 mt_sm--30">
-                <APIProvider apiKey={'AIzaSyBPJffuk5iqp_6IjD42JZX1-NGBM3wPSbw'}>
-                    <ReactGoogleMap />
-                </APIProvider>
+                    <ContactForm formStyle="contact-form-1" />
                 </div>
             </div>
+            
         </>
     )
 }
