@@ -1,8 +1,9 @@
 import React from 'react';
 import ContactForm from "./ContactForm";
-import GoogleMapStyle from "./GoogleMapStyle";
+import ReactGoogleMap from "./ReactGoogleMap";
 import { FiHeadphones , FiMail , FiMapPin } from "react-icons/fi";
-
+import { APIProvider } from "@vis.gl/react-google-maps";
+import CompanyLocation from "../../covisart/map/map"
 const ContactOne = () => {
     return (
         <>
@@ -17,7 +18,6 @@ const ContactOne = () => {
                                     </div>
                                     <div className="inner">
                                         <h4 className="title">Contact Phone Number</h4>
-                                        <p><a href="tel:+90 506 107 5590">+90 506 107 5590</a></p>
                                         <p><a href="tel:+90 505 068 9196">+90 505 068 9196</a></p>
                                     </div>
                                 </div>
@@ -42,7 +42,7 @@ const ContactOne = () => {
                                         <FiMapPin />
                                     </div>
                                     <div className="inner">
-                                        <h4 className="title">Our Location</h4>
+                                        <h4 className="title">Our Locations</h4>
                                         <p>Turkey. TEKNOPARK ANKARA TECHNOLOGY DEVELOPMENT ZONE, <br /> B BLOK OFIS 32</p>
                                     </div>
                                 </div>
@@ -54,12 +54,13 @@ const ContactOne = () => {
 
             <div className="row mt--40 row--15">
                 <div className="col-lg-7">
-                    <ContactForm formStyle="contact-form-1" />
+                    <CompanyLocation />  
                 </div>
                 <div className="col-lg-5 mt_md--30 mt_sm--30">
-                    <GoogleMapStyle />
+                    <ContactForm formStyle="contact-form-1" />
                 </div>
             </div>
+            
         </>
     )
 }
