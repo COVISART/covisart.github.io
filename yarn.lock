@@ -5535,7 +5535,7 @@ __metadata:
     react-axios: ^2.0.6
     react-bootstrap: ^2.8.0
     react-circular-progressbar: ^2.0.4
-    react-country-dropdown: ^1.1.0
+    react-country-dropdown: ^3.0.0
     react-countup: ^6.4.2
     react-dom: ^18.2.0
     react-ga4: ^2.1.0
@@ -12640,12 +12640,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-country-dropdown@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "react-country-dropdown@npm:1.1.0"
+"react-country-dropdown@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "react-country-dropdown@npm:3.0.0"
   peerDependencies:
-    react: ^16.0.0
-  checksum: 6fd0cf121478e9104ba616fb42a7f53fcf8569e2457f0e4a80f9afdd49f537ceac100d881b497e2175b1486fb60da177b715f65d7edb135ce6290153c1f89571
+    react: ^18.2.0
+  checksum: ff2a36aaf720294cfd0ca194212b50ddd62f3c7885ab112ee1ed7d2e1539949b07534fd3a817b8cf965d6991ca949ad643d4db8e5d378b0dbb5e77360a8fc67b
   languageName: node
   linkType: hard
 
