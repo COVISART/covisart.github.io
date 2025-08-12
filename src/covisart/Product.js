@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Space, Table, notification, Row } from 'antd';
 import { PhoneOutlined, CheckCircleTwoTone } from '@ant-design/icons';
+import ReactCountryDropdown from "react-country-dropdown";
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import SectionTitle from "../elements/sectionTitle/SectionTitle";
@@ -11,8 +12,6 @@ import { state } from './store'
 import { Order, PingAPI} from './system/OrderRequest';
 import ReactGA from "react-ga4";
 
-import { ReactCountryDropdown } from 'react-country-dropdown'
-import 'react-country-dropdown/dist/index.css'
 import StaticImageSimulator from './StaticImageSimulator';
 
 const Product = () => {
@@ -38,7 +37,6 @@ const Product = () => {
             description:
                 'Dear ' + state.name + ', we got your order.  Our sales team will contact with you for further operation. Thanks for your interest our NGS-360 family motion platform.',
             duration: 0,
-            placement,
             icon: <PhoneOutlined style={{ color: 'green' }} />
         });
     };
@@ -253,7 +251,7 @@ const Product = () => {
 
                                                                     <Row style={{ justifyContent: "flex-start", alignItems: "center", flexDirection: "row", display: "flex", }}>
                                                                         <div style={{ padding: "3%" }}>Select Country:</div>
-                                                                        <ReactCountryDropdown onSelect={(e) => { state.country = e.name; }} countryCode='TR' />
+                                                                        <ReactCountryDropdown onSelect={(e) => { state.country = e.name; }} defaultCountry='TR' />
                                                                     </Row>
 
                                                                     <button className="btn-default btn-border" type="submit" value="Order">Pre-Order</button >
