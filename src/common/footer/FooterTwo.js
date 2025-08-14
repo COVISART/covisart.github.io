@@ -97,7 +97,7 @@ const FooterTwo = () => {
                                             <li><Link to="facebook.com"><FiFacebook /></Link></li>
                                             <li><Link to="twitter.com"><FiTwitter /></Link></li>
                                             <li><Link to="instagram.com"><FiInstagram /></Link></li>
-                                            <li><Link to="linkdin.com"><FiLinkedin /></Link></li>
+                                            <li><Link to="https://www.linkedin.com/company/covisart"><FiLinkedin /></Link></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -21,7 +21,7 @@ const Copyright = () => {
                                 <li><Link to="https://facebook.com/covisart"><FiFacebook /></Link></li>
                                 <li><Link to="https://twitter.com/covisart"><FiTwitter /></Link></li>
                                 <li><Link to="https://instagram.com/covisart"><FiInstagram /></Link></li>
-                                <li><Link to="https://linkdin.com/in/covisart"><FiLinkedin /></Link></li>
+                                <li><Link to="https://www.linkedin.com/company/covisart"><FiLinkedin /></Link></li>
                             </ul>
                         </div>
                     </div>

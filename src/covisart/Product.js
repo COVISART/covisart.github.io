@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Space, Table, notification, Row } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { ConfigProvider, Space, Table, notification, Row, theme } from 'antd';
 import { PhoneOutlined, CheckCircleTwoTone } from '@ant-design/icons';
 import ReactCountryDropdown from "react-country-dropdown";
 
@@ -9,13 +9,14 @@ import { AccessorySelection } from './Selections/AccessorySelection'
 import { PayloadSelection } from './Selections/PayloadSelection'
 import { useSnapshot } from 'valtio'
 import { state } from './store'
-import { Order, PingAPI} from './system/OrderRequest';
+import { Order, PingAPI } from './system/OrderRequest';
 import ReactGA from "react-ga4";
 
 import StaticImageSimulator from './StaticImageSimulator';
 
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
+    const [ordered, setOrdered] = useState(false);
     const [api, contextHolder] = notification.useNotification();
     const tabCount = 5;
     const snap = useSnapshot(state)
@@ -31,6 +32,14 @@ const Product = () => {
             key: 'value',
         }
     ];
+
+    useEffect(() => {
+        if (ordered) {
+            openNotification('bottomRight');
+        }
+        
+    }, [ordered]);
+
     const openNotification = (placement) => {
         api.open({
             message: 'We got your order.',
@@ -46,10 +55,10 @@ const Product = () => {
         PingAPI();
         Order(state);
         //LocalOrder(state);
-        openNotification('bottomRight')
-
+        //openNotification('bottomRight')
+        setOrdered(true);
         ReactGA.gtag("event", "purchase", {
-            transaction_id: "T_12345",
+            transaction_id: crypto.randomUUID(),
             value: 75000,
             tax: 0,
             shipping: 4200,
@@ -75,207 +84,214 @@ const Product = () => {
         });
     };
     return (
-        <div className="row">
-            {contextHolder}
-            <div className="col-lg-12">
-                <Tabs selectedIndex={selectedTab} onSelect={(index) => setSelectedTab(index)}>
-                    <div className="row row--30 align-items-center">
-                        <div className="col-lg-6 mt_md--40 mt_sm--40">
-                            <div style={{ position: "relative" }}>
-                                <StaticImageSimulator />
-                            </div>
-                        </div>
-                        <div className="col-lg-6 mt_md--40 mt_sm--40" >
-                            <div className="row mb--40 title_message">
-                                <div className="col-lg-12">
-                                    <SectionTitle
-                                        textAlign="text-center"
-                                        radiusRounded=""
-                                        subtitle="3D Configuration"
-                                        title="Build your own NGS-360"
-                                        description=""
-                                    />
+        <ConfigProvider
+            theme={{
+                // 1. Use dark algorithm
+                algorithm: theme.darkAlgorithm,
+
+                // 2. Combine dark algorithm and compact algorithm
+                // algorithm: [theme.darkAlgorithm, theme.compactAlgorithm],
+            }}
+        >
+            <div className="row">
+                {contextHolder}
+                <div className="col-lg-12">
+                    <Tabs selectedIndex={selectedTab} onSelect={(index) => setSelectedTab(index)}>
+                        <div className="row row--30 align-items-center">
+                            <div className="col-lg-6 mt_md--40 mt_sm--40">
+                                <div style={{ position: "relative" }}>
+                                    <StaticImageSimulator />
                                 </div>
                             </div>
-                            <div className="rn-default-tab">
-
-                                {!state.ordered
-                                    ? (
-                                        <div>
-                                            <div className="tab-button-panel">
-                                                <TabList className="tab-button">
+                            <div className="col-lg-6 mt_md--40 mt_sm--40" >
+                                <div className="row mb--40 title_message">
+                                    <div className="col-lg-12">
+                                        <SectionTitle
+                                            textAlign="text-center"
+                                            subtitle="3D Configuration"
+                                            title={ordered?"Thank you for your order!":"Build your own NGS-360"}
+                                            description=""
+                                        />
+                                    </div>
+                                </div>
+                                <div className="rn-default-tab">
+                                    {!ordered
+                                        ? (
+                                            <>
+                                                <div className="tab-button-panel">
+                                                    <TabList className="tab-button">
+                                                        {
+                                                            /*
+                                                                <Tab tabfor="0">
+                                                                    <div className="rn-tab-button">
+                                                                        <button>Color</button>
+                                                                    </div>
+                                                                </Tab> 
+                                                            */
+                                                        }
+                                                        <Tab tabfor="1">
+                                                            <div className="rn-tab-button">
+                                                                <button>Payload</button>
+                                                            </div>
+                                                        </Tab>
+                                                        <Tab tabfor="2">
+                                                            <div className="rn-tab-button">
+                                                                <button>Accessory</button>
+                                                            </div>
+                                                        </Tab>
+                                                        {
+                                                            /*<Tab tabfor="3">
+                                                            <div className="rn-tab-button">
+                                                                <button>Motors</button>
+                                                            </div>
+                                                        </Tab>*/
+                                                        }
+                                                        <Tab tabfor="4">
+                                                            <div>
+                                                                <div className="rn-tab-button">
+                                                                    <button>Result</button>
+                                                                </div>
+                                                            </div>
+                                                        </Tab>
+                                                    </TabList>
+                                                </div>
+                                                <div className="tab-content-panel">
                                                     {
                                                         /*
-                                                            <Tab tabfor="0">
-                                                                <div className="rn-tab-button">
-                                                                    <button>Color</button>
+                                                        <TabPanel tabid="0">
+                                                            <div className="rn-tab-content">
+                                                                <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
+                                                                    <p>NGS-360-3 Motion Platform has <a style={{ color: 'yellow' }}>3</a> different color available. All colors are matte and powder painted</p>
+                                                                    <ColorSelection />
+                                                                    <div className="pricing-footer">
+                                                                        <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Next</a>
+                                                                    </div>
                                                                 </div>
-                                                            </Tab> 
+                                                            </div>
+                                                        </TabPanel>
                                                         */
                                                     }
-                                                    <Tab tabfor="1">
-                                                        <div className="rn-tab-button">
-                                                            <button>Payload</button>
-                                                        </div>
-                                                    </Tab>
-                                                    <Tab tabfor="2">
-                                                        <div className="rn-tab-button">
-                                                            <button>Accessory</button>
-                                                        </div>
-                                                    </Tab>
-                                                    {
-                                                        /*<Tab tabfor="3">
-                                                        <div className="rn-tab-button">
-                                                            <button>Motors</button>
-                                                        </div>
-                                                    </Tab>*/
-                                                    }
-                                                    <Tab tabfor="4">
-                                                        <div>
-                                                            <div className="rn-tab-button">
-                                                                <button>Result</button>
-                                                            </div>
-                                                        </div>
-                                                    </Tab>
-                                                </TabList>
-                                            </div>
-                                            <div className="tab-content-panel">
-                                                {
-                                                    /*
-                                                    <TabPanel tabid="0">
+                                                    <TabPanel tabid="1">
                                                         <div className="rn-tab-content">
                                                             <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
-                                                                <p>NGS-360-3 Motion Platform has <a style={{ color: 'yellow' }}>3</a> different color available. All colors are matte and powder painted</p>
-                                                                <ColorSelection />
+                                                                <p>Unit of measurement  <a style={{ color: 'red' }}>Kg</a>. It can be changed after later for an extra fee.</p>
+                                                                <PayloadSelection />
                                                                 <div className="pricing-footer">
                                                                     <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Next</a>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </TabPanel>
-                                                    */
-                                                }
-                                                <TabPanel tabid="1">
-                                                    <div className="rn-tab-content">
-                                                        <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
-                                                            <p>Unit of measurement  <a style={{ color: 'red' }}>Kg</a>. It can be changed after later for an extra fee.</p>
-                                                            <PayloadSelection />
-                                                            <div className="pricing-footer">
-                                                                <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Next</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </TabPanel>
-                                                <TabPanel tabid="2">
-                                                    <div className="rn-tab-content">
-                                                        <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
-                                                            {
-                                                                //<p>You can only add one accessory on same time, there are <a style={{ color: 'red' }}>2</a> accessories available.</p>
-                                                            }
-                                                            <div style={{ justifyContent: "space-evenly", alignItems: "center", flexDirection: "row", display: "flex" }}>
-                                                                <AccessorySelection />
-                                                            </div>
-
-                                                            <div className="pricing-footer">
-                                                                <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Next</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </TabPanel>
-                                                {
-                                                    /*<TabPanel tabid="3">
+                                                    <TabPanel tabid="2">
                                                         <div className="rn-tab-content">
                                                             <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
-                                                                <p>Required motors applied with pre configured payload selection. If you want more motor power, please <a style={{ color: 'red' }} href='https://covisart.com.tr/contacts/' target='_blank'>contact</a> with us. </p>
+                                                                {
+                                                                    //<p>You can only add one accessory on same time, there are <a style={{ color: 'red' }}>2</a> accessories available.</p>
+                                                                }
+                                                                <div style={{ justifyContent: "space-evenly", alignItems: "center", flexDirection: "row", display: "flex" }}>
+                                                                    <AccessorySelection />
+                                                                </div>
+
                                                                 <div className="pricing-footer">
-                                                                    <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Finish</a>
+                                                                    <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Next</a>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </TabPanel>*/
-                                                }
-                                                <TabPanel tabid="4">
-                                                    <div className="rn-tab-content">
-                                                        <Table columns={columns} dataSource={
-                                                            [
-                                                                {
-                                                                    key: '1',
-                                                                    name: 'Color',
-                                                                    value: snap.color
-                                                                },
-                                                                {
-                                                                    key: '2',
-                                                                    name: 'Payload',
-                                                                    value: snap.size
-                                                                },
-                                                                {
-                                                                    key: '3',
-                                                                    name: 'Accessory',
-                                                                    value: snap.accessory
-                                                                },
-                                                            ]
-                                                        } pagination={false} />
+                                                    </TabPanel>
+                                                    {
+                                                        /*<TabPanel tabid="3">
+                                                            <div className="rn-tab-content">
+                                                                <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
+                                                                    <p>Required motors applied with pre configured payload selection. If you want more motor power, please <a style={{ color: 'red' }} href='https://covisart.com.tr/contacts/' target='_blank'>contact</a> with us. </p>
+                                                                    <div className="pricing-footer">
+                                                                        <a className="btn-default btn-border" onClick={() => setSelectedTab((selectedTab + 1) % tabCount)}>Finish</a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </TabPanel>*/
+                                                    }
+                                                    <TabPanel tabid="4">
+                                                        <div className="rn-tab-content">
+                                                            <Table columns={columns} dataSource={
+                                                                [
+                                                                    {
+                                                                        key: '1',
+                                                                        name: 'Color',
+                                                                        value: snap.color
+                                                                    },
+                                                                    {
+                                                                        key: '2',
+                                                                        name: 'Payload',
+                                                                        value: snap.size
+                                                                    },
+                                                                    {
+                                                                        key: '3',
+                                                                        name: 'Accessory',
+                                                                        value: snap.accessory
+                                                                    },
+                                                                ]
+                                                            } pagination={false} />
 
-                                                        <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
-                                                            <form style={{ display: 'flex', width: "100%" }}
-                                                                onSubmit={handleSubmit}>
-                                                                <Space direction="vertical" size="middle" style={{ display: 'flex', width: "100%" }}>
-                                                                    <input
-                                                                        required
-                                                                        id="name"
-                                                                        type='text'
-                                                                        placeholder="Name"
-                                                                        onInput={(e) => { console.log(e.currentTarget.value) }}
-                                                                        onChange={(e) => { state.name = e.currentTarget.value; console.log(e.currentTarget.value) }} />
+                                                            <div className="inner" style={{ justifyContent: "flex-end", alignItems: "center", flexDirection: "column", display: "flex" }}>
+                                                                <form className="contact-form-1" style={{ display: 'flex', width: "100%" }}
+                                                                    onSubmit={handleSubmit}>
+                                                                    <Space direction="vertical" size="middle" style={{ display: 'flex', width: "100%" }}>
+                                                                        <input
+                                                                            required
+                                                                            id="name"
+                                                                            type='text'
+                                                                            placeholder="Name"
+                                                                            onInput={(e) => { console.log(e.currentTarget.value) }}
+                                                                            onChange={(e) => { state.name = e.currentTarget.value; }} />
 
-                                                                    <input
-                                                                        required
-                                                                        id="phone"
-                                                                        type='text'
-                                                                        placeholder="Phone"
-                                                                        onChange={(e) => { state.phone = e.currentTarget.value }}
-                                                                        onSubmit={(e) => { }} />
+                                                                        <input
+                                                                            required
+                                                                            id="phone"
+                                                                            type='tel'
+                                                                            placeholder="Phone"
+                                                                            onChange={(e) => { state.phone = e.currentTarget.value }} />
 
-                                                                    <input
-                                                                        required
-                                                                        id="email"
-                                                                        type='email'
-                                                                        placeholder="E-mail"
-                                                                        onChange={(e) => { state.email = e.currentTarget.value }} />
-                                                                    <textarea
-                                                                        required
-                                                                        id="message"
-                                                                        type='text'
-                                                                        placeholder="Message"
-                                                                        onChange={(e) => { state.message = e.currentTarget.value }} />
+                                                                        <input
+                                                                            required
+                                                                            id="email"
+                                                                            type='email'
+                                                                            placeholder="E-mail"
+                                                                            onChange={(e) => { state.email = e.currentTarget.value }} />
+                                                                        <textarea
+                                                                            required
+                                                                            id="message"
+                                                                            type='text'
+                                                                            placeholder="Message"
+                                                                            onChange={(e) => { state.message = e.currentTarget.value }} />
 
-                                                                    <Row style={{ justifyContent: "flex-start", alignItems: "center", flexDirection: "row", display: "flex", }}>
-                                                                        <div style={{ padding: "3%" }}>Select Country:</div>
-                                                                        <ReactCountryDropdown onSelect={(e) => { state.country = e.name; }} defaultCountry='TR' />
-                                                                    </Row>
+                                                                        <Row style={{ justifyContent: "flex-start", alignItems: "center", flexDirection: "row", display: "flex", }}>
+                                                                            <div style={{ padding: "3%" }}>Select Your Country:</div>
+                                                                            <ReactCountryDropdown onSelect={(e) => { state.country = e.name; }} defaultCountry='TR' />
+                                                                        </Row>
 
-                                                                    <button className="btn-default btn-border" type="submit" value="Order">Pre-Order</button >
-                                                                </Space>
-                                                            </form>
+                                                                        <button className="btn-default btn-border" type="submit" value="Order">Pre-Order</button >
+                                                                    </Space>
+                                                                </form>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                </TabPanel>
-                                            </div>
-                                        </div>
+                                                    </TabPanel>
+                                                </div>
+                                            </>
 
-                                    )
-                                    : (
-                                        <div id="purchased" style={{ justifyContent: 'center', alignItems: "center", flexDirection: "row", display: "flex", }}>
-                                            <CheckCircleTwoTone twoToneColor="#52c41a" />
-                                        </div>
-                                    )
-                                }
+                                        )
+                                        : (
+                                            <div id="purchased" style={{ justifyContent: 'center', alignItems: "center", flexDirection: "row", display: "flex", }}>
+                                                <CheckCircleTwoTone style={{ fontSize: '10vh' }} twoToneColor="#52c41a" />
+                                            </div>
+                                        )
+                                    }
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </Tabs>
+                    </Tabs>
+                </div>
             </div>
-        </div>
+        </ConfigProvider>
     )
 }
 

@@ -41,7 +41,7 @@ const Social = () => {
                                         <li><Link to="facebook.com"><FiFacebook /></Link></li>
                                         <li><Link to="twitter.com"><FiTwitter /></Link></li>
                                         <li><Link to="instagram.com"><FiInstagram /></Link></li>
-                                        <li><Link to="linkdin.com"><FiLinkedin /></Link></li>
+                                        <li><Link to="https://www.linkedin.com/company/covisart.com"><FiLinkedin /></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@ const Social = () => {
                                         <li><Link to="facebook.com"><FiFacebook /></Link></li>
                                         <li><Link to="twitter.com"><FiTwitter /></Link></li>
                                         <li><Link to="instagram.com"><FiInstagram /></Link></li>
-                                        <li><Link to="linkdin.com"><FiLinkedin /></Link></li>
+                                        <li><Link to="https://www.linkedin.com/company/covisart.com"><FiLinkedin /></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@ const Social = () => {
                                         <li><Link to="facebook.com"><FiFacebook /></Link></li>
                                         <li><Link to="twitter.com"><FiTwitter /></Link></li>
                                         <li><Link to="instagram.com"><FiInstagram /></Link></li>
-                                        <li><Link to="linkdin.com"><FiLinkedin /></Link></li>
+                                        <li><Link to="https://www.linkedin.com/company/covisart.com"><FiLinkedin /></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@ const Social = () => {
                                         <li><Link to="facebook.com"><FiFacebook /></Link></li>
                                         <li><Link to="twitter.com"><FiTwitter /></Link></li>
                                         <li><Link to="instagram.com"><FiInstagram /></Link></li>
-                                        <li><Link to="linkdin.com"><FiLinkedin /></Link></li>
+                                        <li><Link to="https://www.linkedin.com/company/covisart.com"><FiLinkedin /></Link></li>
                                     </ul>
                                 </div>
                             </div>
@@ -164,7 +164,7 @@ const Social = () => {
                                         <li><Link to="facebook.com"><FiFacebook /></Link></li>
                                         <li><Link to="twitter.com"><FiTwitter /></Link></li>
                                         <li><Link to="instagram.com"><FiInstagram /></Link></li>
-                                        <li><Link to="linkdin.com"><FiLinkedin /></Link></li>
+                                        <li><Link to="https://www.linkedin.com/company/covisart.com"><FiLinkedin /></Link></li>
                                     </ul>
                                 </div>
                             </div>
