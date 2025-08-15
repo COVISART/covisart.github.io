@@ -11,6 +11,7 @@ import { useSnapshot } from 'valtio'
 import { state } from './store'
 import { Order, PingAPI } from './system/OrderRequest';
 import ReactGA from "react-ga4";
+import { v4 as uuidv4 } from 'uuid';
 
 import StaticImageSimulator from './StaticImageSimulator';
 
@@ -60,7 +61,7 @@ const Product = () => {
         //openNotification('bottomRight')
         setOrdered(true);
         ReactGA.gtag("event", "purchase", {
-            transaction_id: crypto.randomUUID(),
+            transaction_id: uuidv4(),
             value: 75000,
             tax: 0,
             shipping: 4200,
