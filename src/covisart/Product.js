@@ -35,17 +35,19 @@ const Product = () => {
 
     useEffect(() => {
         if (ordered) {
-            openNotification('bottomRight');
+            openNotification('bottomRight',true);
         }
-        
+
     }, [ordered]);
 
-    const openNotification = (placement) => {
+    const openNotification = (placement, pauseOnHover ) => {
         api.open({
             message: 'We got your order.',
             description:
                 'Dear ' + state.name + ', we got your order.  Our sales team will contact with you for further operation. Thanks for your interest our NGS-360 family motion platform.',
-            duration: 0,
+            placement: placement,
+            showProgress: true,
+            pauseOnHover: pauseOnHover,
             icon: <PhoneOutlined style={{ color: 'green' }} />
         });
     };
@@ -93,8 +95,8 @@ const Product = () => {
                 // algorithm: [theme.darkAlgorithm, theme.compactAlgorithm],
             }}
         >
+            {contextHolder}
             <div className="row">
-                {contextHolder}
                 <div className="col-lg-12">
                     <Tabs selectedIndex={selectedTab} onSelect={(index) => setSelectedTab(index)}>
                         <div className="row row--30 align-items-center">
@@ -109,7 +111,7 @@ const Product = () => {
                                         <SectionTitle
                                             textAlign="text-center"
                                             subtitle="3D Configuration"
-                                            title={ordered?"Thank you for your order!":"Build your own NGS-360"}
+                                            title={ordered ? "Thank you for your order!" : "Build your own NGS-360"}
                                             description=""
                                         />
                                     </div>
