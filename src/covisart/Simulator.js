@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import { Stage, Grid, OrbitControls, Html, useProgress } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import { Ngs_GLT } from './models/NGS_GLT'
+import { Model } from './models/ForWeb'
 import { state } from './store'
 
 function Loader() {
@@ -21,15 +22,20 @@ export default function Simulator() {
       <Canvas
         style={{ height: "100vh" }}
         frameloop="demand"
-        camera={{ fov: 45 }}>
-        <Suspense fallback={<Loader />}>
+        camera={{ fov: 70 }}>
+        <Suspense>
           <Stage intensity={0.5} environment="city" adjustCamera={false} >
-            <Ngs_GLT url="/covisart/models/NGS_GLT_V2-transformed.glb" />
+            {
+              //<Model/> 
+            }           
+            {
+             <Ngs_GLT url="/covisart/models/NGS_GLT_V2-transformed.glb" />
+            }
           </Stage>
         </Suspense>
         <Grid
           renderOrder={-1}
-          position={[-0.17, -1.32, 0]}
+          position={[0, -2, 0]}
           infiniteGrid
           cellSize={0.4}
           cellThickness={0.6}
@@ -43,7 +49,7 @@ export default function Simulator() {
         <OrbitControls
           autoRotate={true}
           autoRotateSpeed={-0.4}
-          enableZoom={false}
+          enableZoom={true}
           makeDefault
           minPolarAngle={Math.PI / 2}
           maxPolarAngle={Math.PI / 2} />

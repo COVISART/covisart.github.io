@@ -14,6 +14,7 @@ import ReactGA from "react-ga4";
 import { v4 as uuidv4 } from 'uuid';
 
 import StaticImageSimulator from './StaticImageSimulator';
+import Simulator from './Simulator';
 
 const Product = () => {
     const [selectedTab, setSelectedTab] = useState(0);
@@ -103,7 +104,7 @@ const Product = () => {
                         <div className="row row--30 align-items-center">
                             <div className="col-lg-6 mt_md--40 mt_sm--40">
                                 <div style={{ position: "relative" }}>
-                                    <StaticImageSimulator />
+                                    <Simulator/>
                                 </div>
                             </div>
                             <div className="col-lg-6 mt_md--40 mt_sm--40" >
