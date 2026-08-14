@@ -1,4 +1,4 @@
-import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
+import { sqliteAdapter } from '@payloadcms/db-sqlite'
 import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
@@ -57,8 +57,10 @@ export default buildConfig({
   },
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,
-  db: sqliteD1Adapter({
-    binding: cloudflare.env.D1,
+  db: sqliteAdapter({
+    client: {
+      url: process.env.DATABASE_URL || '',
+    },
   }),
   collections: [Pages, Posts, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),
