@@ -69,8 +69,9 @@ instead of collapsing.
 
 ## Deployment
 
-`npm run build` emits a static `dist/`. `.github/workflows/deploy.yml` builds and
-publishes it to GitHub Pages on every push to `master`. Pages must be set to
+`npm run build` emits a static `dist/`. `.github/workflows/static.yml` builds and
+publishes it to GitHub Pages on every push to `master` (it was updated from the
+old Create React App / yarn / `build/` pipeline). Pages must be set to
 **Source: GitHub Actions** in the repository settings.
 
 ## Known follow-ups
