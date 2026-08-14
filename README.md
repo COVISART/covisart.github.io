@@ -1,71 +1,82 @@
-# Getting Started with Create React App
+# COVISART NGS-360-3
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Product site for the COVISART NGS-360-3 three-axis motion system: bilingual
+(EN/TR), light and dark, with a live WebGL model of the motion base whose
+gimbals follow the motion-envelope sliders.
 
-## Available Scripts
+React + TypeScript + Vite. Converted from the Claude Design prototype
+`NGS-360-3.dc.html` (design project *Company product site redesign*).
 
-In the project directory, you can run:
+## Getting started
 
-### `npm start`
+```bash
+npm install
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+npm run dev
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+| Script | What it does |
+| --- | --- |
+| `npm run dev` | Vite dev server on http://localhost:5173 |
+| `npm run build` | Type-check, then build to `dist/` |
+| `npm run preview` | Serve the built `dist/` locally |
+| `npm run typecheck` | Type-check only |
 
-### `npm test`
+`predev`/`prebuild` run `scripts/copy-draco.mjs`, which copies the Draco decoder
+out of the installed three.js into `public/draco/` — the GLB is Draco-compressed
+and cannot be decoded without it. That folder is generated, so it is gitignored.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Layout
 
-### `npm run build`
+```
+src/
+  data/          copy.ts (EN/TR strings), product.ts (specs, variants, options), assets.ts
+  site/          SiteContext (language, theme, finish, view) and hooks
+  components/    Header, Footer, Blueprint frame, AssetImage
+  sections/      Hero, KeyFigures, MotionEnvelope, Advantages, Applications,
+                 Software, Family, About, DemoRequest, Specifications
+  viewer/        NgsViewer (three.js), NgsModel (React wrapper), LazyNgsModel
+  styles/        industry.css (light), nocturne.css (dark), app.css (page + layout)
+public/assets/   product renders and NGS-360-3-B.glb
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Design systems
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The prototype loaded two design-system stylesheets and switched themes by
+flipping the dark one's media query. Here `industry.css` (light) is the base
+layer and every Nocturne rule is scoped under `[data-theme="dark"]`, which puts
+it above Industry on specificity — the same cascade result, set by
+`document.documentElement.dataset.theme`. Both files keep their original rule
+bodies, so re-syncing from the design project stays a mechanical edit.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Theme and language persist in `localStorage`; both fall back to the visitor's
+system preference (`prefers-color-scheme`, `navigator.language`).
 
-### `npm run eject`
+### The 3D viewer
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`src/viewer/NgsViewer.ts` is a port of the prototype's `<ngs-model>` custom
+element. The GLB carries nested gimbal nodes (Pitch > Yaw > Roll) and each pose
+value spins its node about its own local axis, so the rings behave like the
+hardware. One fetch and one Draco decode is shared by every viewer on the page;
+each viewer clones the scene so it can pose independently, while materials stay
+shared so a finish change repaints both viewers at once.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+three.js is loaded as its own chunk (`LazyNgsModel`) so it stays off the initial
+page load. If WebGL or the GLB is unavailable, the frame falls back to a caption
+instead of collapsing.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Deployment
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+`npm run build` emits a static `dist/`. `.github/workflows/deploy.yml` builds and
+publishes it to GitHub Pages on every push to `master`. Pages must be set to
+**Source: GitHub Actions** in the repository settings.
 
-## Learn More
+## Known follow-ups
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# doob
+- The product renders in `public/assets` are the original KeyShot exports —
+  ~38 MB in total, with single PNGs over 10 MB. Downscaling to ~1600 px and
+  serving WebP/AVIF would cut that by well over an order of magnitude.
+- The demo request form validates and confirms locally; it has no backend yet.
+  `DemoRequest.tsx` marks the spot where the sales endpoint goes.

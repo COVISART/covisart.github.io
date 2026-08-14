@@ -1,0 +1,199 @@
+/* Page-level styles.
+   The first block is the prototype's own <helmet> stylesheet; the rest turns
+   the prototype's fixed inline grids into named layout classes so the page
+   can reflow on narrow viewports (the design canvas only ever rendered at
+   desktop width). Nothing here changes the desktop composition. */
+
+body { margin: 0; }
+a { color: var(--color-accent-700); }
+a:hover { color: var(--color-accent); }
+input[type="range"] { accent-color: var(--color-accent); }
+
+:root { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
+.page {
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  font-family: var(--font-body);
+}
+
+/* — shell: the 1240px measure every section is built on — */
+.shell { max-width: 1240px; margin: 0 auto; padding-inline: 32px; }
+
+/* — skip link: off-screen until it takes focus — */
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 30;
+  padding: 10px 16px; font-size: 13px; text-decoration: none;
+  background: var(--color-bg); color: var(--color-text);
+  border: 1px solid var(--color-accent);
+}
+.skip-link:focus { top: 12px; }
+
+/* — header — */
+.site-header {
+  position: sticky; top: 0; z-index: 20;
+  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--color-divider);
+}
+.site-header .shell {
+  padding-block: 14px;
+  display: flex; align-items: center; gap: 28px;
+}
+.brand { display: flex; align-items: baseline; gap: 10px; margin-right: auto; }
+.brand-name {
+  font-family: var(--font-heading); font-weight: 600; font-size: 19px; letter-spacing: 0.16em;
+}
+.brand-model {
+  font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--color-accent-700);
+}
+.site-nav { display: flex; gap: 22px; align-items: center; }
+.nav-link {
+  background: none; border: 0; padding: 0; cursor: pointer;
+  font-family: var(--font-heading); font-weight: 600; font-size: 14px;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--color-text);
+}
+.nav-link[aria-current="page"] { color: var(--color-accent); }
+.header-cta { flex: none; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.06em; }
+
+/* — shared section furniture — */
+.kicker {
+  font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--color-accent-700); margin-bottom: 10px;
+}
+.section-head {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 32px; margin-bottom: 36px;
+}
+.section-head h2 { font-size: 40px; margin: 0; }
+.section-lede {
+  max-width: 44ch; font-size: 14px; margin: 0; text-wrap: pretty;
+  color: color-mix(in srgb, var(--color-text) 72%, transparent);
+}
+.rule-top { border-top: 1px solid var(--color-divider); }
+.uc { text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+.micro-label {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+}
+.num { font-variant-numeric: tabular-nums; }
+
+/* — layouts — */
+.split { display: grid; gap: 48px; align-items: center; }
+.split-5-7 { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); }
+.split-7-5 { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; }
+.split-6-6 { grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 56px; }
+.split-top { align-items: start; }
+
+.hairline-grid {
+  display: grid; gap: 1px;
+  background: var(--color-divider); border: 1px solid var(--color-divider);
+}
+.hairline-grid > * { background: var(--color-bg); }
+.figures { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.cards-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.variants { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 28px; }
+.cols-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px; }
+.cols-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; }
+.form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.app-row {
+  padding: 20px 22px; display: grid; grid-template-columns: 180px minmax(0, 1fr);
+  gap: 20px; align-items: baseline;
+}
+.axis-readouts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+/* — reversed (accent-900 ground) sections — */
+.reverse { background: var(--color-accent-900); }
+
+/* — motion envelope — */
+.viewer-frame { position: relative; }
+.orbit-hint {
+  position: absolute; left: 0; bottom: 0; font-size: 10px; letter-spacing: 0.14em;
+  text-transform: uppercase; pointer-events: none;
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+}
+.viewer-fallback {
+  display: grid; place-content: center; gap: 8px; text-align: center; padding: 24px;
+  font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  border: 1px dashed var(--color-divider);
+}
+.finish-row {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 16px;
+  border-top: 1px solid var(--color-divider); padding-top: 14px;
+}
+.finish-btn {
+  display: flex; align-items: center; gap: 8px; cursor: pointer; font: inherit;
+  font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase;
+  padding: 5px 10px 5px 6px; background: transparent; color: var(--color-text);
+}
+.finish-chip {
+  width: 14px; height: 14px; flex: none;
+  outline: 1px solid color-mix(in srgb, var(--color-text) 22%, transparent);
+  outline-offset: -1px;
+}
+.axis-control { border-bottom: 1px solid var(--color-divider); padding: 0 0 20px; margin-bottom: 20px; }
+.axis-control input[type="range"] { width: 100%; margin: 14px 0 12px; }
+
+/* — form validation (new in the React port; the prototype's inputs were
+     uncontrolled and never validated) — */
+.field-error { font-size: 11px; margin-top: 4px; color: #b3402a; }
+[data-theme="dark"] .field-error { color: #e79280; }
+
+/* — specifications — */
+.spec-row {
+  display: flex; justify-content: space-between; gap: 16px; padding: 8px 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent);
+  font-size: 14px;
+}
+.table-scroll { overflow-x: auto; }
+
+/* — contact block — */
+.contact-line { display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 0; }
+
+/* — footer — */
+.site-footer { border-top: 1px solid var(--color-divider); background: var(--color-accent-900); }
+.site-footer .shell {
+  padding-block: 44px; display: flex; flex-wrap: wrap; gap: 24px;
+  align-items: baseline; justify-content: space-between;
+}
+
+/* — reflow — */
+@media (max-width: 1024px) {
+  .cards-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px; }
+  .split-5-7, .split-7-5, .split-6-6 { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* The header runs out of room before the page grids do: drop the nav onto its
+   own row first, and only shed the CTA when even that stops fitting. */
+@media (max-width: 940px) {
+  .site-header .shell { gap: 14px; flex-wrap: wrap; }
+  .site-nav { order: 3; width: 100%; gap: 18px; }
+}
+
+@media (max-width: 560px) {
+  .header-cta { display: none; }
+}
+
+@media (max-width: 720px) {
+  .shell { padding-inline: 20px; }
+  .cards-3, .cols-3, .cols-2, .form-grid, .variants { grid-template-columns: minmax(0, 1fr); }
+  .figures { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .app-row { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .section-head { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .section-head h2 { font-size: 30px; }
+  .hero-title { font-size: 44px !important; }
+  .hero-lede { font-size: 21px !important; }
+  .spec-title { font-size: 36px !important; }
+  .axis-readouts { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; }
+}
