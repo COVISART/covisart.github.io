@@ -41,6 +41,7 @@ class NgsModel extends HTMLElement {
 
     const w = this.clientWidth || 600, h = this.clientHeight || 420;
     this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, preserveDrawingBuffer: true });
+    this.renderer.setClearColor(0x000000, 0);
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
     this.renderer.setSize(w, h, false);
     this.renderer.shadowMap.enabled = true;

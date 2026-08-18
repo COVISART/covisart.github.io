@@ -8,7 +8,6 @@ export interface NgsModelProps extends Partial<Pose> {
   /** Hex colour applied to the model's base structure material. */
   finish?: string;
   height: number;
-  background?: string;
   /** Shown in place of the canvas if WebGL or the GLB is unavailable. */
   fallback: string;
   label: string;
@@ -22,7 +21,6 @@ export function NgsModel({
   autorotate = false,
   finish,
   height,
-  background,
   fallback,
   label,
 }: NgsModelProps) {
@@ -75,7 +73,7 @@ export function NgsModel({
 
   if (failed) {
     return (
-      <div className="viewer-fallback" style={{ height, background }}>
+      <div className="viewer-fallback" style={{ height }}>
         <span>{fallback}</span>
       </div>
     );
@@ -86,7 +84,7 @@ export function NgsModel({
       ref={hostRef}
       role="img"
       aria-label={label}
-      style={{ width: '100%', height, position: 'relative', display: 'block', background }}
+      style={{ width: '100%', height, position: 'relative', display: 'block' }}
     />
   );
 }

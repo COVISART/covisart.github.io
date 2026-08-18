@@ -9,7 +9,7 @@ import { LazyNgsModel } from '../viewer/LazyNgsModel';
 const deg = (v: number) => `${Math.round(v)}°`;
 
 export function MotionEnvelope() {
-  const { t, lang, dark, finish, setFinish, finishHex } = useSite();
+  const { t, lang, finish, setFinish, finishHex } = useSite();
   const [pose, setPose] = useState<Record<AxisKey, number>>(NEUTRAL_POSE);
   const [running, setRunning] = useState(false);
 
@@ -37,7 +37,6 @@ export function MotionEnvelope() {
   };
 
   const axes = AXES[lang];
-  const viewerBg = dark ? 'var(--color-neutral-800)' : 'transparent';
 
   return (
     <section
@@ -58,8 +57,8 @@ export function MotionEnvelope() {
         </div>
 
         <div className="split split-6-6 split-top" style={{ gap: 40 }}>
-          <Blueprint style={{ padding: 20, background: 'var(--color-bg)' }}>
-            <div className="viewer-frame" style={{ background: viewerBg }}>
+          <Blueprint style={{ padding: 20, background: 'transparent' }}>
+            <div className="viewer-frame">
               <LazyNgsModel
                 src={ASSETS.model}
                 height={440}
