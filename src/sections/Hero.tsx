@@ -6,9 +6,8 @@ import { useGoToDemo } from '../site/useGoToDemo';
 import { LazyNgsModel } from '../viewer/LazyNgsModel';
 
 export function Hero() {
-  const { t, dark, finishHex, setView } = useSite();
+  const { t, finishHex, setView } = useSite();
   const goToDemo = useGoToDemo();
-  const viewerBg = dark ? 'var(--color-neutral-800)' : 'transparent';
 
   return (
     <section className="shell split split-5-7" style={{ paddingBlock: '72px 40px' }} aria-labelledby="hero-title">
@@ -50,16 +49,14 @@ export function Hero() {
       </div>
 
       <Blueprint as="figure" style={{ padding: 18, background: 'transparent' }}>
-        <div style={{ background: viewerBg }}>
-          <LazyNgsModel
-            src={ASSETS.model}
-            height={470}
-            autorotate
-            finish={finishHex}
-            label={t.figHero}
-            fallback={t.figHero}
-          />
-        </div>
+        <LazyNgsModel
+          src={ASSETS.model}
+          height={470}
+          autorotate
+          finish={finishHex}
+          label={t.figHero}
+          fallback={t.figHero}
+        />
         <figcaption style={{ letterSpacing: '0.08em', textTransform: 'uppercase', marginTop: 10 }}>{t.figHero}</figcaption>
       </Blueprint>
     </section>

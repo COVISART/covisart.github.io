@@ -7,7 +7,7 @@ const NgsModel = lazy(() => import('./NgsModel').then((m) => ({ default: m.NgsMo
 
 export function LazyNgsModel(props: NgsModelProps) {
   return (
-    <Suspense fallback={<div style={{ height: props.height, background: props.background }} aria-hidden="true" />}>
+    <Suspense fallback={<div style={{ height: props.height }} aria-hidden="true" />}>
       <NgsModel {...props} />
     </Suspense>
   );

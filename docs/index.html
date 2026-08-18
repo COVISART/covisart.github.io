@@ -95,7 +95,7 @@
         </div>
 
         <div style="display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 40px; align-items: start;">
-          <div class="blueprint" style="padding: 20px; background: var(--color-bg);">
+          <div class="blueprint" style="padding: 20px; background: transparent;">
             <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
             <div style="position: relative; background: {{ viewerBg }};">
               <x-import component-from-global-scope="ngs-model" hint-size="100%,440px" src="assets/NGS-360-3-B.glb" roll="{{ roll }}" pitch="{{ pitch }}" yaw="{{ yaw }}" finish="{{ finishHex }}" style="width: 100%; height: 440px;"></x-import>
@@ -725,7 +725,7 @@ class Component extends DCLogic {
       reverseFgMuted: dark ? "color-mix(in srgb, var(--color-text) 68%, transparent)" : "color-mix(in srgb, var(--color-bg) 70%, transparent)",
       reverseFgFaint: dark ? "color-mix(in srgb, var(--color-text) 52%, transparent)" : "color-mix(in srgb, var(--color-bg) 55%, transparent)",
       reverseRule: dark ? "color-mix(in srgb, var(--color-text) 22%, transparent)" : "color-mix(in srgb, var(--color-bg) 24%, transparent)",
-      viewerBg: dark ? "var(--color-neutral-800)" : "transparent",
+      viewerBg: "transparent",
       isOverview: s.view === "overview", isSpecs: s.view === "specs",
       showOverview: () => this.setState({ view: "overview" }),
       showSpecs: () => this.setState({ view: "specs" }),
