@@ -114,7 +114,7 @@ export function Specifications() {
                 fontSize: 14,
               }}
             >
-              <span style={{ color: 'var(--color-accent)' }} aria-hidden="true">
+              <span style={{ color: 'var(--color-accent-text)' }} aria-hidden="true">
                 +
               </span>
               <span>{i.label}</span>
@@ -139,7 +139,7 @@ export function Specifications() {
           <div style={{ display: 'grid', gap: 10 }}>
             {OPTIONS[lang].map((o) => (
               <div key={o.title} style={{ display: 'grid', gridTemplateColumns: '16px minmax(0, 1fr)', gap: 10, fontSize: 14 }}>
-                <span style={{ color: 'var(--color-accent)' }} aria-hidden="true">
+                <span style={{ color: 'var(--color-accent-text)' }} aria-hidden="true">
                   +
                 </span>
                 <span>

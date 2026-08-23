@@ -36,7 +36,7 @@ export function Family() {
                 padding: 18,
                 border: `1px solid ${isActive ? 'var(--color-accent)' : 'var(--color-divider)'}`,
                 background: isActive ? 'var(--color-accent)' : 'transparent',
-                color: isActive ? 'var(--color-bg)' : 'var(--color-text)',
+                color: isActive ? 'var(--text-on-red)' : 'var(--color-text)',
               }}
             >
               <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 600, fontSize: 22 }}>{v.name}</div>
@@ -54,7 +54,7 @@ export function Family() {
       >
         <div>
           <h3 style={{ margin: '0 0 4px', fontSize: 30 }}>{active.name}</h3>
-          <div style={{ fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-accent-700)' }}>
+          <div style={{ fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--color-accent-text)' }}>
             {active.axes}
           </div>
         </div>

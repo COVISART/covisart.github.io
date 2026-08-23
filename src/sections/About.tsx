@@ -39,7 +39,7 @@ export function About() {
                   alignItems: 'baseline',
                 }}
               >
-                <div style={{ fontFamily: 'var(--font-heading)', fontSize: 18, color: 'var(--color-accent-700)' }}>{c.year}</div>
+                <div style={{ fontFamily: 'var(--font-heading)', fontSize: 18, color: 'var(--color-accent-text)' }}>{c.year}</div>
                 <div style={{ fontSize: 13.5 }}>{c.body}</div>
               </div>
             ))}

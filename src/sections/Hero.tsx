@@ -14,7 +14,7 @@ export function Hero() {
       <div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 22 }}>
           <span style={{ width: 34, height: 1, background: 'var(--color-accent)' }} />
-          <span style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-accent-700)' }}>
+          <span style={{ fontSize: 11, letterSpacing: '0.18em', textTransform: 'uppercase', color: 'var(--color-accent-text)' }}>
             {t.kicker}
           </span>
         </div>
