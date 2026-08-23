@@ -1,46 +1,80 @@
-import React , {useState} from 'react';
-import emailjs from 'emailjs-com';
+import React, { useState } from 'react';
+import ReactCountryDropdown from "react-country-dropdown";
+import { useSnapshot } from 'valtio';
+import { state } from '../../covisart/store';
+import { PostOrder } from '../../covisart/system/OrderRequest';
 
-const Result = () => {
+const initialForm = {
+    fullname: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: ""
+};
+
+const Result = ({ status }) => {
+    if (status === "success") {
+        return (
+            <p className="success-message">Your message has been successfully sent. We will contact you soon.</p>
+        )
+    }
     return (
-        <p className="success-message">Your Message has been successfully sent. I will contact you soon.</p>
+        <p className="error-message">Your message could not be sent. Please try again or write us at info@covisart.com.</p>
     )
 }
 
 function ContactForm({props , formStyle}) {
-    const [ result,showresult ] = useState(false);
+    const snap = useSnapshot(state);
+    const [ form, setForm ] = useState(initialForm);
+    const [ country, setCountry ] = useState(snap.country);
+    const [ sending, setSending ] = useState(false);
+    const [ result, setResult ] = useState(null);
 
-    const sendEmail = (e) => {
-        e.preventDefault();
-        emailjs
-        .sendForm(
-            'service_p4x3hv8', 
-            'template_jgfr42f', 
-            e.target, 
-            'user_jrfTH2e0Ely35ZCVFdT9S'
-        )
-        .then((result) => {
-            console.log(result.text);
-            }, 
-            (error) => {
-                console.log(error.text);
-            }
-        );
-        e.target.reset();
-        showresult(true);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setForm((prev) => ({ ...prev, [name]: value }));
     };
 
-    setTimeout(() => {
-        showresult(false);
-    }, 5000);
+    const sendMessage = async (e) => {
+        e.preventDefault();
+        if (sending) {
+            return;
+        }
+        setSending(true);
+        setResult(null);
+
+        try {
+            await PostOrder({
+                email: form.email,
+                name: form.fullname,
+                country: country,
+                description: form.subject
+                    ? `${form.subject}\n\n${form.message}`
+                    : form.message,
+                size: snap.size,
+                phone: form.phone,
+                accessory: snap.accessory,
+                color: snap.color
+            });
+            setForm(initialForm);
+            setResult("success");
+        } catch (error) {
+            console.log(error);
+            setResult("error");
+        } finally {
+            setSending(false);
+        }
+    };
 
     return (
-        <form className={`${formStyle}`} action="" onSubmit={sendEmail}>
+        <form className={`${formStyle}`} action="" onSubmit={sendMessage}>
             <div className="form-group">
                 <input 
                 type="text"
                 name="fullname"
                 placeholder="Your Name"
+                value={form.fullname}
+                onChange={handleChange}
                 required
                 />
             </div>
@@ -50,15 +84,19 @@ function ContactForm({props , formStyle}) {
                 type="email"
                 name="email"
                 placeholder="Email Address"
+                value={form.email}
+                onChange={handleChange}
                 required
                 />
             </div>
 
             <div className="form-group">
                 <input 
-                type="text"
+                type="tel"
                 name="phone"
                 placeholder="Phone Number"
+                value={form.phone}
+                onChange={handleChange}
                 required
                 />
             </div>
@@ -69,6 +107,8 @@ function ContactForm({props , formStyle}) {
                 type="text"
                 name="subject"
                 placeholder="Subject"
+                value={form.subject}
+                onChange={handleChange}
                 required
                 />
             </div>
@@ -77,17 +117,29 @@ function ContactForm({props , formStyle}) {
                 <textarea 
                 name="message"
                 placeholder="Your Message"
+                value={form.message}
+                onChange={handleChange}
                 required
                 >
                 </textarea>
             </div>
 
+            <div className="form-group contact-country">
+                <label htmlFor="country">Select Your Country:</label>
+                <ReactCountryDropdown
+                    defaultCountry="TR"
+                    onSelect={(selected) => setCountry(selected.name)}
+                />
+            </div>
+
             <div className="form-group">
-                <button className="btn-default btn-large">Submit Now</button>
+                <button className="btn-default btn-large" type="submit" disabled={sending}>
+                    {sending ? "Sending..." : "Submit Now"}
+                </button>
             </div> 
 
             <div className="form-group">
-                {result ? <Result /> : null}
+                {result ? <Result status={result} /> : null}
             </div> 
         </form>
     )
