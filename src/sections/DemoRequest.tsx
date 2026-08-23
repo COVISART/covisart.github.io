@@ -124,7 +124,7 @@ export function DemoRequest() {
               <button type="submit" className="btn btn-primary btn-block" style={{ padding: 12, textTransform: 'uppercase', letterSpacing: '0.08em' }}>
                 {t.fSubmit}
               </button>
-              <p style={{ fontSize: 12, margin: '14px 0 0', color: 'color-mix(in srgb, var(--color-text) 55%, transparent)' }}>
+              <p style={{ fontSize: 12, margin: '14px 0 0', color: 'var(--text-muted)' }}>
                 {t.fNote}
               </p>
             </form>

@@ -153,7 +153,7 @@ export function MotionEnvelope() {
               <button type="button" className="btn btn-secondary uc" style={{ padding: '10px 18px' }} onClick={reset}>
                 {t.reset}
               </button>
-              <span style={{ fontSize: 12, color: 'color-mix(in srgb, var(--color-text) 55%, transparent)' }}>
+              <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
                 {t.envelopeNote}
               </span>
             </div>

@@ -26,6 +26,25 @@ const AXIS = { pitch: 'x', yaw: 'z', roll: 'x' } as const;
 const SPACE = { pitch: 'local', yaw: 'parent', roll: 'local' } as const;
 const JOINTS = ['pitch', 'yaw', 'roll'] as const;
 
+/* Viewer colour, mirrored from the design tokens (styles/tokens.css). These
+ * are light sources and a clear colour, not surfaces, so they are declared as
+ * numbers here rather than read from CSS — but they carry the same values as
+ * the tokens they are named for, and no raw literal sits inline below.
+ *
+ * The fill light was a cool blue inherited from the prototype's
+ * blue-accented system; on a black + red ground that reads as a colour cast,
+ * so it is neutral now. Intensities are untouched, so the render's modelling
+ * is unchanged. */
+const VIEWER = {
+  /* --bg-base. Drawn at alpha 0 — the page ground shows through — so this is
+     never actually painted; it replaces a pure-black literal. */
+  clear: 0x0e0f11,
+  keyLight: 0xf2f3f5,    // --text-primary
+  fillLight: 0xf2f3f5,   // --text-primary (was a blue-cast fill)
+  hemiSky: 0xf2f3f5,     // --text-primary
+  hemiGround: 0x9ba1aa,  // --text-muted
+} as const;
+
 export type JointName = (typeof JOINTS)[number];
 export type Pose = Record<JointName, number>;
 
@@ -100,7 +119,7 @@ export class NgsViewer {
     this.renderer.setSize(w, h, false);
     // Nothing is drawn behind the model: the page background shows through the
     // canvas so the viewer reads as the object alone, not as a boxed panel.
-    this.renderer.setClearColor(0x000000, 0);
+    this.renderer.setClearColor(VIEWER.clear, 0);
     this.renderer.shadowMap.enabled = true;
     this.renderer.toneMapping = THREE.ACESFilmicToneMapping;
     this.renderer.toneMappingExposure = 1.05;
@@ -121,7 +140,7 @@ export class NgsViewer {
     this.camera = new THREE.PerspectiveCamera(35, w / h, 0.05, 200);
     this.camera.position.set(6, 3.4, 8);
 
-    const key = new THREE.DirectionalLight(0xffffff, 2.1);
+    const key = new THREE.DirectionalLight(VIEWER.keyLight, 2.1);
     key.position.set(5, 8, 6);
     key.castShadow = true;
     key.shadow.mapSize.set(2048, 2048);
@@ -129,8 +148,8 @@ export class NgsViewer {
     const d = 6;
     Object.assign(key.shadow.camera, { left: -d, right: d, top: d, bottom: -d, near: 0.5, far: 40 });
     this.scene.add(key);
-    this.scene.add(new THREE.DirectionalLight(0xdce6f0, 0.5).translateX(-7).translateY(4).translateZ(-5));
-    this.scene.add(new THREE.HemisphereLight(0xffffff, 0x9aa3ab, 0.5));
+    this.scene.add(new THREE.DirectionalLight(VIEWER.fillLight, 0.5).translateX(-7).translateY(4).translateZ(-5));
+    this.scene.add(new THREE.HemisphereLight(VIEWER.hemiSky, VIEWER.hemiGround, 0.5));
 
     const ground = new THREE.Mesh(new THREE.PlaneGeometry(60, 60), new THREE.ShadowMaterial({ opacity: 0.22 }));
     ground.rotation.x = -Math.PI / 2;

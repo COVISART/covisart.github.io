@@ -5,9 +5,12 @@
    desktop width). Nothing here changes the desktop composition. */
 
 body { margin: 0; }
-a { color: var(--color-accent-700); }
-a:hover { color: var(--color-accent); }
-input[type="range"] { accent-color: var(--color-accent); }
+a { color: var(--color-accent-text); }
+a:hover { color: var(--red-text-hover); }
+/* accent-color paints the filled part of the track in the brand red. The
+   background is pinned because the UA otherwise gives the range a pure-white
+   box in a light color-scheme, and this system emits no pure white. */
+input[type="range"] { accent-color: var(--color-accent); background: transparent; }
 
 :root { color-scheme: light; }
 :root[data-theme="dark"] { color-scheme: dark; }
@@ -48,7 +51,7 @@ input[type="range"] { accent-color: var(--color-accent); }
 }
 .brand-model {
   font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--color-accent-700);
+  color: var(--color-accent-text);
 }
 .site-nav { display: flex; gap: 22px; align-items: center; }
 .nav-link {
@@ -57,13 +60,13 @@ input[type="range"] { accent-color: var(--color-accent); }
   letter-spacing: 0.04em; text-transform: uppercase;
   color: var(--color-text);
 }
-.nav-link[aria-current="page"] { color: var(--color-accent); }
+.nav-link[aria-current="page"] { color: var(--color-accent-text); }
 .header-cta { flex: none; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.06em; }
 
 /* — shared section furniture — */
 .kicker {
   font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--color-accent-700); margin-bottom: 10px;
+  color: var(--color-accent-text); margin-bottom: 10px;
 }
 .section-head {
   display: flex; align-items: flex-end; justify-content: space-between;
@@ -78,7 +81,7 @@ input[type="range"] { accent-color: var(--color-accent); }
 .uc { text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
 .micro-label {
   font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
-  color: color-mix(in srgb, var(--color-text) 55%, transparent);
+  color: var(--text-muted);
 }
 .num { font-variant-numeric: tabular-nums; }
 
@@ -114,12 +117,12 @@ input[type="range"] { accent-color: var(--color-accent); }
 .orbit-hint {
   position: absolute; left: 0; bottom: 0; font-size: 10px; letter-spacing: 0.14em;
   text-transform: uppercase; pointer-events: none;
-  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  color: var(--text-muted);
 }
 .viewer-fallback {
   display: grid; place-content: center; gap: 8px; text-align: center; padding: 24px;
   font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
-  color: color-mix(in srgb, var(--color-text) 45%, transparent);
+  color: var(--text-muted);
   border: 1px dashed var(--color-divider);
 }
 .finish-row {
@@ -133,7 +136,7 @@ input[type="range"] { accent-color: var(--color-accent); }
 }
 .finish-chip {
   width: 14px; height: 14px; flex: none;
-  outline: 1px solid color-mix(in srgb, var(--color-text) 22%, transparent);
+  outline: 1px solid var(--steel);
   outline-offset: -1px;
 }
 .axis-control { border-bottom: 1px solid var(--color-divider); padding: 0 0 20px; margin-bottom: 20px; }
@@ -141,8 +144,7 @@ input[type="range"] { accent-color: var(--color-accent); }
 
 /* — form validation (new in the React port; the prototype's inputs were
      uncontrolled and never validated) — */
-.field-error { font-size: 11px; margin-top: 4px; color: #b3402a; }
-[data-theme="dark"] .field-error { color: #e79280; }
+.field-error { font-size: 11px; margin-top: 4px; color: var(--status-error); }
 
 /* — specifications — */
 .spec-row {
