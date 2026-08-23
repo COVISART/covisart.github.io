@@ -218,3 +218,22 @@ export const ELECTRICAL: { power: string; voltage: string }[] = [
 
 /* Neutral start position the Reset button returns to. */
 export const NEUTRAL_POSE: Record<AxisKey, number> = { roll: 18, pitch: 26, yaw: 12 };
+
+/* — order options —
+   Values the NGS market API (see site/orders.ts) records against an order.
+   They are sent verbatim, so the identifiers must stay as the API knows them;
+   only the labels are translated. */
+
+export const PAYLOAD_SIZES = ['450', '850'] as const;
+
+export type PayloadSize = (typeof PAYLOAD_SIZES)[number];
+
+export interface AccessoryOption {
+  id: string;
+  labelKey: keyof Copy;
+}
+
+export const ACCESSORIES: AccessoryOption[] = [
+  { id: 'RaceSeat', labelKey: 'accRaceSeat' },
+  { id: 'JustSim', labelKey: 'accJustSim' },
+];
