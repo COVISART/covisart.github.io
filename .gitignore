@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vite/
+*.local
+
+# Copied from node_modules/three by scripts/copy-draco.mjs on dev/build
+public/draco/
+
+.DS_Store
+Thumbs.db
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

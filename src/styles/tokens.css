@@ -1,0 +1,71 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Design tokens — the single source of truth for colour.
+
+   Every colour in the app resolves to a primitive defined here. Nothing
+   downstream (industry.css, nocturne.css, app.css, component inline styles)
+   carries a raw colour literal; the design-system files below map their
+   `--color-*` names onto these primitives.
+
+   The system is black + red. Neutral ground and neutral type carry the page
+   (~90% of the surface area); red is a signal (~10%) — CTAs, active states,
+   focus rings, section markers, data highlights. Red is never a large fill.
+
+   Two reds, and they are not interchangeable:
+     --red-brand  fills and element strokes. 3.76:1 on --bg-base — valid for
+                  UI components (3:1), INVALID for text (needs 4.5:1).
+     --red-text   any red used as type, a link, or inline emphasis. ~6.2:1.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* — reds — identical across themes: they sit on their own fills, not on the
+       page ground, so they do not need to re-tune per theme. — */
+  --red-brand: #D81E17;
+  --red-hover: #DB302A;    /* --red-brand lightened 8% */
+  --red-pressed: #A50F0B;
+  --text-on-red: #F2F3F5;  /* the only type permitted on a --red-brand fill (4.59:1).
+                              Not #FFF: the system emits no pure black or white. */
+
+  /* The reversed band and the footer are a dark ground in BOTH themes (that is
+     the existing composition), so the red that sits on them is the dark-theme
+     red in both. */
+  --ground-reverse: #2A100F;
+  --red-on-reverse: #FF5A4E;
+
+  /* — light theme — derived counterpart: the same two reds over inverted
+       neutrals, with the red-as-type value darkened to hold 4.5:1 on a light
+       ground (#FF5A4E would be 2.2:1 there). — */
+  --bg-base: #F7F7F8;
+  --bg-surface: #EDEEF0;
+  --border: #D3D6DB;
+  --text-muted: #5C616A;
+  --text-primary: #17191C;
+  --red-text: #B3140E;
+  --red-text-hover: #8E100B;
+  --red-tint: #FBEDEC;
+  --steel: #5F666F;
+
+  /* Semantic status. Amber, deliberately off-hue from brand red, so a
+     validation error never reads as ordinary brand emphasis. There is no
+     success or warning state anywhere in this app; none has been invented. */
+  --status-error: #8A4B00;
+
+  --shadow-ink: #17191C;
+  --scrim: #0E0F11;
+}
+
+:root[data-theme="dark"] {
+  --bg-base: #0E0F11;      /* never pure #000 */
+  --bg-surface: #17191C;
+  --border: #2A2D33;
+  --text-muted: #9BA1AA;
+  --text-primary: #F2F3F5;
+  --red-text: #FF5A4E;
+  --red-text-hover: #FF8378;
+  --red-tint: #2A100F;
+  --steel: #6E7681;
+
+  --status-error: #F2A33C;
+
+  --shadow-ink: #0E0F11;
+  --scrim: #0E0F11;
+}

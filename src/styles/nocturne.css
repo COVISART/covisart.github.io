@@ -1,0 +1,174 @@
+/* Nocturne — the dark design system.
+   Ported from the Claude Design project
+   (_ds/nocturne-27ce2b99-f1bb-4a31-a9f7-6ae8bbfa2892/styles.css).
+
+   In the prototype the dark theme was switched on by flipping the media
+   query of a second <link>, so Nocturne's rules simply won on source order.
+   Here every rule is scoped under [data-theme="dark"] instead, which raises
+   its specificity above Industry's and produces the same cascade result
+   without touching stylesheet media at runtime. Rule bodies are unchanged. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* As in industry.css, every `--color-*` name is an alias onto a tokens.css
+   primitive. The primitives themselves already re-point under
+   [data-theme="dark"], so the dark theme only needs the aliases whose ROLE
+   differs between themes — the ramp steps that run light-to-dark one way in a
+   light theme and the other way in a dark one. */
+:root[data-theme="dark"] {
+  --color-bg: var(--bg-base);
+  --color-surface: var(--bg-surface);
+  --color-text: var(--text-primary);
+  --color-accent: var(--red-brand);        /* fills and strokes only */
+  --color-accent-text: var(--red-text);    /* red as type, links, emphasis */
+  --color-accent-2: var(--steel);
+  --color-divider: var(--border);
+
+  /* Ramps invert: on a dark ground the low steps are the dark ones. */
+  --color-neutral-100: var(--bg-surface);
+  --color-neutral-200: var(--bg-surface);
+  --color-neutral-300: var(--border);
+  --color-neutral-400: var(--border);
+  --color-neutral-500: var(--steel);
+  --color-neutral-600: var(--steel);
+  --color-neutral-700: var(--text-muted);
+  --color-neutral-800: var(--text-primary);
+  --color-neutral-900: var(--scrim);
+
+  --color-accent-100: var(--red-tint);
+  --color-accent-200: var(--red-tint);
+  --color-accent-300: var(--red-on-reverse);  /* type on the reversed band */
+  --color-accent-400: var(--red-text);
+  --color-accent-500: var(--red-brand);
+  --color-accent-600: var(--red-hover);
+  --color-accent-700: var(--red-pressed);
+  --color-accent-800: var(--red-text);        /* the hero lede emphasis line */
+  --color-accent-900: var(--ground-reverse);
+
+  --color-accent-2-100: var(--bg-surface);
+  --color-accent-2-200: var(--bg-surface);
+  --color-accent-2-300: var(--border);
+  --color-accent-2-400: var(--border);
+  --color-accent-2-500: var(--steel);
+  --color-accent-2-600: var(--steel);
+  --color-accent-2-700: var(--text-muted);
+  --color-accent-2-800: var(--text-primary);
+  --color-accent-2-900: var(--bg-surface);
+
+  /* Deck section-divider ground — deck-scale fills only, not interface colors.
+     Red would be a large fill here, so these stay neutral. */
+  --color-section: var(--bg-surface);
+  --color-section-glow: var(--border);
+  --color-section-ghost: var(--steel);
+
+  --font-heading: "Inter", system-ui, sans-serif;
+  --font-heading-weight: 500;
+  --font-body: "Inter", system-ui, sans-serif;
+
+  --space-1: 2.8px;
+  --space-2: 5.6px;
+  --space-3: 8.4px;
+  --space-4: 11.2px;
+  --space-6: 16.8px;
+  --space-8: 22.4px;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+
+  /* Elevation — a hairline edge + ambient darkness on a dark ground. */
+  --shadow-sm: 0 0 0 1px var(--border);
+  --shadow-md: 0 0 0 1px var(--steel), 0 6px 18px color-mix(in srgb, var(--shadow-ink) 55%, transparent);
+  --shadow-lg: 0 0 0 1px var(--text-muted), 0 16px 40px color-mix(in srgb, var(--shadow-ink) 65%, transparent);
+}
+
+[data-theme="dark"] .lighten { mix-blend-mode: lighten; background-color: transparent; }
+
+/* — rules — */
+/* Rules fade to transparent at both ends instead of stopping cleanly — a
+   Nocturne signature. */
+[data-theme="dark"] .hr {
+  height: 1px; border: 0; margin: var(--space-4) 0;
+  background: linear-gradient(to right,
+    transparent, var(--color-divider) 48px,
+    var(--color-divider) calc(100% - 48px), transparent);
+}
+
+/* — buttons — */
+[data-theme="dark"] .btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  cursor: pointer; text-decoration: none;
+  font-family: var(--font-heading); font-weight: var(--font-heading-weight);
+  font-size: 14px; line-height: 1.2; color: var(--color-text);
+  background: transparent; border: 1px solid transparent;
+  padding: var(--space-2) calc(var(--space-3) * 1.2);
+  border-radius: var(--radius-md);
+}
+[data-theme="dark"] .btn-primary { color: var(--color-accent-text); border-color: var(--color-accent); background: transparent; }
+[data-theme="dark"] .btn-primary:hover { background: color-mix(in srgb, var(--color-accent) 12%, transparent); }
+[data-theme="dark"] .btn-primary:active { background: color-mix(in srgb, var(--red-pressed) 30%, transparent); }
+[data-theme="dark"] .btn-secondary { border-color: var(--color-divider); }
+[data-theme="dark"] .btn-secondary:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+[data-theme="dark"] .btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
+[data-theme="dark"] .btn-ghost { color: var(--color-accent-text); padding-inline: var(--space-1); border-color: transparent; }
+[data-theme="dark"] .btn-icon { width: 36px; height: 36px; padding: 0; }
+
+/* — forms — */
+[data-theme="dark"] .input {
+  background: var(--color-surface);
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+[data-theme="dark"] .seg {
+  display: inline-flex; overflow: hidden;
+  border: 1px solid var(--color-divider); border-radius: var(--radius-md);
+}
+[data-theme="dark"] .seg-opt:has(input:checked) {
+  background: transparent; color: var(--color-accent-text);
+  box-shadow: inset 0 0 0 1px var(--color-accent);
+}
+[data-theme="dark"] .seg-opt:not(:has(input:checked)):hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+
+/* — cards — */
+[data-theme="dark"] .card {
+  padding: var(--space-3); border-radius: var(--radius-md);
+  background: var(--color-surface); border: 1px solid transparent;
+}
+[data-theme="dark"] .card-kicker { color: var(--color-accent-text); }
+
+/* — tags — */
+[data-theme="dark"] .tag { border-radius: calc(var(--radius-md) * 0.75); }
+[data-theme="dark"] .tag-accent { background: var(--red-tint); color: var(--color-accent-text); }
+[data-theme="dark"] .tag-accent-2 { background: var(--color-divider); color: var(--color-text); }
+[data-theme="dark"] .tag-neutral { background: var(--color-divider); color: var(--color-text); }
+[data-theme="dark"] .tag-outline { border: 1px solid var(--color-accent); color: var(--color-accent-text); }
+
+/* — tables — */
+/* Row rules as row-level strips so the end-fade spans the row, not each cell. */
+[data-theme="dark"] .table th {
+  border-bottom: 1px solid transparent; /* keeps layout; the row paints the fading rule */
+}
+[data-theme="dark"] .table td { border-bottom: 1px solid transparent; }
+[data-theme="dark"] .table thead tr {
+  background: linear-gradient(to right,
+    transparent, var(--color-divider) 48px,
+    var(--color-divider) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;
+}
+[data-theme="dark"] .table tbody tr {
+  background: linear-gradient(to right,
+    transparent, color-mix(in srgb, var(--color-text) 8%, transparent) 48px,
+    color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;
+}
+[data-theme="dark"] .table tbody tr:hover {
+  /* the hover tint layers over the row rule, which keeps painting */
+  background:
+    linear-gradient(color-mix(in srgb, var(--color-text) 4%, transparent),
+                    color-mix(in srgb, var(--color-text) 4%, transparent)) no-repeat 0 0 / 100% 100%,
+    linear-gradient(to right,
+      transparent, color-mix(in srgb, var(--color-text) 8%, transparent) 48px,
+      color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 48px), transparent) no-repeat bottom / 100% 1px;
+}
+
+/* — dialog — */
+[data-theme="dark"] .dialog {
+  border-radius: var(--radius-lg);
+  background: var(--color-surface); box-shadow: var(--shadow-lg); border: 1px solid transparent;
+}

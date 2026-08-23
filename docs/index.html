@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/industry-48e6581c-27c2-43be-8727-7859ee62a85e/styles.css">
+<script src="_ds/industry-48e6581c-27c2-43be-8727-7859ee62a85e/_ds_bundle.js"></script>
+<link id="ds-dark" rel="stylesheet" href="_ds/nocturne-27ce2b99-f1bb-4a31-a9f7-6ae8bbfa2892/styles.css" media="not all">
+<script src="_ds/nocturne-27ce2b99-f1bb-4a31-a9f7-6ae8bbfa2892/_ds_bundle.js"></script>
+<script type="module" src="ngs-model.js"></script>
+<style>
+  body { margin: 0; }
+  a { color: var(--color-accent-700); }
+  a:hover { color: var(--color-accent); }
+  input[type="range"] { accent-color: var(--color-accent); }
+</style>
+</helmet>
+
+<div style="background: var(--color-bg); color: var(--color-text); min-height: 100vh; font-family: var(--font-body);">
+
+  <header style="position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--color-bg) 92%, transparent); backdrop-filter: blur(6px); border-bottom: 1px solid var(--color-divider);">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; gap: 28px;">
+      <div style="display: flex; align-items: baseline; gap: 10px; margin-right: auto;">
+        <span style="font-family: var(--font-heading); font-weight: 600; font-size: 19px; letter-spacing: 0.16em;">COVISART</span>
+        <span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent-700);">NGS&#8209;360&#8209;3</span>
+      </div>
+      <nav style="display: flex; gap: 22px; align-items: center;">
+        <button onClick="{{ showOverview }}" style="background: none; border: 0; padding: 0; cursor: pointer; font-family: var(--font-heading); font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; color: {{ navOverviewColor }};">{{ t.navOverview }}</button>
+        <button onClick="{{ showSpecs }}" style="background: none; border: 0; padding: 0; cursor: pointer; font-family: var(--font-heading); font-weight: 600; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; color: {{ navSpecsColor }};">{{ t.navSpecs }}</button>
+      </nav>
+      <button class="btn btn-secondary btn-icon" onClick="{{ toggleTheme }}" title="{{ t.themeToggle }}" aria-label="{{ t.themeToggle }}" style="flex: none;">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: {{ moonShown }};"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display: {{ sunShown }};"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4"></path></svg>
+      </button>
+      <div class="seg" style="flex: none;">
+        <label class="seg-opt" style="letter-spacing: 0.06em; background: {{ enBg }}; color: {{ enFg }};"><input type="radio" name="lang" checked="{{ isEn }}" onChange="{{ setEn }}">EN</label>
+        <label class="seg-opt" style="letter-spacing: 0.06em; background: {{ trBg }}; color: {{ trFg }};"><input type="radio" name="lang" checked="{{ isTr }}" onChange="{{ setTr }}">TR</label>
+      </div>
+      <a class="btn btn-primary" href="#demo" style="flex: none; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.06em;">{{ t.navCta }}</a>
+    </div>
+  </header>
+
+  <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+  <main>
+
+    <section data-screen-label="Hero" style="max-width: 1240px; margin: 0 auto; padding: 72px 32px 40px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: center;">
+      <div>
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 22px;">
+          <span style="width: 34px; height: 1px; background: var(--color-accent);"></span>
+          <span style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700);">{{ t.kicker }}</span>
+        </div>
+        <h1 style="font-size: 68px; letter-spacing: -0.02em; margin: 0 0 6px;">NGS&#8209;360&#8209;3</h1>
+        <p style="font-family: var(--font-heading); font-size: 25px; line-height: 1.15; margin: 0 0 20px; color: var(--color-accent-800);">{{ t.heroLede }}</p>
+        <p style="font-size: 15px; max-width: 46ch; text-wrap: pretty; margin: 0 0 28px; color: color-mix(in srgb, var(--color-text) 78%, transparent);">{{ t.heroBody }}</p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a class="btn btn-primary" href="#demo" style="padding: 11px 20px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.06em;">{{ t.ctaPrimary }}</a>
+          <button class="btn btn-secondary" onClick="{{ showSpecs }}" style="padding: 11px 20px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.06em;">{{ t.ctaSecondary }}</button>
+        </div>
+      </div>
+      <div>
+        <figure class="blueprint" style="padding: 18px; background: transparent;">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <div style="background: {{ viewerBg }};">
+            <x-import component-from-global-scope="ngs-model" hint-size="100%,470px" src="assets/NGS-360-3-B.glb" autorotate="true" finish="{{ finishHex }}" style="width: 100%; height: 470px;"></x-import>
+          </div>
+          <figcaption style="letter-spacing: 0.08em; text-transform: uppercase; margin-top: 10px;">{{ t.figHero }}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section data-screen-label="Key figures" style="max-width: 1240px; margin: 0 auto; padding: 24px 32px 80px;">
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--color-divider); border: 1px solid var(--color-divider);">
+        <sc-for list="{{ figures }}" as="fig" hint-placeholder-count="4">
+          <div style="background: var(--color-bg); padding: 26px 22px;">
+            <div style="font-family: var(--font-heading); font-size: 40px; line-height: 1; letter-spacing: -0.01em;">{{ fig.value }}</div>
+            <div style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 10px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">{{ fig.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section data-screen-label="Motion envelope" style="border-top: 1px solid var(--color-divider); border-bottom: 1px solid var(--color-divider); background: color-mix(in srgb, var(--color-accent) 4%, transparent);">
+      <div style="max-width: 1240px; margin: 0 auto; padding: 76px 32px;">
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 40px;">
+          <div>
+            <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 10px;">{{ t.envelopeKicker }}</div>
+            <h2 style="font-size: 40px; margin: 0;">{{ t.envelopeTitle }}</h2>
+          </div>
+          <p style="max-width: 44ch; font-size: 14px; margin: 0; text-wrap: pretty; color: color-mix(in srgb, var(--color-text) 72%, transparent);">{{ t.envelopeBody }}</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 40px; align-items: start;">
+          <div class="blueprint" style="padding: 20px; background: transparent;">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <div style="position: relative; background: {{ viewerBg }};">
+              <x-import component-from-global-scope="ngs-model" hint-size="100%,440px" src="assets/NGS-360-3-B.glb" roll="{{ roll }}" pitch="{{ pitch }}" yaw="{{ yaw }}" finish="{{ finishHex }}" style="width: 100%; height: 440px;"></x-import>
+              <div style="position: absolute; left: 0; bottom: 0; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 45%, transparent); pointer-events: none;">{{ t.orbitHint }}</div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 16px; border-top: 1px solid var(--color-divider); padding-top: 14px;">
+              <span style="font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ t.finishLabel }}</span>
+              <sc-for list="{{ finishes }}" as="f" hint-placeholder-count="4">
+                <button onClick="{{ f.onSelect }}" title="{{ f.label }}" style="display: flex; align-items: center; gap: 8px; cursor: pointer; font: inherit; font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; padding: 5px 10px 5px 6px; border: 1px solid {{ f.border }}; background: transparent; color: var(--color-text);">
+                  <span style="width: 14px; height: 14px; flex: none; background: {{ f.hex }}; outline: 1px solid color-mix(in srgb, var(--color-text) 22%, transparent); outline-offset: -1px;"></span>{{ f.label }}
+                </button>
+              </sc-for>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; border-top: 1px solid var(--color-divider); padding-top: 14px;">
+              <sc-for list="{{ axes }}" as="ax" hint-placeholder-count="3">
+                <div>
+                  <div style="font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ ax.name }}</div>
+                  <div style="font-family: var(--font-heading); font-size: 22px; font-variant-numeric: tabular-nums;">{{ ax.reading }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div>
+            <sc-for list="{{ axes }}" as="ax" hint-placeholder-count="3">
+              <div style="border-bottom: 1px solid var(--color-divider); padding: 0 0 20px; margin-bottom: 20px;">
+                <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 16px;">
+                  <h4 style="margin: 0; font-size: 20px;">{{ ax.title }}</h4>
+                  <span class="tag tag-outline" style="white-space: nowrap;">{{ ax.excursion }}</span>
+                </div>
+                <input type="range" min="{{ ax.min }}" max="{{ ax.max }}" step="1" value="{{ ax.value }}" onChange="{{ ax.onInput }}" style="width: 100%; margin: 14px 0 12px;">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; font-size: 13px;">
+                  <div><span style="display: block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ t.colVelocity }}</span>{{ ax.velocity }}</div>
+                  <div><span style="display: block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ t.colAccel }}</span>{{ ax.accel }}</div>
+                  <div><span style="display: block; font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ t.colJerk }}</span>{{ ax.jerk }}</div>
+                </div>
+              </div>
+            </sc-for>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <button class="btn btn-primary" onClick="{{ toggleRun }}" style="padding: 10px 18px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.06em;">{{ runLabel }}</button>
+              <button class="btn btn-secondary" onClick="{{ resetAxes }}" style="padding: 10px 18px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.06em;">{{ t.reset }}</button>
+              <span style="font-size: 12px; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ t.envelopeNote }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Advantages" style="max-width: 1240px; margin: 0 auto; padding: 80px 32px;">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 32px; margin-bottom: 36px;">
+        <h2 style="font-size: 40px; margin: 0;">{{ t.advTitle }}</h2>
+        <p style="max-width: 42ch; font-size: 14px; margin: 0; text-wrap: pretty; color: color-mix(in srgb, var(--color-text) 72%, transparent);">{{ t.advBody }}</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px;">
+        <sc-for list="{{ advantages }}" as="adv" hint-placeholder-count="6">
+          <div class="card blueprint" style="padding: 22px;">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <div class="card-kicker">{{ adv.n }}</div>
+            <div class="card-title" style="font-size: 19px;">{{ adv.title }}</div>
+            <p class="card-body" style="font-size: 13.5px; opacity: 0.85;">{{ adv.body }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section data-screen-label="Applications" style="border-top: 1px solid var(--color-divider);">
+      <div style="max-width: 1240px; margin: 0 auto; padding: 80px 32px; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 56px; align-items: center;">
+        <div>
+          <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 10px;">{{ t.appKicker }}</div>
+          <h2 style="font-size: 40px; margin: 0 0 14px;">{{ t.appTitle }}</h2>
+          <p style="font-size: 15px; max-width: 52ch; text-wrap: pretty; color: color-mix(in srgb, var(--color-text) 78%, transparent);">{{ t.appBody }}</p>
+          <div style="display: grid; gap: 1px; background: var(--color-divider); border: 1px solid var(--color-divider); margin-top: 28px;">
+            <sc-for list="{{ applications }}" as="app" hint-placeholder-count="3">
+              <div style="background: var(--color-bg); padding: 20px 22px; display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 20px; align-items: baseline;">
+                <div style="font-family: var(--font-heading); font-size: 20px;">{{ app.title }}</div>
+                <div style="font-size: 13.5px; color: color-mix(in srgb, var(--color-text) 78%, transparent);">{{ app.body }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <figure class="blueprint" style="padding: 16px; background: var(--color-neutral-100); border: 1px solid var(--color-divider);">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/ngs-operator.png" alt="Operator seated in the NGS-360-3 gondola" style="width: 100%; mix-blend-mode: multiply;">
+          <figcaption style="letter-spacing: 0.08em; text-transform: uppercase; margin-top: 10px; color: var(--color-neutral-700);">{{ t.figOperator }}</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section data-screen-label="Software" style="border-top: 1px solid var(--color-divider); background: var(--color-accent-900); color: {{ reverseFg }};">
+      <div style="max-width: 1240px; margin: 0 auto; padding: 80px 32px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: start;">
+        <div>
+          <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-300); margin-bottom: 10px;">{{ t.swKicker }}</div>
+          <h2 style="font-size: 40px; margin: 0 0 16px; color: {{ reverseFg }};">{{ t.swTitle }}</h2>
+          <p style="font-size: 15px; text-wrap: pretty; color: {{ reverseFgSoft }};">{{ t.swBody }}</p>
+          <figure class="blueprint" style="margin-top: 28px; padding: 14px; background: var(--color-neutral-100); border: 1px solid var(--color-divider);">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <img src="assets/ngs-cockpit.png" alt="NGS-360-3 gondola with mission display and HOTAS controls" style="width: 100%; mix-blend-mode: multiply;">
+          </figure>
+        </div>
+        <div>
+          <div style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--color-accent-300); margin-bottom: 18px;">{{ t.supplyTitle }}</div>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px;">
+            <sc-for list="{{ supply }}" as="s" hint-placeholder-count="6">
+              <div style="border-top: 1px solid {{ reverseRule }}; padding-top: 12px;">
+                <div style="font-family: var(--font-heading); font-size: 18px; color: {{ reverseFg }};">{{ s.title }}</div>
+                <div style="font-size: 13px; margin-top: 4px; color: {{ reverseFgMuted }};">{{ s.body }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Family" style="max-width: 1240px; margin: 0 auto; padding: 80px 32px;">
+      <div style="margin-bottom: 36px;">
+        <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 10px;">{{ t.famKicker }}</div>
+        <h2 style="font-size: 40px; margin: 0;">{{ t.famTitle }}</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-bottom: 28px;">
+        <sc-for list="{{ variants }}" as="v" hint-placeholder-count="4">
+          <button onClick="{{ v.onSelect }}" style="cursor: pointer; text-align: left; font: inherit; padding: 18px; border: 1px solid {{ v.border }}; background: {{ v.bg }}; color: {{ v.fg }};">
+            <div style="font-family: var(--font-heading); font-weight: 600; font-size: 22px;">{{ v.name }}</div>
+            <div style="font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 6px; opacity: 0.75;">{{ v.axes }}</div>
+          </button>
+        </sc-for>
+      </div>
+      <div class="blueprint" style="padding: 28px 32px; display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 40px; align-items: center;">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <div>
+          <h3 style="margin: 0 0 4px; font-size: 30px;">{{ activeVariant.name }}</h3>
+          <div style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--color-accent-700);">{{ activeVariant.axes }}</div>
+        </div>
+        <p style="margin: 0; font-size: 15px; text-wrap: pretty; color: color-mix(in srgb, var(--color-text) 80%, transparent);">{{ activeVariant.body }}</p>
+      </div>
+    </section>
+
+    <section data-screen-label="About" style="border-top: 1px solid var(--color-divider);">
+      <div style="max-width: 1240px; margin: 0 auto; padding: 80px 32px; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 6fr); gap: 56px; align-items: center;">
+        <figure class="blueprint duotone lighten" style="padding: 0; border: 1px solid var(--color-divider);">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="assets/covisart-hq.jpg" alt="COVISART facility, Ankara" style="width: 100%; filter: grayscale(1) contrast(1.05);">
+        </figure>
+        <div>
+          <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 10px;">{{ t.aboutKicker }}</div>
+          <h2 style="font-size: 40px; margin: 0 0 16px;">{{ t.aboutTitle }}</h2>
+          <p style="font-size: 15px; text-wrap: pretty; color: color-mix(in srgb, var(--color-text) 80%, transparent);">{{ t.aboutBody }}</p>
+          <div style="display: grid; gap: 14px; margin-top: 26px;">
+            <sc-for list="{{ credentials }}" as="c" hint-placeholder-count="3">
+              <div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 18px; border-top: 1px solid var(--color-divider); padding-top: 12px; align-items: baseline;">
+                <div style="font-family: var(--font-heading); font-size: 18px; color: var(--color-accent-700);">{{ c.year }}</div>
+                <div style="font-size: 13.5px;">{{ c.body }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo" data-screen-label="Demo request" style="border-top: 1px solid var(--color-divider); background: color-mix(in srgb, var(--color-accent) 5%, transparent);">
+      <div style="max-width: 1240px; margin: 0 auto; padding: 80px 32px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: start;">
+        <div>
+          <h2 style="font-size: 40px; margin: 0 0 14px;">{{ t.demoTitle }}</h2>
+          <p style="font-size: 15px; text-wrap: pretty; color: color-mix(in srgb, var(--color-text) 78%, transparent);">{{ t.demoBody }}</p>
+          <div style="display: grid; gap: 10px; margin-top: 26px; font-size: 14px;">
+            <div><span style="display: inline-block; width: 92px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Tel</span>+90 312 395 9639</div>
+            <div><span style="display: inline-block; width: 92px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Mail</span><a href="mailto:info@covisart.com">info@covisart.com</a></div>
+            <div><span style="display: inline-block; width: 92px; font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">Web</span><a href="https://covisart.com.tr">covisart.com.tr</a></div>
+            <div style="display: grid; grid-template-columns: 92px minmax(0, 1fr); gap: 0;"><span style="font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ t.address }}</span><span>Teknopark Ankara, Technology Development Zone &middot; Ivedik OSB, 1466 Street No:22, Yenimahalle / Ankara, T&uuml;rkiye</span></div>
+          </div>
+        </div>
+        <div class="blueprint" style="padding: 28px; background: var(--color-bg);">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px;">
+              <div class="field"><label>{{ t.fName }}</label><input class="input" type="text"></div>
+              <div class="field"><label>{{ t.fOrg }}</label><input class="input" type="text"></div>
+              <div class="field"><label>{{ t.fEmail }}</label><input class="input" type="email"></div>
+              <div class="field"><label>{{ t.fCountry }}</label><input class="input" type="text"></div>
+              <div class="field" style="grid-column: 1 / -1;"><label>{{ t.fUse }}</label><textarea class="input"></textarea></div>
+            </div>
+            <button class="btn btn-primary btn-block" onClick="{{ submit }}" style="padding: 12px; text-transform: uppercase; letter-spacing: 0.08em;">{{ t.fSubmit }}</button>
+            <p style="font-size: 12px; margin: 14px 0 0; color: color-mix(in srgb, var(--color-text) 55%, transparent);">{{ t.fNote }}</p>
+          </sc-if>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="padding: 40px 0; text-align: center;">
+              <div style="font-family: var(--font-heading); font-size: 28px; margin-bottom: 8px;">{{ t.sentTitle }}</div>
+              <p style="font-size: 14px; margin: 0 auto; max-width: 40ch; color: color-mix(in srgb, var(--color-text) 70%, transparent);">{{ t.sentBody }}</p>
+            </div>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+  </main>
+  </sc-if>
+
+  <sc-if value="{{ isSpecs }}" hint-placeholder-val="{{ false }}">
+  <main data-screen-label="Specifications" style="max-width: 1240px; margin: 0 auto; padding: 64px 32px 96px;">
+    <div style="display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 48px; align-items: end; padding-bottom: 40px; border-bottom: 1px solid var(--color-divider);">
+      <div>
+        <div style="font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-accent-700); margin-bottom: 10px;">{{ t.kicker }}</div>
+        <h1 style="font-size: 52px; margin: 0 0 8px;">{{ t.specTitle }}</h1>
+        <p style="font-size: 14px; margin: 0; color: color-mix(in srgb, var(--color-text) 70%, transparent);">{{ t.specNote }}</p>
+      </div>
+      <figure style="margin: 0; padding: 14px; background: var(--color-neutral-100); border: 1px solid var(--color-divider);">
+        <img src="assets/ngs-front.png" alt="NGS-360-3 front elevation" style="width: 100%; mix-blend-mode: multiply;">
+        <figcaption style="letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-neutral-700);">{{ t.figFront }}</figcaption>
+      </figure>
+    </div>
+
+    <div style="padding: 48px 0; border-bottom: 1px solid var(--color-divider);">
+      <h3 style="font-size: 24px; margin: 0 0 4px;">{{ t.perfTitle }}</h3>
+      <p style="font-size: 13px; margin: 0 0 20px; color: color-mix(in srgb, var(--color-text) 60%, transparent);">{{ t.perfNote }}</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>{{ t.colAxis }}</th>
+            <th>{{ t.colAccel }}</th>
+            <th>{{ t.colJerk }}</th>
+            <th>{{ t.colVelocity }}</th>
+            <th>{{ t.colExcursion }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <sc-for list="{{ perfRows }}" as="r" hint-placeholder-count="3">
+            <tr>
+              <td style="font-family: var(--font-heading); font-size: 17px;">{{ r.axis }}</td>
+              <td style="font-variant-numeric: tabular-nums;">{{ r.accel }}</td>
+              <td style="font-variant-numeric: tabular-nums;">{{ r.jerk }}</td>
+              <td style="font-variant-numeric: tabular-nums;">{{ r.velocity }}</td>
+              <td style="font-variant-numeric: tabular-nums;">{{ r.excursion }}</td>
+            </tr>
+          </sc-for>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="padding: 48px 0; border-bottom: 1px solid var(--color-divider); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 48px;">
+      <div>
+        <h3 style="font-size: 24px; margin: 0 0 18px;">{{ t.dimTitle }}</h3>
+        <sc-for list="{{ dims }}" as="d" hint-placeholder-count="7">
+          <div style="display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent); font-size: 14px;">
+            <span style="color: color-mix(in srgb, var(--color-text) 65%, transparent);">{{ d.label }}</span>
+            <span style="font-variant-numeric: tabular-nums;">{{ d.value }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <div>
+        <h3 style="font-size: 24px; margin: 0 0 18px;">{{ t.elecTitle }}</h3>
+        <table class="table">
+          <thead><tr><th>{{ t.colAxis }}</th><th>{{ t.colPower }}</th><th>{{ t.colVoltage }}</th></tr></thead>
+          <tbody>
+            <sc-for list="{{ elecRows }}" as="e" hint-placeholder-count="3">
+              <tr><td>{{ e.axis }}</td><td style="font-variant-numeric: tabular-nums;">{{ e.power }}</td><td style="font-variant-numeric: tabular-nums;">{{ e.voltage }}</td></tr>
+            </sc-for>
+          </tbody>
+        </table>
+        <div style="margin-top: 18px; font-size: 13px; color: color-mix(in srgb, var(--color-text) 70%, transparent);">{{ t.generalSpecs }}</div>
+      </div>
+      <div>
+        <h3 style="font-size: 24px; margin: 0 0 18px;">{{ t.ifaceTitle }}</h3>
+        <sc-for list="{{ interfaces }}" as="i" hint-placeholder-count="5">
+          <div style="display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid color-mix(in srgb, var(--color-text) 8%, transparent); font-size: 14px;">
+            <span style="color: var(--color-accent);">&#43;</span><span>{{ i.label }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <div style="padding: 48px 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 56px;">
+      <div>
+        <h3 style="font-size: 24px; margin: 0 0 18px;">{{ t.supplyTitle }}</h3>
+        <sc-for list="{{ supply }}" as="s" hint-placeholder-count="6">
+          <div style="padding: 12px 0; border-top: 1px solid var(--color-divider);">
+            <div style="font-family: var(--font-heading); font-size: 18px;">{{ s.title }}</div>
+            <div style="font-size: 13px; color: color-mix(in srgb, var(--color-text) 70%, transparent);">{{ s.body }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div>
+        <h3 style="font-size: 24px; margin: 0 0 18px;">{{ t.optTitle }}</h3>
+        <div style="display: grid; gap: 10px;">
+          <sc-for list="{{ options }}" as="o" hint-placeholder-count="9">
+            <div style="display: grid; grid-template-columns: 16px minmax(0, 1fr); gap: 10px; font-size: 14px;">
+              <span style="color: var(--color-accent);">&#43;</span><span><strong style="font-weight: 500;">{{ o.title }}</strong> &mdash; <span style="color: color-mix(in srgb, var(--color-text) 70%, transparent);">{{ o.body }}</span></span>
+            </div>
+          </sc-for>
+        </div>
+        <button class="btn btn-primary" onClick="{{ showOverview }}" style="margin-top: 28px; padding: 12px 20px; text-transform: uppercase; letter-spacing: 0.08em;">{{ t.ctaPrimary }}</button>
+      </div>
+    </div>
+  </main>
+  </sc-if>
+
+  <footer style="border-top: 1px solid var(--color-divider); background: var(--color-accent-900); color: {{ reverseFg }};">
+    <div style="max-width: 1240px; margin: 0 auto; padding: 44px 32px; display: flex; flex-wrap: wrap; gap: 24px; align-items: baseline; justify-content: space-between;">
+      <div style="font-family: var(--font-heading); font-size: 20px; letter-spacing: 0.16em;">COVISART</div>
+      <div style="font-size: 13px; color: {{ reverseFgMuted }};">{{ t.footerTag }}</div>
+      <div style="font-size: 12px; color: {{ reverseFgFaint }};">&copy; COVISART Research &amp; Development &middot; Ankara, T&uuml;rkiye</div>
+    </div>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;language&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;en&quot;,&quot;tr&quot;],&quot;default&quot;:&quot;en&quot;,&quot;tsType&quot;:&quot;'en' | 'tr'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;finish&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;black&quot;,&quot;olive&quot;,&quot;steel&quot;,&quot;sand&quot;],&quot;default&quot;:&quot;black&quot;,&quot;tsType&quot;:&quot;'black' | 'olive' | 'steel' | 'sand'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light' | 'dark'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;autoplayDemo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Behaviour&quot;}}">
+const COPY = {
+  en: {
+    navOverview: "Overview", navSpecs: "Specifications", navCta: "Request a demo",
+    kicker: "New Generation Simulator",
+    heroLede: "Unlimited motion, unmatched precision.",
+    heroBody: "COVISART delivers next-generation electrically driven motion systems for modern simulation needs. The NGS-360-3 is built for mid-range payloads up to 800 kg, offering unlimited 3-axis rotation with 1 ms communication speed for ultra-precise response.",
+    ctaPrimary: "Request a demonstration", ctaSecondary: "View specifications",
+    figHero: "NGS-360-3 — three-axis motion base", figOperator: "Reconfigurable gondola, operator seated",
+    figFront: "Front elevation", themeToggle: "Switch theme", finishLabel: "Finish", finishBlack: "Black", finishOlive: "Olive", finishSteel: "Steel", finishSand: "Sand",
+    envelopeKicker: "Interactive", envelopeTitle: "Motion envelope",
+    envelopeBody: "Drive each axis through its full excursion. Every figure shown is the operational, non-simultaneous value from a neutral start position at design payload.",
+    envelopeNote: "Live model \u2014 drag to orbit.", orbitHint: "Drag to orbit \u00B7 scroll to zoom", reset: "Reset", run: "Run profile", stop: "Stop",
+    colVelocity: "Velocity", colAccel: "Acceleration", colJerk: "Jerk", colExcursion: "Excursion", colAxis: "Axis", colPower: "Power", colVoltage: "Voltage / current",
+    advTitle: "Engineered advantages",
+    advBody: "Proprietary motion cueing, full digital control and a compact subsystem architecture that arrives assembled and tested.",
+    appKicker: "One system, endless vehicle possibilities",
+    appTitle: "Typical applications",
+    appBody: "The cockpit (gondola) is fully reconfigurable, allowing it to replicate any vehicle type required for training or research. This rapid adaptability minimises both cost and time, enabling efficient execution of diverse simulation and testing programmes.",
+    swKicker: "Control software", swTitle: "Next Generation Motion Platform Manager",
+    swBody: "Intuitive control software enabling quick adjustments to motion, bumps, roll and pitch with a single click. Motion cueing, ride-file play and replay, remote access service and diagnostics are included.",
+    supplyTitle: "Scope of supply",
+    famKicker: "Product line", famTitle: "The NGS family",
+    aboutKicker: "About", aboutTitle: "COVISART Research & Development",
+    aboutBody: "Established in 2018 within the Technology Development Zone by a group of young engineers, COVISART develops high-technology products by integrating rapidly evolving visual processing technologies into simulation environments. Beyond motion training, the New Generation Simulator addresses pilot disorientation, human-factor dynamics and medical research related to spatial perception.",
+    demoTitle: "Request a demonstration",
+    demoBody: "Tell us the platform you need to replicate and the payload envelope you are working to. Our engineering team will follow up with a payload geometry analysis and a site visit or factory demonstration.",
+    address: "Address",
+    fName: "Name", fOrg: "Organisation", fEmail: "E-mail", fCountry: "Country", fUse: "Intended use and payload", fSubmit: "Submit request",
+    fNote: "Demonstration requests are handled by the COVISART sales engineering team.",
+    sentTitle: "Request received", sentBody: "Our sales engineering team will contact you to arrange the demonstration.",
+    specTitle: "Technical specifications", specNote: "NGS-360-3 · electrically driven three-axis motion system",
+    perfTitle: "Performance", perfNote: "Operational, non-simultaneous. Neutral start position, design payload.",
+    dimTitle: "Dimensions and weight", elecTitle: "Electrical", ifaceTitle: "Interfaces", optTitle: "Options",
+    generalSpecs: "Motor: servo motor with integrated brake · Platform shape: square · Ambient temperature: −10° to +45°C",
+    footerTag: "Advanced technologies for tomorrow"
+  },
+  tr: {
+    navOverview: "Genel bakış", navSpecs: "Teknik özellikler", navCta: "Demo talebi",
+    kicker: "Yeni Nesil Simülatör",
+    heroLede: "Sınırsız hareket, benzersiz hassasiyet.",
+    heroBody: "COVISART, modern simülasyon ihtiyaçları için elektrikle tahrik edilen yeni nesil hareket sistemleri geliştirir. NGS-360-3, 800 kg'a kadar orta sınıf faydalı yük için tasarlanmıştır; üç eksende sınırsız dönüş ve 1 ms haberleşme hızıyla yüksek hassasiyette tepki verir.",
+    ctaPrimary: "Demo talep edin", ctaSecondary: "Teknik özellikler",
+    figHero: "NGS-360-3 — üç eksenli hareket platformu", figOperator: "Yeniden yapılandırılabilir gondol, operatör ile",
+    figFront: "Ön görünüş", themeToggle: "Temayı değiştir", finishLabel: "Renk", finishBlack: "Siyah", finishOlive: "Haki", finishSteel: "Çelik", finishSand: "Kum",
+    envelopeKicker: "Etkileşimli", envelopeTitle: "Hareket zarfı",
+    envelopeBody: "Her ekseni tam hareket aralığında sürün. Gösterilen tüm değerler, nötr başlangıç konumunda ve tasarım yükünde, eş zamansız operasyonel değerlerdir.",
+    envelopeNote: "Canlı model \u2014 döndürmek için sürükleyin.", orbitHint: "Sürükleyerek döndür \u00B7 kaydırarak yakınlaştır", reset: "Sıfırla", run: "Profili çalıştır", stop: "Durdur",
+    colVelocity: "Hız", colAccel: "İvme", colJerk: "Jerk", colExcursion: "Hareket aralığı", colAxis: "Eksen", colPower: "Güç", colVoltage: "Gerilim / akım",
+    advTitle: "Mühendislik avantajları",
+    advBody: "Özgün hareket işaretleme yazılımı, tam dijital kontrol ve monte edilmiş ile test edilmiş olarak teslim edilen kompakt alt sistem mimarisi.",
+    appKicker: "Tek sistem, sınırsız platform",
+    appTitle: "Tipik uygulamalar",
+    appBody: "Kokpit (gondol) tamamen yeniden yapılandırılabilir; eğitim veya araştırma için gereken her araç tipini temsil edebilir. Bu hızlı uyarlanabilirlik maliyeti ve süreyi azaltır, farklı simülasyon ve test programlarının verimli yürütülmesini sağlar.",
+    swKicker: "Kontrol yazılımı", swTitle: "Yeni Nesil Hareket Platformu Yöneticisi",
+    swBody: "Hareket, sarsıntı, roll ve pitch ayarlarını tek tıkla değiştirmeye izin veren sezgisel kontrol yazılımı. Hareket işaretleme, kayıt dosyası oynatma ve tekrar oynatma, uzaktan erişim ve tanılama araçları dahildir.",
+    supplyTitle: "Tedarik kapsamı",
+    famKicker: "Ürün hattı", famTitle: "NGS ailesi",
+    aboutKicker: "Hakkında", aboutTitle: "COVISART Araştırma ve Geliştirme",
+    aboutBody: "2018 yılında Teknoloji Geliştirme Bölgesi'nde genç bir mühendis ekibi tarafından kurulan COVISART, hızla gelişen görüntü işleme teknolojilerini simülasyon ortamlarına entegre ederek yüksek teknoloji ürünleri geliştirir. Yeni Nesil Simülatör, hareket eğitiminin ötesinde pilot mekansal şaşkınlığı, insan faktörleri ve mekansal algıya ilişkin tıbbi araştırmaları da kapsar.",
+    demoTitle: "Demo talebi",
+    demoBody: "Temsil etmeniz gereken platformu ve çalıştığınız faydalı yük aralığını bize bildirin. Mühendislik ekibimiz yük geometrisi analizi ve saha ya da fabrika demosu için sizinle iletişime geçer.",
+    address: "Adres",
+    fName: "Ad Soyad", fOrg: "Kurum", fEmail: "E-posta", fCountry: "Ülke", fUse: "Kullanım amacı ve faydalı yük", fSubmit: "Talebi gönder",
+    fNote: "Demo talepleri COVISART satış mühendisliği ekibi tarafından değerlendirilir.",
+    sentTitle: "Talebiniz alındı", sentBody: "Satış mühendisliği ekibimiz demo organizasyonu için sizinle iletişime geçecek.",
+    specTitle: "Teknik özellikler", specNote: "NGS-360-3 · elektrikle tahrik edilen üç eksenli hareket sistemi",
+    perfTitle: "Performans", perfNote: "Operasyonel, eş zamansız. Nötr başlangıç konumu, tasarım yükü.",
+    dimTitle: "Boyutlar ve ağırlık", elecTitle: "Elektrik", ifaceTitle: "Arayüzler", optTitle: "Opsiyonlar",
+    generalSpecs: "Motor: entegre frenli servo motor · Platform şekli: kare · Ortam sıcaklığı: −10° ila +45°C",
+    footerTag: "Yarının ileri teknolojileri"
+  }
+};
+
+const FINISHES = [
+  { id: "black", labelKey: "finishBlack", hex: "#43403D" },
+  { id: "olive", labelKey: "finishOlive", hex: "#3f4a34" },
+  { id: "steel", labelKey: "finishSteel", hex: "#6b7178" },
+  { id: "sand", labelKey: "finishSand", hex: "#a8987b" }
+];
+
+const AXES = {
+  en: [
+    { key: "roll", name: "Roll", title: "Roll", min: 0, max: 360, accel: "±220 deg/s²", jerk: "±600 deg/s²", velocity: "±220 deg/s", excursion: "360° unlimited" },
+    { key: "pitch", name: "Pitch", title: "Pitch", min: -180, max: 180, accel: "±180 deg/s²", jerk: "±400 deg/s²", velocity: "±110 deg/s", excursion: "360° unlimited" },
+    { key: "yaw", name: "Yaw", title: "Yaw", min: 0, max: 360, accel: "±110 deg/s²", jerk: "±200 deg/s²", velocity: "±90 deg/s", excursion: "360° unlimited" }
+  ],
+  tr: [
+    { key: "roll", name: "Roll", title: "Yuvarlanma (Roll)", min: 0, max: 360, accel: "±220 der/s²", jerk: "±600 der/s²", velocity: "±220 der/s", excursion: "360° sınırsız" },
+    { key: "pitch", name: "Pitch", title: "Yanlama (Pitch)", min: -180, max: 180, accel: "±180 der/s²", jerk: "±400 der/s²", velocity: "±110 der/s", excursion: "360° sınırsız" },
+    { key: "yaw", name: "Yaw", title: "Sapma (Yaw)", min: 0, max: 360, accel: "±110 der/s²", jerk: "±200 der/s²", velocity: "±90 der/s", excursion: "360° sınırsız" }
+  ]
+};
+
+const FIGURES = {
+  en: [
+    { value: "360° × 3", label: "Unlimited rotation axes" },
+    { value: "1 ms", label: "Host communication" },
+    { value: "500 kg", label: "Platform payload" },
+    { value: "220 °/s", label: "Peak roll velocity" }
+  ],
+  tr: [
+    { value: "360° × 3", label: "Sınırsız dönüş ekseni" },
+    { value: "1 ms", label: "Haberleşme hızı" },
+    { value: "500 kg", label: "Platform faydalı yükü" },
+    { value: "220 °/s", label: "Azami roll hızı" }
+  ]
+};
+
+const ADVANTAGES = {
+  en: [
+    { n: "01", title: "Optimal motion control", body: "Proprietary motion cueing software and full digital control for unmatched precision." },
+    { n: "02", title: "Best-in-class smoothness", body: "Advanced friction compensation, ball screw spindles, oil lubrication and low-friction seals ensure seamless operation." },
+    { n: "03", title: "Economic and efficient", body: "High performance at low power consumption through optimised transmission ratios and integrated static compensation." },
+    { n: "04", title: "Optimised motion envelope", body: "Parallel-mounted Beckhoff servo motors with integrated brakes deliver responsive and reliable motion." },
+    { n: "05", title: "Safe operation", body: "Built-in cushioning system, holding brakes and advanced safety electronics and software." },
+    { n: "06", title: "Fast commissioning", body: "Compact subsystem architecture simplifies setup; units arrive completely assembled and tested, engineered for low-interval servicing." }
+  ],
+  tr: [
+    { n: "01", title: "Optimum hareket kontrolü", body: "Özgün hareket işaretleme yazılımı ve tam dijital kontrol ile üstün hassasiyet." },
+    { n: "02", title: "Sınıfının en iyisi yumuşaklık", body: "İleri sürtünme kompanzasyonu, bilyalı vida milleri, yağ yağlama ve düşük sürtünmeli keceler ile kesintisiz çalışma." },
+    { n: "03", title: "Ekonomik ve verimli", body: "Optimize edilmiş çevrim oranları ve entegre statik kompanzasyon sayesinde düşük enerji tüketimiyle yüksek performans." },
+    { n: "04", title: "Optimize hareket zarfı", body: "Paralel montajlı, entegre frenli Beckhoff servo motorlar hızlı ve güvenilir hareket sağlar." },
+    { n: "05", title: "Güvenli çalışma", body: "Dahili yastıklama sistemi, tutma frenleri ve ileri güvenlik elektroniği ile yazılımı." },
+    { n: "06", title: "Hızlı devreye alma", body: "Kompakt alt sistem mimarisi kurulumu kolaylaştırır; üniteler tamamen monte ve test edilmiş olarak, uzun bakım aralıklarına göre tasarlanmış teslim edilir." }
+  ]
+};
+
+const APPS = {
+  en: [
+    { title: "Driving simulation", body: "Cars, trucks, buses, trains, trams and off-road / rough terrain vehicles." },
+    { title: "Flight simulation", body: "Small aircraft and light helicopters." },
+    { title: "Motion rides", body: "Immersive entertainment and theme park applications." }
+  ],
+  tr: [
+    { title: "Sürüş simülasyonu", body: "Otomobil, kamyon, otobüs, tren, tramvay ve arazi araçları." },
+    { title: "Uçuş simülasyonu", body: "Küçük uçaklar ve hafif helikopterler." },
+    { title: "Hareket platformları", body: "Eğlence ve tema parkı uygulamaları." }
+  ]
+};
+
+const SUPPLY = {
+  en: [
+    { title: "Motion base assembly", body: "Three electric servo motors, motion platform, base frame with integrated floor mounting plates." },
+    { title: "System electronics", body: "Drive controllers and power units." },
+    { title: "Motion computer", body: "Digital I/O and Ethernet communication interface." },
+    { title: "Motion control software", body: "Advanced motion cueing plus ride-file play and replay." },
+    { title: "User interface", body: "Menu-driven design with remote access service and diagnostic tools." },
+    { title: "Cabling and documentation", body: "Complete wiring for plug-and-play integration; system description, ICD, operating and maintenance manuals." }
+  ],
+  tr: [
+    { title: "Hareket tabanı grubu", body: "Üç elektrikli servo motor, hareket platformu, entegre zemin montaj plakalı taban şasisi." },
+    { title: "Sistem elektroniği", body: "Sürücü kontrolörleri ve güç üniteleri." },
+    { title: "Hareket bilgisayarı", body: "Dijital G/Ç ve Ethernet haberleşme arayüzü." },
+    { title: "Hareket kontrol yazılımı", body: "İleri hareket işaretleme ile kayıt dosyası oynatma ve tekrar oynatma." },
+    { title: "Kullanıcı arayüzü", body: "Menü tabanlı tasarım, uzaktan erişim hizmeti ve tanılama araçları." },
+    { title: "Kablolama ve dokümantasyon", body: "Tak-çalıştır entegrasyon için eksiksiz kablolama; sistem tanımı, ICD, kullanım ve bakım kılavuzları." }
+  ]
+};
+
+const OPTIONS = {
+  en: [
+    { title: "Access ramp", body: "simplifies entry and exit to the simulator" },
+    { title: "Extended motion capability", body: "upgradeable up to 5 axes" },
+    { title: "Alternative host interfacing", body: "options such as reflective memory" },
+    { title: "User-tunable software", body: "customisable motion profiles and parameters" },
+    { title: "Tailor-made motion cueing", body: "cueing algorithms adapted to customer requirements" },
+    { title: "Motion ride file creation", body: "custom ride scenarios for training or entertainment" },
+    { title: "On-site services", body: "assembly, commissioning, fine tuning, maintenance and operator training" },
+    { title: "Payload geometry analysis", body: "envelope study tailored to the customer's payload setup" },
+    { title: "Service and maintenance contracts", body: "long-term support solutions" }
+  ],
+  tr: [
+    { title: "Erişim rampası", body: "simülatöre giriş ve çıkışı kolaylaştırır" },
+    { title: "Genişletilmiş hareket kabiliyeti", body: "5 eksene kadar yükseltilebilir" },
+    { title: "Alternatif ana bilgisayar arayüzü", body: "reflective memory gibi seçenekler" },
+    { title: "Kullanıcı ayarlı yazılım", body: "özelleştirilebilir hareket profilleri ve parametreler" },
+    { title: "Özel hareket işaretleme", body: "müşteri gereksinimlerine uyarlanmış algoritmalar" },
+    { title: "Hareket kayıt dosyası oluşturma", body: "eğitim veya eğlence için özel senaryolar" },
+    { title: "Sahada hizmetler", body: "montaj, devreye alma, ince ayar, bakım ve operatör eğitimi" },
+    { title: "Yük geometrisi analizi", body: "müşterinin yük düzenine göre zarf çalışması" },
+    { title: "Servis ve bakım sözleşmeleri", body: "uzun vadeli destek çözümleri" }
+  ]
+};
+
+const VARIANTS = {
+  en: [
+    { id: "ngs2", name: "NGS-360-2", axes: "2 axes", body: "An entry-level version of the NGS line, designed as a lower-cost option that still delivers a highly immersive experience. It focuses on the most critical axes of movement while retaining unlimited rotation, showing how the platform scales down to a more accessible price point." },
+    { id: "ngs3", name: "NGS-360-3", axes: "3 axes", body: "The foundational model in the NGS product line: a three-axis motion system with unlimited rotation capability. More standard than its advanced variants yet highly capable, it is effective wherever rotational cues carry the experience." },
+    { id: "ngs31", name: "NGS-360-3+1", axes: "3 axes + heave", body: "Three axes of unlimited rotation combined with a single axis of translational movement. Adding the Z axis (heave) creates a powerful sensation of flight and ground vehicle movement, more immersive than rotation alone." },
+    { id: "ngs62", name: "NGS-360-6+2", axes: "6DOF + 2 axes", body: "A high-end motion simulator combining two unlimited rotation axes with a high-response six-degrees-of-freedom system, developed for highly realistic training and entertainment applications." }
+  ],
+  tr: [
+    { id: "ngs2", name: "NGS-360-2", axes: "2 eksen", body: "NGS hattının giriş seviyesi sürümü; daha erişilebilir bir maliyetle yüksek sarmalayıcılık sunar. En kritik hareket eksenlerine odaklanır ve sınırsız dönüş özelliğini korur." },
+    { id: "ngs3", name: "NGS-360-3", axes: "3 eksen", body: "NGS ürün hattının temel modeli: sınırsız dönüş kabiliyetine sahip üç eksenli hareket sistemi. Dönme işaretlerinin deneyimi taşıdığı her uygulamada etkilidir." },
+    { id: "ngs31", name: "NGS-360-3+1", axes: "3 eksen + heave", body: "Üç eksende sınırsız dönüşe tek eksenli ötelenme hareketi eklenir. Z ekseni (heave) ile uçuş ve kara aracı hareketi hissi belirgin şekilde güçlenir." },
+    { id: "ngs62", name: "NGS-360-6+2", axes: "6DOF + 2 eksen", body: "İki sınırsız dönüş eksenini yüksek tepkili altı serbestlik dereceli sistemle birleştiren üst segment simülatör; yüksek gerçekçilik gerektiren eğitim ve eğlence uygulamaları için geliştirilmiştir." }
+  ]
+};
+
+const CREDENTIALS = {
+  en: [
+    { year: "2018", body: "Founded in Teknopark Ankara Technology Development Zone; first NGS prototype presented in November." },
+    { year: "2019", body: "New Generation Simulator shown for the first time at the 4th Istanbul International Invention Fair, ISIF'19." },
+    { year: "Award", body: "NGS-360-3 awarded the IFIA Best National Invention Medal by the International Federation of Inventors' Associations." }
+  ],
+  tr: [
+    { year: "2018", body: "Teknopark Ankara Teknoloji Geliştirme Bölgesi'nde kuruldu; ilk NGS prototipi Kasım ayında tanıtıldı." },
+    { year: "2019", body: "Yeni Nesil Simülatör ilk kez 4. İstanbul Uluslararası Buluş Fuarı ISIF'19'da sergilendi." },
+    { year: "Ödül", body: "NGS-360-3, Uluslararası Buluşçu Dernekleri Federasyonu tarafından IFIA En İyi Ulusal Buluş Madalyası'na değer görüldü." }
+  ]
+};
+
+const DIMS = {
+  en: [
+    { label: "Payload (above platform)", value: "500 kg" },
+    { label: "Approx. unit weight", value: "1800 kg" },
+    { label: "Height", value: "3100 mm" },
+    { label: "Width (X)", value: "3600 mm" },
+    { label: "Width (Y)", value: "3600 mm" },
+    { label: "Area", value: "12 m²" },
+    { label: "Footprint", value: "1800 × 1800 mm" }
+  ],
+  tr: [
+    { label: "Faydalı yük (platform üstü)", value: "500 kg" },
+    { label: "Yaklaşık ünite ağırlığı", value: "1800 kg" },
+    { label: "Yükseklik", value: "3100 mm" },
+    { label: "Genişlik (X)", value: "3600 mm" },
+    { label: "Genişlik (Y)", value: "3600 mm" },
+    { label: "Alan", value: "12 m²" },
+    { label: "Taban alanı", value: "1800 × 1800 mm" }
+  ]
+};
+
+const IFACES = {
+  en: [
+    { label: "Electric power: 220/380 VAC, 50/60 Hz" },
+    { label: "4 channel data transfer module (30 A – 380 V)" },
+    { label: "Host computer" },
+    { label: "Ethernet connection" },
+    { label: "Update rate up to 1 GHz" }
+  ],
+  tr: [
+    { label: "Elektrik beslemesi: 220/380 VAC, 50/60 Hz" },
+    { label: "4 kanallı veri transfer modülü (30 A – 380 V)" },
+    { label: "Ana bilgisayar" },
+    { label: "Ethernet bağlantısı" },
+    { label: "1 GHz'e kadar güncelleme hızı" }
+  ]
+};
+
+class Component extends DCLogic {
+  state = {
+    lang: null, theme: null, view: "overview", variant: "ngs3", finish: "black",
+    roll: 18, pitch: 26, yaw: 12, running: false, sent: false
+  };
+
+  componentDidMount() {
+    if (this.props.autoplayDemo) this.start();
+    this.applyTheme();
+  }
+  componentDidUpdate() { this.applyTheme(); }
+
+  get theme() { return this.state.theme || (this.props.theme === "dark" ? "dark" : "light"); }
+
+  // The dark theme is the Nocturne stylesheet, enabled by flipping its media
+  // query so its :root tokens win over Industry's.
+  applyTheme() {
+    const link = document.getElementById("ds-dark");
+    if (link) link.media = this.theme === "dark" ? "all" : "not all";
+  }
+  componentWillUnmount() { this.stop(); }
+
+  get lang() { return this.state.lang || (this.props.language === "tr" ? "tr" : "en"); }
+
+  start() {
+    if (this.timer) return;
+    this.t0 = Date.now();
+    this.timer = setInterval(() => {
+      const e = (Date.now() - this.t0) / 1000;
+      const r = (v) => Math.round(v * 10) / 10;
+      this.setState({
+        roll: r((e * 46) % 360),
+        pitch: r(52 * Math.sin(e * 0.9)),
+        yaw: r((e * 19) % 360)
+      });
+    }, 24);
+    this.setState({ running: true });
+  }
+  stop() {
+    if (this.timer) { clearInterval(this.timer); this.timer = null; }
+    if (this.state.running) this.setState({ running: false });
+  }
+
+  swatch(active) {
+    return active
+      ? { border: "var(--color-accent)", bg: "var(--color-accent)", fg: "var(--color-bg)" }
+      : { border: "var(--color-divider)", bg: "transparent", fg: "var(--color-text)" };
+  }
+
+  renderVals() {
+    const L = this.lang;
+    const t = COPY[L];
+    const s = this.state;
+    const finish = this.props.finish && !s.touchedFinish ? this.props.finish : s.finish;
+    const deg = (v) => Math.round(v) + "\u00B0";
+    const dark = this.theme === "dark";
+    const activeVariant = VARIANTS[L].find(v => v.id === s.variant) || VARIANTS[L][1];
+
+    return {
+      t,
+      isEn: L === "en", isTr: L === "tr",
+      setEn: () => this.setState({ lang: "en" }),
+      setTr: () => this.setState({ lang: "tr" }),
+      toggleTheme: () => this.setState({ theme: dark ? "light" : "dark" }),
+      // The two stylesheets style a checked segment differently (Industry fills,
+      // Nocturne outlines); pin it inline so neither cascade collides.
+      enBg: L === "en" ? (dark ? "transparent" : "var(--color-accent)") : "transparent",
+      enFg: L === "en" ? (dark ? "var(--color-accent)" : "var(--color-bg)") : "var(--color-text)",
+      trBg: L === "tr" ? (dark ? "transparent" : "var(--color-accent)") : "transparent",
+      trFg: L === "tr" ? (dark ? "var(--color-accent)" : "var(--color-bg)") : "var(--color-text)",
+      moonShown: dark ? "none" : "block", sunShown: dark ? "block" : "none",
+      reverseFg: dark ? "var(--color-text)" : "var(--color-bg)",
+      reverseFgSoft: dark ? "color-mix(in srgb, var(--color-text) 82%, transparent)" : "color-mix(in srgb, var(--color-bg) 82%, transparent)",
+      reverseFgMuted: dark ? "color-mix(in srgb, var(--color-text) 68%, transparent)" : "color-mix(in srgb, var(--color-bg) 70%, transparent)",
+      reverseFgFaint: dark ? "color-mix(in srgb, var(--color-text) 52%, transparent)" : "color-mix(in srgb, var(--color-bg) 55%, transparent)",
+      reverseRule: dark ? "color-mix(in srgb, var(--color-text) 22%, transparent)" : "color-mix(in srgb, var(--color-bg) 24%, transparent)",
+      viewerBg: "transparent",
+      isOverview: s.view === "overview", isSpecs: s.view === "specs",
+      showOverview: () => this.setState({ view: "overview" }),
+      showSpecs: () => this.setState({ view: "specs" }),
+      navOverviewColor: s.view === "overview" ? "var(--color-accent)" : "var(--color-text)",
+      navSpecsColor: s.view === "specs" ? "var(--color-accent)" : "var(--color-text)",
+
+      blackShown: finish === "olive" ? "none" : "block",
+      oliveShown: finish === "olive" ? "block" : "none",
+      finishHex: (FINISHES.find(f => f.id === finish) || FINISHES[0]).hex,
+      finishes: FINISHES.map(f => ({
+        label: t[f.labelKey], hex: f.hex,
+        border: f.id === finish ? "var(--color-accent)" : "var(--color-divider)",
+        onSelect: () => this.setState({ finish: f.id, touchedFinish: true })
+      })),
+
+      figures: FIGURES[L],
+      advantages: ADVANTAGES[L],
+      applications: APPS[L],
+      supply: SUPPLY[L],
+      options: OPTIONS[L],
+      perfRows: AXES[L].map(a => ({ axis: a.title, accel: a.accel, jerk: a.jerk, velocity: a.velocity, excursion: a.excursion })),
+      elecRows: [
+        { axis: AXES[L][0].name, power: "4600 W", voltage: "380 V \u2013 12 A" },
+        { axis: AXES[L][1].name, power: "4700 W", voltage: "380 V \u2013 12.4 A" },
+        { axis: AXES[L][2].name, power: "4600 W", voltage: "380 V \u2013 12 A" }
+      ],
+      dims: DIMS[L], interfaces: IFACES[L], credentials: CREDENTIALS[L],
+
+      axes: AXES[L].map(a => ({
+        name: a.name, title: a.title, min: a.min, max: a.max,
+        value: s[a.key], reading: deg(s[a.key]),
+        accel: a.accel, jerk: a.jerk, velocity: a.velocity, excursion: a.excursion,
+        onInput: (ev) => { this.stop(); this.setState({ [a.key]: Number(ev.target.value) }); }
+      })),
+      roll: s.roll, pitch: s.pitch, yaw: s.yaw,
+      runLabel: s.running ? t.stop : t.run,
+      toggleRun: () => { s.running ? this.stop() : this.start(); },
+      resetAxes: () => { this.stop(); this.setState({ roll: 18, pitch: 26, yaw: 12 }); },
+
+      variants: VARIANTS[L].map(v => {
+        const sw = this.swatch(v.id === s.variant);
+        return { name: v.name, axes: v.axes, border: sw.border, bg: sw.bg, fg: sw.fg, onSelect: () => this.setState({ variant: v.id }) };
+      }),
+      activeVariant,
+
+      sent: s.sent, notSent: !s.sent,
+      submit: () => this.setState({ sent: true })
+    };
+  }
+}
+</script>
+</body>
+</html>
