@@ -2,6 +2,7 @@
   "name": "covisart",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "homepage": "https://ngs.covisart.com/",
   "dependencies": {
     "@ant-design/icons": "^5.5.2",
