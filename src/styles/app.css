@@ -145,6 +145,10 @@ input[type="range"] { accent-color: var(--color-accent); background: transparent
 /* — form validation (new in the React port; the prototype's inputs were
      uncontrolled and never validated) — */
 .field-error { font-size: 11px; margin-top: 4px; color: var(--status-error); }
+.field-error a { color: inherit; }
+/* Selects share the .input skin; the native arrow keeps them recognisable. */
+select.input { cursor: pointer; padding-right: 6px; }
+.input:disabled { cursor: progress; opacity: 0.6; }
 
 /* — specifications — */
 .spec-row {
